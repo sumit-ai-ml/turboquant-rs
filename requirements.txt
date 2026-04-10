@@ -8,3 +8,7 @@ transformers>=4.30
 open_clip_torch>=2.20
 faiss-cpu>=1.7
 tqdm
+# jsonnet-binary provides the jsonnet module as a pre-built wheel,
+# avoiding the C++ compilation failure from the 'jsonnet' source package
+# (transitive dep: torchgeo -> pytorch_lightning -> jsonargparse)
+jsonnet-binary
