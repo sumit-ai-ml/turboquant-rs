@@ -8,18 +8,15 @@ from scipy.stats import beta as beta_dist
 from pathlib import Path
 
 from config import MODELS, DATASETS, EMBED_DIR, RESULTS_DIR, FIGURES_DIR, SEEDS
-from utils import random_orthogonal, srht_matrix, apply_rotation, verify_rotation
+from utils import random_orthogonal, SRHTRotation, make_rotation, apply_rotation, verify_rotation
 from utils import beta_ks_test, coordinate_independence_check
 
 
 def validate_beta_assumption(embeddings: np.ndarray, d: int, seed: int,
                              rotation_type: str = "srht") -> dict:
     """Run full Beta assumption validation on one embedding set + seed."""
-    # Build rotation matrix
-    if rotation_type == "srht":
-        R = srht_matrix(d, seed)
-    else:
-        R = random_orthogonal(d, seed)
+    # Build rotation (auto-falls back to dense for non-power-of-2 d)
+    R = make_rotation(d, seed, rotation_type)
 
     assert verify_rotation(R), f"Rotation matrix not orthogonal (seed={seed})"
 
@@ -71,7 +68,7 @@ def categorize_fit(mean_d: float) -> str:
 def plot_qq(embeddings: np.ndarray, d: int, seed: int, model_name: str,
             dataset_name: str, n_coords: int = 6):
     """QQ plots of rotated coordinates vs Beta(d/2, d/2)."""
-    R = srht_matrix(d, seed)
+    R = make_rotation(d, seed, "srht")
     rotated = apply_rotation(embeddings, R)
 
     fig, axes = plt.subplots(2, 3, figsize=(14, 9))

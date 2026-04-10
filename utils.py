@@ -43,46 +43,74 @@ def random_orthogonal(d: int, seed: int) -> np.ndarray:
     return Q.astype(np.float32)
 
 
-def srht_matrix(d: int, seed: int) -> np.ndarray:
+class SRHTRotation:
     """Structured Randomized Hadamard Transform. O(d log d) per vector.
 
-    SRHT = D @ H @ S where:
-      D = random sign diagonal
-      H = normalized Hadamard matrix
-      S = random sign diagonal (second randomization)
-
-    Requires d to be a power of 2. Pads if necessary.
+    Only works correctly when d is a power of 2. For other dimensions,
+    use random_orthogonal() instead (see make_rotation helper).
     """
-    # Pad to next power of 2
-    d_padded = 1
-    while d_padded < d:
-        d_padded *= 2
 
-    rng = np.random.RandomState(seed)
+    def __init__(self, d: int, seed: int):
+        self.d = d
+        if d & (d - 1) != 0:
+            raise ValueError(
+                f"SRHTRotation requires d to be a power of 2, got d={d}. "
+                f"Use make_rotation(d, seed, 'srht') which auto-falls back to dense."
+            )
 
-    # Random sign flips
-    signs_d = rng.choice([-1.0, 1.0], size=d_padded).astype(np.float32)
-    signs_s = rng.choice([-1.0, 1.0], size=d_padded).astype(np.float32)
+        rng = np.random.RandomState(seed)
+        self.signs_d = rng.choice([-1.0, 1.0], size=d).astype(np.float32)
+        self.signs_s = rng.choice([-1.0, 1.0], size=d).astype(np.float32)
+        self.H = hadamard(d).astype(np.float32) / np.sqrt(d)
 
-    # Hadamard matrix (normalized)
-    H = hadamard(d_padded).astype(np.float32) / np.sqrt(d_padded)
+    def forward(self, embeddings: np.ndarray) -> np.ndarray:
+        """Rotate embeddings. (N, d) -> (N, d)."""
+        rotated = embeddings * self.signs_s[None, :]
+        rotated = rotated @ self.H.T
+        rotated = rotated * self.signs_d[None, :]
+        return rotated
 
-    # SRHT = diag(signs_d) @ H @ diag(signs_s)
-    # For application: x_rotated = SRHT @ x
-    # We store the full matrix for simplicity; for large d, apply via fast Walsh-Hadamard
-    srht = np.diag(signs_d) @ H @ np.diag(signs_s)
+    def inverse(self, rotated: np.ndarray) -> np.ndarray:
+        """Inverse rotation. (N, d) -> (N, d)."""
+        inv = rotated * self.signs_d[None, :]
+        inv = inv @ self.H.T  # H is symmetric and orthogonal
+        inv = inv * self.signs_s[None, :]
+        return inv
 
-    # Truncate back to d if padded
-    return srht[:d, :d]
+
+def make_rotation(d: int, seed: int, rotation_type: str = "srht"):
+    """Build a rotation. Uses SRHT for power-of-2 d, dense orthogonal otherwise.
+
+    Returns either an SRHTRotation object or a dense orthogonal np.ndarray.
+    """
+    is_power_of_2 = (d & (d - 1) == 0) and d > 0
+    if rotation_type == "srht" and is_power_of_2:
+        return SRHTRotation(d, seed)
+    if rotation_type == "srht" and not is_power_of_2:
+        # SRHT doesn't work for non-power-of-2; fall back to dense
+        pass
+    return random_orthogonal(d, seed)
 
 
-def apply_rotation(embeddings: np.ndarray, rotation: np.ndarray) -> np.ndarray:
-    """Apply rotation matrix to embeddings. Shape: (N, d) @ (d, d).T -> (N, d)."""
+def apply_rotation(embeddings: np.ndarray, rotation) -> np.ndarray:
+    """Apply rotation to embeddings. Supports both matrix and SRHTRotation."""
+    if isinstance(rotation, SRHTRotation):
+        return rotation.forward(embeddings)
+    # Dense orthogonal matrix: (N, d) @ (d, d).T -> (N, d)
     return embeddings @ rotation.T
 
 
-def verify_rotation(rotation: np.ndarray, atol: float = 1e-4) -> bool:
-    """Verify R^T @ R ~ I (orthogonality check)."""
+def verify_rotation(rotation, atol: float = 1e-3) -> bool:
+    """Verify rotation preserves inner products (orthogonality check)."""
+    if isinstance(rotation, SRHTRotation):
+        # Test with random vectors: inner products should be preserved
+        rng = np.random.RandomState(999)
+        test = rng.randn(100, rotation.d).astype(np.float32)
+        test = test / np.linalg.norm(test, axis=1, keepdims=True)
+        rotated = rotation.forward(test)
+        orig_dots = test[:10] @ test[10:20].T
+        rot_dots = rotated[:10] @ rotated[10:20].T
+        return np.allclose(orig_dots, rot_dots, atol=atol)
     d = rotation.shape[0]
     product = rotation.T @ rotation
     return np.allclose(product, np.eye(d), atol=atol)

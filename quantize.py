@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import beta as beta_dist
 from typing import Optional
 
-from utils import srht_matrix, random_orthogonal, apply_rotation
+from utils import SRHTRotation, random_orthogonal, make_rotation, apply_rotation
 
 
 # =============================================================================
@@ -26,11 +26,8 @@ class TurboQuantMSE:
         self.seed = seed
         self.n_levels = 2 ** bits
 
-        # Build rotation matrix
-        if rotation_type == "srht":
-            self.rotation = srht_matrix(d, seed)
-        else:
-            self.rotation = random_orthogonal(d, seed)
+        # Build rotation (auto-falls back to dense for non-power-of-2 d)
+        self.rotation = make_rotation(d, seed, rotation_type)
 
         # Pre-compute optimal codebook for Beta(d/2, d/2) on [0, 1]
         # then shift to [-1, 1]
@@ -98,8 +95,10 @@ class TurboQuantMSE:
     def decode(self, codes: np.ndarray) -> np.ndarray:
         """Decompress: map codes to centroids, inverse-rotate."""
         reconstructed = self.centroids[codes]
-        # Inverse rotation (R is orthogonal so R^-1 = R^T)
-        return apply_rotation(reconstructed, self.rotation.T)
+        # Inverse rotation
+        if isinstance(self.rotation, SRHTRotation):
+            return self.rotation.inverse(reconstructed)
+        return reconstructed @ self.rotation  # R^-1 = R^T, so x @ R = x @ R^{-T}
 
     def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
         """Approximate nearest neighbor search via decoded inner products."""
