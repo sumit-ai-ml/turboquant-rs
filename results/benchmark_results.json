@@ -1,0 +1,8102 @@
+[
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 1.0287528699991526,
+    "queries_per_sec": 972.050751120455
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.9647120609988633,
+    "queries_per_sec": 1036.5787268841643
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.9613041779994091,
+    "queries_per_sec": 1040.2534628332955
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.9856236270024965,
+    "queries_per_sec": 1014.5860677480158
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.9833556459998363,
+    "queries_per_sec": 1016.926077628039
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.142,
+      "10": 0.277,
+      "100": 0.39737
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0005989708343275911,
+    "search_time_s": 26.67198310800086,
+    "queries_per_sec": 37.49252524458999
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.154,
+      "10": 0.2769,
+      "100": 0.39527000000000007
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0005952624907746989,
+    "search_time_s": 26.35068615400087,
+    "queries_per_sec": 37.94967592706
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.149,
+      "10": 0.2756,
+      "100": 0.39969000000000005
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0005883528967099899,
+    "search_time_s": 27.23151551099727,
+    "queries_per_sec": 36.72215744276724
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.168,
+      "10": 0.2679,
+      "100": 0.39300999999999997
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.000701941555321231,
+    "search_time_s": 30.2961124450012,
+    "queries_per_sec": 33.00753526761478
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.148,
+      "10": 0.2664,
+      "100": 0.38683000000000006
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0007476395096398307,
+    "search_time_s": 31.651133704999665,
+    "queries_per_sec": 31.594444904260676
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.728,
+      "10": 0.8315000000000001,
+      "100": 0.90117
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.2801801490205714,
+    "search_time_s": 1.2609814300012658,
+    "queries_per_sec": 793.033090105852
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.726,
+      "10": 0.8337000000000001,
+      "100": 0.90026
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.2638634334044798,
+    "search_time_s": 1.2346993810024287,
+    "queries_per_sec": 809.9137453103112
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.726,
+      "10": 0.8343000000000002,
+      "100": 0.9013
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.2555853138140121,
+    "search_time_s": 1.2014927810014342,
+    "queries_per_sec": 832.2979678383988
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.735,
+      "10": 0.8385000000000002,
+      "100": 0.8990799999999999
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.26591758690189193,
+    "search_time_s": 1.3019025110006623,
+    "queries_per_sec": 768.1066681647188
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.731,
+      "10": 0.8327000000000001,
+      "100": 0.90049
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.28700024499890825,
+    "search_time_s": 1.1104955730006623,
+    "queries_per_sec": 900.4988622313073
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.779,
+      "10": 0.8674000000000001,
+      "100": 0.9301899999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.3216955778348671,
+    "search_time_s": 1.5238818979996722,
+    "queries_per_sec": 656.2188325175676
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.79,
+      "10": 0.8768000000000001,
+      "100": 0.9310999999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.33258250044392607,
+    "search_time_s": 1.6547296489989094,
+    "queries_per_sec": 604.3283267481111
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.792,
+      "10": 0.8776000000000002,
+      "100": 0.9306599999999998
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.36000158576856456,
+    "search_time_s": 1.5303401519995532,
+    "queries_per_sec": 653.4494953252014
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.791,
+      "10": 0.8816000000000002,
+      "100": 0.9288399999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.3229553768111086,
+    "search_time_s": 1.571854940000776,
+    "queries_per_sec": 636.1910215452237
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.791,
+      "10": 0.8737000000000001,
+      "100": 0.9296399999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.3699161770150784,
+    "search_time_s": 1.6831101480020152,
+    "queries_per_sec": 594.1381799563618
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.867,
+      "10": 0.9238000000000002,
+      "100": 0.96056
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.574529339938471,
+    "search_time_s": 2.506383125000866,
+    "queries_per_sec": 398.9813009931011
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.863,
+      "10": 0.9234000000000001,
+      "100": 0.9616600000000001
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.49737074011597115,
+    "search_time_s": 1.7211370179975347,
+    "queries_per_sec": 581.0112672862355
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.85,
+      "10": 0.9242,
+      "100": 0.96296
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.28871169083287934,
+    "search_time_s": 1.7001522690006823,
+    "queries_per_sec": 588.1826106009795
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.89,
+      "10": 0.9290000000000002,
+      "100": 0.96089
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.36442165533915005,
+    "search_time_s": 1.7580046749972098,
+    "queries_per_sec": 568.8267012154488
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.877,
+      "10": 0.9223000000000001,
+      "100": 0.9599300000000001
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.3514328707568872,
+    "search_time_s": 1.721006772997498,
+    "queries_per_sec": 581.0552379513813
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.231,
+      "10": 0.39189999999999997,
+      "100": 0.55693
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012097880568806023,
+    "search_time_s": 1.4025240880000638,
+    "queries_per_sec": 713.000231907571
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.229,
+      "10": 0.3846,
+      "100": 0.5602900000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012006290494866187,
+    "search_time_s": 1.4130538309982512,
+    "queries_per_sec": 707.6871227853723
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.218,
+      "10": 0.3767,
+      "100": 0.55014
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012122446875142676,
+    "search_time_s": 1.4057005680006114,
+    "queries_per_sec": 711.3890559369576
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.186,
+      "10": 0.3748000000000001,
+      "100": 0.54672
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01210908457702829,
+    "search_time_s": 1.405053497001063,
+    "queries_per_sec": 711.7166728059774
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.242,
+      "10": 0.3828,
+      "100": 0.54603
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01215274261662498,
+    "search_time_s": 1.421693451997271,
+    "queries_per_sec": 703.3865131721234
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.291,
+      "10": 0.4789,
+      "100": 0.63578
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014820406607466422,
+    "search_time_s": 1.3857617609974113,
+    "queries_per_sec": 721.6247613011368
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.331,
+      "10": 0.4885,
+      "100": 0.6484200000000001
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014574513246397027,
+    "search_time_s": 1.3893206840002676,
+    "queries_per_sec": 719.7762269836093
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.301,
+      "10": 0.4918,
+      "100": 0.6507999999999999
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.01463346419105038,
+    "search_time_s": 1.377011353000853,
+    "queries_per_sec": 726.2104250780135
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.316,
+      "10": 0.4825,
+      "100": 0.64197
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014716421049711204,
+    "search_time_s": 1.3779514449997805,
+    "queries_per_sec": 725.7149761181602
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.331,
+      "10": 0.48560000000000003,
+      "100": 0.6372000000000001
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014705988134767332,
+    "search_time_s": 1.393521623002016,
+    "queries_per_sec": 717.6063747369303
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.402,
+      "10": 0.57,
+      "100": 0.71493
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.018710927047241217,
+    "search_time_s": 1.3732590100007656,
+    "queries_per_sec": 728.1947489275476
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.362,
+      "10": 0.5702,
+      "100": 0.71366
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.018152272622736557,
+    "search_time_s": 1.380294603000948,
+    "queries_per_sec": 724.4830182092027
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.391,
+      "10": 0.5739000000000001,
+      "100": 0.71047
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.01807128880774167,
+    "search_time_s": 1.4021003340021707,
+    "queries_per_sec": 713.2157205508888
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.389,
+      "10": 0.5720999999999999,
+      "100": 0.7118399999999999
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.01808979471256463,
+    "search_time_s": 1.3995014229985827,
+    "queries_per_sec": 714.5401809291427
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.42,
+      "10": 0.5742999999999999,
+      "100": 0.7132000000000001
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.018593326906353184,
+    "search_time_s": 1.3812829079979565,
+    "queries_per_sec": 723.964652143136
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.219,
+      "10": 0.3968,
+      "100": 0.5577300000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.010508687294907358,
+    "search_time_s": 1.529816654001479,
+    "queries_per_sec": 653.6731034953377
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.217,
+      "10": 0.3905,
+      "100": 0.56099
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.009687698177616043,
+    "search_time_s": 1.3520039610011736,
+    "queries_per_sec": 739.6428034570913
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.202,
+      "10": 0.3727,
+      "100": 0.5445200000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.00913224714955518,
+    "search_time_s": 1.2911305930028902,
+    "queries_per_sec": 774.5149912947353
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.221,
+      "10": 0.37399999999999994,
+      "100": 0.5432
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.009464240512426038,
+    "search_time_s": 1.3015590200011502,
+    "queries_per_sec": 768.3093771645609
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.217,
+      "10": 0.3885,
+      "100": 0.5551300000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.009327366617867067,
+    "search_time_s": 1.315279352998914,
+    "queries_per_sec": 760.2947599838327
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.321,
+      "10": 0.5049,
+      "100": 0.65402
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014333230278691319,
+    "search_time_s": 1.5511219740001252,
+    "queries_per_sec": 644.6946254143643
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.32,
+      "10": 0.4899,
+      "100": 0.64635
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.015215370381324245,
+    "search_time_s": 1.4377048660026048,
+    "queries_per_sec": 695.5530468366574
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.3,
+      "10": 0.472,
+      "100": 0.63139
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012695682789817638,
+    "search_time_s": 1.4396560530003626,
+    "queries_per_sec": 694.6103535743257
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.304,
+      "10": 0.4842,
+      "100": 0.64341
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012500185357569336,
+    "search_time_s": 1.3258516770001734,
+    "queries_per_sec": 754.2321794716629
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.336,
+      "10": 0.48310000000000003,
+      "100": 0.64215
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012519121544725209,
+    "search_time_s": 1.3765504749972024,
+    "queries_per_sec": 726.4535650260353
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.416,
+      "10": 0.6040999999999999,
+      "100": 0.7377400000000001
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.018367289252609498,
+    "search_time_s": 1.5394870699965395,
+    "queries_per_sec": 649.5670015612718
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.394,
+      "10": 0.5761000000000001,
+      "100": 0.71867
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.016454569921574017,
+    "search_time_s": 1.3982738549966598,
+    "queries_per_sec": 715.1674877038939
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.38,
+      "10": 0.5679,
+      "100": 0.7119200000000001
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.023354731733946324,
+    "search_time_s": 2.072294833997148,
+    "queries_per_sec": 482.55681749259054
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.409,
+      "10": 0.5904,
+      "100": 0.72599
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.016961395557902582,
+    "search_time_s": 1.6906155519973254,
+    "queries_per_sec": 591.5005329381839
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.408,
+      "10": 0.5812999999999999,
+      "100": 0.72628
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.023333378001048746,
+    "search_time_s": 1.736625487996207,
+    "queries_per_sec": 575.8293926423036
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.125,
+      "10": 0.252,
+      "100": 0.4118
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.009236994809003026,
+    "search_time_s": 1.7286049379981705,
+    "queries_per_sec": 578.5011820908372
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.139,
+      "10": 0.2673,
+      "100": 0.44755
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011430710728762094,
+    "search_time_s": 1.731950171997596,
+    "queries_per_sec": 577.3838163292079
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.127,
+      "10": 0.2651,
+      "100": 0.42821
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011079870483328418,
+    "search_time_s": 1.6894960470017395,
+    "queries_per_sec": 591.892476916207
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.112,
+      "10": 0.23970000000000002,
+      "100": 0.40117
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011207893824551647,
+    "search_time_s": 1.7219007120002061,
+    "queries_per_sec": 580.7535783165878
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.143,
+      "10": 0.2545,
+      "100": 0.41879999999999995
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011399524129100573,
+    "search_time_s": 1.7077929520019097,
+    "queries_per_sec": 585.5510756311411
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.125,
+      "10": 0.252,
+      "100": 0.4118
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.011515128163375615,
+    "search_time_s": 1.6981018750011572,
+    "queries_per_sec": 588.8928189301473
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.139,
+      "10": 0.2673,
+      "100": 0.44755
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.011584504644227268,
+    "search_time_s": 1.7101736149998032,
+    "queries_per_sec": 584.7359538406369
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.127,
+      "10": 0.2651,
+      "100": 0.42821
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012077824449848567,
+    "search_time_s": 1.8016416979953647,
+    "queries_per_sec": 555.049320357467
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.112,
+      "10": 0.23970000000000002,
+      "100": 0.40117
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012174801664779905,
+    "search_time_s": 1.7037477749981917,
+    "queries_per_sec": 586.9413387794806
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.143,
+      "10": 0.2545,
+      "100": 0.41879999999999995
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.01212710530407125,
+    "search_time_s": 1.763060958001006,
+    "queries_per_sec": 567.1953629634112
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.124,
+      "10": 0.25179999999999997,
+      "100": 0.41195
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.012670871095102924,
+    "search_time_s": 1.6755027789986343,
+    "queries_per_sec": 596.83577522781
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.135,
+      "10": 0.2666,
+      "100": 0.44849
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.012070867294483853,
+    "search_time_s": 1.7011601229969529,
+    "queries_per_sec": 587.834141231978
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.128,
+      "10": 0.2635,
+      "100": 0.42914
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.012686756651046245,
+    "search_time_s": 1.7025900890002958,
+    "queries_per_sec": 587.3404329442366
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.117,
+      "10": 0.2395,
+      "100": 0.40127999999999997
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.012875529079120799,
+    "search_time_s": 1.7468681189930066,
+    "queries_per_sec": 572.4530599232966
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.142,
+      "10": 0.25420000000000004,
+      "100": 0.41897
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.013598064665683512,
+    "search_time_s": 1.7199876960003166,
+    "queries_per_sec": 581.3995078717214
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.236,
+      "10": 0.38039999999999996,
+      "100": 0.5500499999999999
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.00712986345688635,
+    "search_time_s": 54.99600421800278,
+    "queries_per_sec": 18.183139197459237
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.207,
+      "10": 0.3609,
+      "100": 0.53508
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.005445210941911275,
+    "search_time_s": 48.96051854699908,
+    "queries_per_sec": 20.424620279298342
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.204,
+      "10": 0.3635,
+      "100": 0.53544
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.00544942575864881,
+    "search_time_s": 49.22607999900356,
+    "queries_per_sec": 20.31443495034019
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.197,
+      "10": 0.37039999999999995,
+      "100": 0.5374800000000001
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.0053917477706960275,
+    "search_time_s": 49.18097366300208,
+    "queries_per_sec": 20.333066336835888
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.203,
+      "10": 0.35840000000000005,
+      "100": 0.51664
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.005532076345546322,
+    "search_time_s": 48.59755793699878,
+    "queries_per_sec": 20.57716565298171
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.284,
+      "10": 0.44520000000000004,
+      "100": 0.60765
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.0076951604034887384,
+    "search_time_s": 73.09186496399343,
+    "queries_per_sec": 13.681413116119295
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.247,
+      "10": 0.42879999999999996,
+      "100": 0.59429
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.007631586755332171,
+    "search_time_s": 73.26328856599866,
+    "queries_per_sec": 13.649400942453706
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.26,
+      "10": 0.4248,
+      "100": 0.59564
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.007734216392610271,
+    "search_time_s": 73.3113758920008,
+    "queries_per_sec": 13.640447854547942
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.262,
+      "10": 0.44039999999999996,
+      "100": 0.5961900000000001
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.007596025473306626,
+    "search_time_s": 73.32472899999993,
+    "queries_per_sec": 13.637963803453006
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.266,
+      "10": 0.4177,
+      "100": 0.5812
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.007677725412144371,
+    "search_time_s": 72.88038190099905,
+    "queries_per_sec": 13.721113609947917
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.335,
+      "10": 0.4962,
+      "100": 0.6513599999999999
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.010224616288731466,
+    "search_time_s": 100.01535487500223,
+    "queries_per_sec": 9.998464748235767
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.304,
+      "10": 0.4736,
+      "100": 0.63388
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.01015690715442378,
+    "search_time_s": 100.11950483499822,
+    "queries_per_sec": 9.988063780859166
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.292,
+      "10": 0.4739,
+      "100": 0.63952
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.010035285229684384,
+    "search_time_s": 99.03623824600072,
+    "queries_per_sec": 10.09731405100478
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.295,
+      "10": 0.48830000000000007,
+      "100": 0.63725
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.009384988301624665,
+    "search_time_s": 97.47814821299835,
+    "queries_per_sec": 10.258709447525735
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.296,
+      "10": 0.47090000000000004,
+      "100": 0.63078
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.009614351526766863,
+    "search_time_s": 97.82986544199957,
+    "queries_per_sec": 10.221827409063241
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.01,
+      "10": 0.045599999999999995,
+      "100": 0.12139
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.006858592836393951,
+    "search_time_s": 1.138769537996268,
+    "queries_per_sec": 878.1408060489209
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.062,
+      "10": 0.1429,
+      "100": 0.26900999999999997
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.0062108624001005214,
+    "search_time_s": 1.1387454740033718,
+    "queries_per_sec": 878.1593629385868
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.027,
+      "10": 0.06709999999999999,
+      "100": 0.15095
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.006442134689137316,
+    "search_time_s": 1.1299519989988767,
+    "queries_per_sec": 884.9933456341398
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.016,
+      "10": 0.047,
+      "100": 0.13138
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.0061686133223329085,
+    "search_time_s": 1.1210444989992538,
+    "queries_per_sec": 892.0252504630198
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.039,
+      "10": 0.09570000000000001,
+      "100": 0.19636
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.0061751188936394205,
+    "search_time_s": 1.1171825919955154,
+    "queries_per_sec": 895.1088274780549
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.014,
+      "10": 0.0515,
+      "100": 0.12929
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.007860099186195204,
+    "search_time_s": 1.1962846140013426,
+    "queries_per_sec": 835.9214757892704
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.062,
+      "10": 0.1285,
+      "100": 0.23420999999999997
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.007718683438753705,
+    "search_time_s": 1.205008637996798,
+    "queries_per_sec": 829.8695697836627
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.014,
+      "10": 0.0386,
+      "100": 0.11053
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.007745592725115011,
+    "search_time_s": 1.204770112002734,
+    "queries_per_sec": 830.0338712235008
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.013,
+      "10": 0.032299999999999995,
+      "100": 0.11146
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.007616968334540952,
+    "search_time_s": 1.2190454230003525,
+    "queries_per_sec": 820.3139777505328
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.044,
+      "10": 0.1007,
+      "100": 0.20629999999999998
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.007836085559651079,
+    "search_time_s": 1.2451330149997375,
+    "queries_per_sec": 803.1270458282811
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.015,
+      "10": 0.046200000000000005,
+      "100": 0.11810999999999999
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.009111110254263777,
+    "search_time_s": 1.4136396359972423,
+    "queries_per_sec": 707.393860879231
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.05,
+      "10": 0.1223,
+      "100": 0.21841000000000002
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.009180745341930549,
+    "search_time_s": 1.3290822170019965,
+    "queries_per_sec": 752.3989014432038
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.02,
+      "10": 0.0538,
+      "100": 0.13264
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.00937204842505986,
+    "search_time_s": 1.3189562929983367,
+    "queries_per_sec": 758.1752369722088
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.014,
+      "10": 0.046200000000000005,
+      "100": 0.12938999999999998
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.009400611357355426,
+    "search_time_s": 1.3265331959992182,
+    "queries_per_sec": 753.8446855427125
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.04,
+      "10": 0.0952,
+      "100": 0.19824
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.009404470642684275,
+    "search_time_s": 1.3305433929999708,
+    "queries_per_sec": 751.57263209981
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.053,
+      "10": 0.122,
+      "100": 0.24166
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.010062666308189588,
+    "search_time_s": 53.43263378700067,
+    "queries_per_sec": 18.715154562403107
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.056,
+      "10": 0.1295,
+      "100": 0.2548
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009862432507031369,
+    "search_time_s": 53.587076566996984,
+    "queries_per_sec": 18.66121580171956
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.045,
+      "10": 0.1285,
+      "100": 0.26230000000000003
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.010234304937109908,
+    "search_time_s": 53.12295802000153,
+    "queries_per_sec": 18.824252964668986
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.053,
+      "10": 0.11730000000000002,
+      "100": 0.2445
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.010258747659406526,
+    "search_time_s": 52.65834455000004,
+    "queries_per_sec": 18.99034252872272
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.048,
+      "10": 0.1315,
+      "100": 0.26268
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009728373217846576,
+    "search_time_s": 53.219692373000726,
+    "queries_per_sec": 18.790037210123323
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.084,
+      "10": 0.17550000000000002,
+      "100": 0.32159999999999994
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.013277747436902455,
+    "search_time_s": 79.28360927200265,
+    "queries_per_sec": 12.612947482868053
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.087,
+      "10": 0.16970000000000002,
+      "100": 0.31766
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.013104093216373808,
+    "search_time_s": 78.67728320499737,
+    "queries_per_sec": 12.71014909595255
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.068,
+      "10": 0.1728,
+      "100": 0.31598000000000004
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.012691803426102074,
+    "search_time_s": 78.62122268800158,
+    "queries_per_sec": 12.719212011855552
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.07,
+      "10": 0.15860000000000002,
+      "100": 0.29673
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.013068730491817431,
+    "search_time_s": 79.16248161699332,
+    "queries_per_sec": 12.632246735748318
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.063,
+      "10": 0.154,
+      "100": 0.28104999999999997
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.013040880494644832,
+    "search_time_s": 78.96503159600252,
+    "queries_per_sec": 12.663833342284427
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.114,
+      "10": 0.2248,
+      "100": 0.38465000000000005
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.015541814327253442,
+    "search_time_s": 105.0080910589968,
+    "queries_per_sec": 9.523075697454294
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.115,
+      "10": 0.2176,
+      "100": 0.37213
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.01559641361525954,
+    "search_time_s": 104.88430082500417,
+    "queries_per_sec": 9.534315356389374
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.091,
+      "10": 0.20020000000000002,
+      "100": 0.36225999999999997
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.016080079404490497,
+    "search_time_s": 105.20452322699566,
+    "queries_per_sec": 9.50529472808255
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.095,
+      "10": 0.20010000000000003,
+      "100": 0.34747
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.015406484677101267,
+    "search_time_s": 104.65488901799836,
+    "queries_per_sec": 9.555215330915136
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.094,
+      "10": 0.1932,
+      "100": 0.32492000000000004
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.016241143569600734,
+    "search_time_s": 105.92532273099641,
+    "queries_per_sec": 9.440613200108523
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.8882364459932433,
+    "queries_per_sec": 1125.8263545826253
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.8912026239995612,
+    "queries_per_sec": 1122.0792814906392
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.8887412800031598,
+    "queries_per_sec": 1125.1868485240661
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.8751597240043338,
+    "queries_per_sec": 1142.6485618241818
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.8829968639984145,
+    "queries_per_sec": 1132.506853389907
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.333,
+      "10": 0.47709999999999997,
+      "100": 0.57981
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0002983094881890437,
+    "search_time_s": 12.227199496999674,
+    "queries_per_sec": 81.78487643432834
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.346,
+      "10": 0.4706,
+      "100": 0.57441
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00017276718487216144,
+    "search_time_s": 12.046561389994167,
+    "queries_per_sec": 83.01124010629262
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.351,
+      "10": 0.4746,
+      "100": 0.5845
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00017584829707645373,
+    "search_time_s": 12.354771662998246,
+    "queries_per_sec": 80.94038702430545
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.35,
+      "10": 0.4698,
+      "100": 0.5794600000000001
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00017902931663549688,
+    "search_time_s": 12.233079677003843,
+    "queries_per_sec": 81.74556419180641
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.346,
+      "10": 0.471,
+      "100": 0.57898
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00017130875154248583,
+    "search_time_s": 12.256831824000983,
+    "queries_per_sec": 81.5871519132561
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.754,
+      "10": 0.8359000000000002,
+      "100": 0.88399
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.11401750250283896,
+    "search_time_s": 0.4806970049976371,
+    "queries_per_sec": 2080.312524528659
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.755,
+      "10": 0.8365000000000001,
+      "100": 0.8817
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.08933498692846835,
+    "search_time_s": 0.4396010010023019,
+    "queries_per_sec": 2274.790088557518
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.762,
+      "10": 0.8380000000000001,
+      "100": 0.8856600000000001
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.08904729945781534,
+    "search_time_s": 0.4494628659958835,
+    "queries_per_sec": 2224.8779057292772
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.79,
+      "10": 0.8270000000000001,
+      "100": 0.8834000000000001
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.092552244356819,
+    "search_time_s": 0.44113127200398594,
+    "queries_per_sec": 2266.8989107418442
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.77,
+      "10": 0.8354000000000001,
+      "100": 0.88451
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.09419265877704101,
+    "search_time_s": 0.4445267870032694,
+    "queries_per_sec": 2249.583218013463
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.914,
+      "10": 0.9446000000000001,
+      "100": 0.9653100000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.20281262570130323,
+    "search_time_s": 1.0485945489999722,
+    "queries_per_sec": 953.657446487476
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.919,
+      "10": 0.9451000000000002,
+      "100": 0.96496
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.186114222029164,
+    "search_time_s": 1.050593152998772,
+    "queries_per_sec": 951.843248878635
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.926,
+      "10": 0.9468000000000001,
+      "100": 0.9652800000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.18017266824087055,
+    "search_time_s": 1.0632273189985426,
+    "queries_per_sec": 940.5326425791085
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.93,
+      "10": 0.9400000000000003,
+      "100": 0.9656100000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.17956545567540474,
+    "search_time_s": 1.0621544839959824,
+    "queries_per_sec": 941.48263276906
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.921,
+      "10": 0.9456,
+      "100": 0.9656000000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.18071608500340228,
+    "search_time_s": 1.0749809310000273,
+    "queries_per_sec": 930.2490594598041
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.462,
+      "10": 0.6092000000000001,
+      "100": 0.7170899999999999
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.015256077661834344,
+    "search_time_s": 1.7743777079958818,
+    "queries_per_sec": 563.5778647881441
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.477,
+      "10": 0.6149,
+      "100": 0.71547
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.015662673223387533,
+    "search_time_s": 1.768988971998624,
+    "queries_per_sec": 565.2946489938762
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.484,
+      "10": 0.6125,
+      "100": 0.71745
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.015987658651483824,
+    "search_time_s": 1.7824569500007783,
+    "queries_per_sec": 561.0233672120739
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.449,
+      "10": 0.6117999999999999,
+      "100": 0.71678
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.01523724553662778,
+    "search_time_s": 1.7652465229984955,
+    "queries_per_sec": 566.4931141183459
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.453,
+      "10": 0.6145,
+      "100": 0.716
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.015118294313918102,
+    "search_time_s": 1.7488724060021923,
+    "queries_per_sec": 571.7970027818865
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.688,
+      "10": 0.7761,
+      "100": 0.8499500000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01662936689586614,
+    "search_time_s": 1.6984771600036765,
+    "queries_per_sec": 588.7627008171457
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.684,
+      "10": 0.7792,
+      "100": 0.84867
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.016642869241225277,
+    "search_time_s": 1.7283489119945443,
+    "queries_per_sec": 578.5868773718744
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.686,
+      "10": 0.7773000000000001,
+      "100": 0.85083
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.016990361593546766,
+    "search_time_s": 1.7371383670033538,
+    "queries_per_sec": 575.65938269215
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.672,
+      "10": 0.7746000000000001,
+      "100": 0.8508700000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.016879443519455924,
+    "search_time_s": 1.7212555219957721,
+    "queries_per_sec": 580.9712661607114
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.669,
+      "10": 0.7807000000000001,
+      "100": 0.8484700000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01701171890473329,
+    "search_time_s": 1.7107822809994104,
+    "queries_per_sec": 584.5279151569285
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.806,
+      "10": 0.8791000000000001,
+      "100": 0.9236299999999998
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.01867882153907915,
+    "search_time_s": 1.7363287849948392,
+    "queries_per_sec": 575.9277900832429
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.817,
+      "10": 0.8789000000000001,
+      "100": 0.9219400000000001
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.019215523146446926,
+    "search_time_s": 1.7430619189981371,
+    "queries_per_sec": 573.7030848420875
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.823,
+      "10": 0.8801000000000001,
+      "100": 0.92331
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.019768509705455944,
+    "search_time_s": 1.7535894050015486,
+    "queries_per_sec": 570.2589198747565
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.818,
+      "10": 0.8757,
+      "100": 0.9227299999999999
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.018982992065079116,
+    "search_time_s": 1.7290053619944956,
+    "queries_per_sec": 578.3672057826641
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.826,
+      "10": 0.8766000000000002,
+      "100": 0.92228
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.01890869745450694,
+    "search_time_s": 1.7539152419994934,
+    "queries_per_sec": 570.152978920454
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.489,
+      "10": 0.6215,
+      "100": 0.72348
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.012236360573982589,
+    "search_time_s": 1.6991402019993984,
+    "queries_per_sec": 588.5329526211481
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.48,
+      "10": 0.6209,
+      "100": 0.72005
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.012520073249396628,
+    "search_time_s": 1.6790401859980193,
+    "queries_per_sec": 595.5783597910739
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.493,
+      "10": 0.6206,
+      "100": 0.72156
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.011786810637952136,
+    "search_time_s": 1.6622297299982165,
+    "queries_per_sec": 601.6015608149861
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.501,
+      "10": 0.6193,
+      "100": 0.7233099999999999
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.01204237334761181,
+    "search_time_s": 1.6731630110007245,
+    "queries_per_sec": 597.6703963840897
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.479,
+      "10": 0.6185,
+      "100": 0.72281
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.01201143415708296,
+    "search_time_s": 1.6947518200031482,
+    "queries_per_sec": 590.0568969432601
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.7,
+      "10": 0.7919,
+      "100": 0.8581100000000002
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.014031404215857222,
+    "search_time_s": 1.6751347899989923,
+    "queries_per_sec": 596.9668864680444
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.705,
+      "10": 0.7906000000000002,
+      "100": 0.85452
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013969354530168203,
+    "search_time_s": 1.7013175480024074,
+    "queries_per_sec": 587.7797482158134
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.715,
+      "10": 0.7962,
+      "100": 0.8585999999999999
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013914768664623817,
+    "search_time_s": 1.6983787440040032,
+    "queries_per_sec": 588.7968178655225
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.701,
+      "10": 0.7845,
+      "100": 0.85597
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013968042770608563,
+    "search_time_s": 1.6837373089947505,
+    "queries_per_sec": 593.9168744779046
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.672,
+      "10": 0.7921000000000001,
+      "100": 0.8561300000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013988873449577402,
+    "search_time_s": 1.7104992859967751,
+    "queries_per_sec": 584.6246228727659
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.825,
+      "10": 0.8858000000000001,
+      "100": 0.9255999999999999
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.016161674002127483,
+    "search_time_s": 1.7065344819930033,
+    "queries_per_sec": 585.9828855213838
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.846,
+      "10": 0.8878000000000001,
+      "100": 0.9233899999999999
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.016961134003150392,
+    "search_time_s": 1.7882436149957357,
+    "queries_per_sec": 559.2079242527504
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.829,
+      "10": 0.8887000000000002,
+      "100": 0.92723
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.017366545171430135,
+    "search_time_s": 1.8374308810016373,
+    "queries_per_sec": 544.238159018461
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.859,
+      "10": 0.8853000000000002,
+      "100": 0.92541
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.02095510901204734,
+    "search_time_s": 2.587626035005087,
+    "queries_per_sec": 386.45460606444783
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.814,
+      "10": 0.8855000000000002,
+      "100": 0.92638
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.021347697973717703,
+    "search_time_s": 2.2456110559942317,
+    "queries_per_sec": 445.3130907646229
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.272,
+      "10": 0.382,
+      "100": 0.49502999999999997
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.014838022395680774,
+    "search_time_s": 2.3079354470028193,
+    "queries_per_sec": 433.28768198375803
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.275,
+      "10": 0.4033,
+      "100": 0.51259
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.017108831884077767,
+    "search_time_s": 2.1840944530049455,
+    "queries_per_sec": 457.85565666547467
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.273,
+      "10": 0.3956,
+      "100": 0.5128400000000001
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.015864392702950147,
+    "search_time_s": 2.2489524199991138,
+    "queries_per_sec": 444.651470216695
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.281,
+      "10": 0.40270000000000006,
+      "100": 0.5185400000000001
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.014605198038414353,
+    "search_time_s": 1.8716630319977412,
+    "queries_per_sec": 534.284207629318
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.253,
+      "10": 0.38889999999999997,
+      "100": 0.50976
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.013010377315123988,
+    "search_time_s": 2.0931426379975164,
+    "queries_per_sec": 477.750527769425
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.272,
+      "10": 0.382,
+      "100": 0.49502999999999997
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.014899483027049994,
+    "search_time_s": 2.224118345999159,
+    "queries_per_sec": 449.61636227624473
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.275,
+      "10": 0.4033,
+      "100": 0.51259
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.015340234857975074,
+    "search_time_s": 2.102141990006203,
+    "queries_per_sec": 475.7052590900624
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.273,
+      "10": 0.3956,
+      "100": 0.5128400000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.015584297132024269,
+    "search_time_s": 2.3176098949988955,
+    "queries_per_sec": 431.479000049953
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.281,
+      "10": 0.40270000000000006,
+      "100": 0.5185400000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.016116074899409232,
+    "search_time_s": 2.060204066998267,
+    "queries_per_sec": 485.38880978766707
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.253,
+      "10": 0.38889999999999997,
+      "100": 0.50976
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.015879381467947054,
+    "search_time_s": 2.0698078450004687,
+    "queries_per_sec": 483.136636289913
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.28,
+      "10": 0.38739999999999997,
+      "100": 0.5007
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.015774425072796413,
+    "search_time_s": 2.1174884220017702,
+    "queries_per_sec": 472.25759990444186
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.28,
+      "10": 0.4087,
+      "100": 0.51857
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.015844890413202802,
+    "search_time_s": 2.158342110000376,
+    "queries_per_sec": 463.3185792774185
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.275,
+      "10": 0.40079999999999993,
+      "100": 0.51747
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.014144345723792027,
+    "search_time_s": 2.2520866050035693,
+    "queries_per_sec": 444.0326574378853
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.28,
+      "10": 0.4051,
+      "100": 0.52361
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.015906493131119078,
+    "search_time_s": 2.4761681920062983,
+    "queries_per_sec": 403.8497882446979
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.263,
+      "10": 0.39479999999999993,
+      "100": 0.5149
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.017354713064841504,
+    "search_time_s": 2.3476019910012837,
+    "queries_per_sec": 425.9665837024983
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.385,
+      "10": 0.5387000000000001,
+      "100": 0.63597
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0035283761101031264,
+    "search_time_s": 24.030949628999224,
+    "queries_per_sec": 41.61300387369025
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.412,
+      "10": 0.5262,
+      "100": 0.62755
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0032097093753620477,
+    "search_time_s": 23.974624192997,
+    "queries_per_sec": 41.71076851715993
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.414,
+      "10": 0.5363,
+      "100": 0.6367200000000001
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.003494883090151397,
+    "search_time_s": 24.24073726699862,
+    "queries_per_sec": 41.25287069388775
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.399,
+      "10": 0.5282,
+      "100": 0.6303099999999999
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0027789514266496583,
+    "search_time_s": 20.77747932199418,
+    "queries_per_sec": 48.129033580191866
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.408,
+      "10": 0.5357000000000001,
+      "100": 0.6301800000000001
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.002589201616608301,
+    "search_time_s": 20.823291603999678,
+    "queries_per_sec": 48.02314730145367
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.454,
+      "10": 0.6038,
+      "100": 0.69042
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004338789150676716,
+    "search_time_s": 55.008128829998896,
+    "queries_per_sec": 18.17913136239323
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.523,
+      "10": 0.5965,
+      "100": 0.68911
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004913284117282993,
+    "search_time_s": 51.58290382500127,
+    "queries_per_sec": 19.3862680432372
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.483,
+      "10": 0.6067,
+      "100": 0.69805
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004587395113020987,
+    "search_time_s": 60.051282929998706,
+    "queries_per_sec": 16.652433573578968
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.483,
+      "10": 0.5982000000000001,
+      "100": 0.6930899999999999
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.006625128663878129,
+    "search_time_s": 56.20207844200195,
+    "queries_per_sec": 17.792936270710268
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.484,
+      "10": 0.608,
+      "100": 0.69464
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004958530896062482,
+    "search_time_s": 53.21968423000362,
+    "queries_per_sec": 18.790040085135093
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.515,
+      "10": 0.6467,
+      "100": 0.72753
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.006453244517015664,
+    "search_time_s": 70.64472882299742,
+    "queries_per_sec": 14.155337796051723
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.55,
+      "10": 0.6389,
+      "100": 0.72781
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.006180329835498703,
+    "search_time_s": 71.17794080000021,
+    "queries_per_sec": 14.049296576447137
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.544,
+      "10": 0.6554000000000001,
+      "100": 0.73641
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.0060782606278475156,
+    "search_time_s": 67.92645570299646,
+    "queries_per_sec": 14.721804481782886
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.531,
+      "10": 0.6464999999999999,
+      "100": 0.7309000000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.006786028476707949,
+    "search_time_s": 67.48362858199835,
+    "queries_per_sec": 14.818408864676194
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.517,
+      "10": 0.6515,
+      "100": 0.7303499999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.005643314447788168,
+    "search_time_s": 66.71825528599584,
+    "queries_per_sec": 14.98840153588219
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.359,
+      "10": 0.49160000000000004,
+      "100": 0.59277
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.004797519438648018,
+    "search_time_s": 1.1037840409990167,
+    "queries_per_sec": 905.9743236502283
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.375,
+      "10": 0.5022,
+      "100": 0.59405
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.005044596062255869,
+    "search_time_s": 1.1288544650014956,
+    "queries_per_sec": 885.8537845254261
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.381,
+      "10": 0.5097999999999999,
+      "100": 0.609
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.004647748326887701,
+    "search_time_s": 1.1058120430025156,
+    "queries_per_sec": 904.3128136720113
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.399,
+      "10": 0.4909,
+      "100": 0.5968100000000001
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.004667308403971448,
+    "search_time_s": 1.1103022679963033,
+    "queries_per_sec": 900.6556402020512
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.36,
+      "10": 0.4929,
+      "100": 0.5967899999999999
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.004657440219561671,
+    "search_time_s": 1.112133046000963,
+    "queries_per_sec": 899.1729933714549
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.474,
+      "10": 0.5991000000000001,
+      "100": 0.68144
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005884298744913592,
+    "search_time_s": 1.2079815100005362,
+    "queries_per_sec": 827.8272405010207
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.474,
+      "10": 0.5768,
+      "100": 0.6614500000000001
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005705503179551029,
+    "search_time_s": 1.207270109996898,
+    "queries_per_sec": 828.315048736334
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.451,
+      "10": 0.5772,
+      "100": 0.6619
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005779323291229729,
+    "search_time_s": 1.211469734997081,
+    "queries_per_sec": 825.4436500656035
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.473,
+      "10": 0.5712999999999999,
+      "100": 0.6646
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005641794156415495,
+    "search_time_s": 1.2067816509952536,
+    "queries_per_sec": 828.650318949814
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.456,
+      "10": 0.5629,
+      "100": 0.6556299999999999
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005576959305941466,
+    "search_time_s": 1.19410778600286,
+    "queries_per_sec": 837.4453392916785
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.501,
+      "10": 0.6235,
+      "100": 0.69965
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006740970114461726,
+    "search_time_s": 1.2636175849984284,
+    "queries_per_sec": 791.3786669890668
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.509,
+      "10": 0.6153,
+      "100": 0.69985
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006872081054478924,
+    "search_time_s": 1.2635433139948873,
+    "queries_per_sec": 791.4251841817322
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.503,
+      "10": 0.6352,
+      "100": 0.71075
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006810974397051498,
+    "search_time_s": 1.2564641200006008,
+    "queries_per_sec": 795.8842469767635
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.51,
+      "10": 0.6203,
+      "100": 0.70232
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.0068063764994391865,
+    "search_time_s": 1.2703050039999653,
+    "queries_per_sec": 787.2125173491227
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.482,
+      "10": 0.6,
+      "100": 0.6823499999999999
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006843817516123782,
+    "search_time_s": 1.2581427980039734,
+    "queries_per_sec": 794.822337803377
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.19,
+      "10": 0.29510000000000003,
+      "100": 0.40009000000000006
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.008077869315349826,
+    "search_time_s": 33.652985820997856,
+    "queries_per_sec": 29.71504535493691
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.193,
+      "10": 0.278,
+      "100": 0.38599
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.007778281688553316,
+    "search_time_s": 33.5300003989978,
+    "queries_per_sec": 29.824037819871
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.179,
+      "10": 0.2859,
+      "100": 0.39572999999999997
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.007401856041115431,
+    "search_time_s": 33.272306161001325,
+    "queries_per_sec": 30.055025196062488
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.176,
+      "10": 0.2796,
+      "100": 0.39921999999999996
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.007781421346345821,
+    "search_time_s": 33.3144198259979,
+    "queries_per_sec": 30.017031820545775
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.176,
+      "10": 0.287,
+      "100": 0.39722
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.007565910324669652,
+    "search_time_s": 32.75736143800168,
+    "queries_per_sec": 30.527489275735867
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.255,
+      "10": 0.37060000000000004,
+      "100": 0.47864
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009587798253514765,
+    "search_time_s": 49.47017612899799,
+    "queries_per_sec": 20.214199306515685
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.238,
+      "10": 0.34240000000000004,
+      "100": 0.45248
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009762706520322543,
+    "search_time_s": 49.387313348001044,
+    "queries_per_sec": 20.248114995720357
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.25,
+      "10": 0.3698000000000001,
+      "100": 0.46665999999999996
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009786270694646914,
+    "search_time_s": 49.66678515500098,
+    "queries_per_sec": 20.134180154386524
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.226,
+      "10": 0.34779999999999994,
+      "100": 0.46453
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009865263779500023,
+    "search_time_s": 49.561123423001845,
+    "queries_per_sec": 20.177105177076946
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.248,
+      "10": 0.3485,
+      "100": 0.46182
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.009934264947386856,
+    "search_time_s": 49.339486060001946,
+    "queries_per_sec": 20.267742529459994
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.306,
+      "10": 0.419,
+      "100": 0.5264099999999999
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.011593414820446846,
+    "search_time_s": 66.66009117400245,
+    "queries_per_sec": 15.001479631789069
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.288,
+      "10": 0.3991,
+      "100": 0.5086900000000001
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.011865213963942783,
+    "search_time_s": 67.379169120999,
+    "queries_per_sec": 14.84138218154943
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.296,
+      "10": 0.4227,
+      "100": 0.52
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.011308766625283212,
+    "search_time_s": 66.60506290199555,
+    "queries_per_sec": 15.013873667102851
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.294,
+      "10": 0.40220000000000006,
+      "100": 0.51847
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.01102604664521843,
+    "search_time_s": 66.3538571800018,
+    "queries_per_sec": 15.07071393434212
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.287,
+      "10": 0.40099999999999997,
+      "100": 0.50897
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.011535240252939512,
+    "search_time_s": 66.34086607000063,
+    "queries_per_sec": 15.073665136430899
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.017599043996597175,
+    "queries_per_sec": 18410.09091531599
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.01705486599530559,
+    "queries_per_sec": 18997.5107449793
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.017346477005048655,
+    "queries_per_sec": 18678.14426558779
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.018040251998172607,
+    "queries_per_sec": 17959.837813397487
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 3072,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.017622135994315613,
+    "queries_per_sec": 18385.966383672952
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2345679012345679,
+      "10": 0.4703703703703704,
+      "100": 0.6309567901234568
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0007926628962473749,
+    "search_time_s": 0.254022499997518,
+    "queries_per_sec": 1275.4775659761071
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25,
+      "10": 0.4453703703703704,
+      "100": 0.625
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.00026707853372569674,
+    "search_time_s": 0.2969017069990514,
+    "queries_per_sec": 1091.270249924953
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.30246913580246915,
+      "10": 0.45524691358024694,
+      "100": 0.6381481481481481
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0002613480783373294,
+    "search_time_s": 0.25360147999890614,
+    "queries_per_sec": 1277.595067668365
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25,
+      "10": 0.44043209876543205,
+      "100": 0.635432098765432
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.00025829252546518376,
+    "search_time_s": 0.25375267100025667,
+    "queries_per_sec": 1276.8338505476156
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.22839506172839505,
+      "10": 0.44598765432098764,
+      "100": 0.6411111111111111
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0002625915634473632,
+    "search_time_s": 0.25124332300038077,
+    "queries_per_sec": 1289.5865097259082
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7870370370370371,
+      "10": 0.9077160493827161,
+      "100": 0.9603395061728395
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.5504648453360859,
+    "search_time_s": 0.02334864899603417,
+    "queries_per_sec": 13876.605882208954
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8333333333333334,
+      "10": 0.8966049382716049,
+      "100": 0.958641975308642
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.6296545723594092,
+    "search_time_s": 0.022451778000686318,
+    "queries_per_sec": 14430.92836523218
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8364197530864198,
+      "10": 0.8969135802469137,
+      "100": 0.9605246913580247
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.5661686145399016,
+    "search_time_s": 0.024851673995726742,
+    "queries_per_sec": 13037.35112796474
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8209876543209876,
+      "10": 0.904320987654321,
+      "100": 0.9594444444444444
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.5832232849787654,
+    "search_time_s": 0.024047908998909406,
+    "queries_per_sec": 13473.104876382129
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7993827160493827,
+      "10": 0.8981481481481481,
+      "100": 0.9583641975308642
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.5553157527438825,
+    "search_time_s": 0.022989296005107462,
+    "queries_per_sec": 14093.515518179325
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8796296296296297,
+      "10": 0.9339506172839507,
+      "100": 0.973858024691358
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.825020159122007,
+    "search_time_s": 0.041664060998300556,
+    "queries_per_sec": 7776.486310665101
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8641975308641975,
+      "10": 0.9290123456790124,
+      "100": 0.9721913580246914
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.8692253892332041,
+    "search_time_s": 0.04186790799576556,
+    "queries_per_sec": 7738.624056228668
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8518518518518519,
+      "10": 0.9277777777777778,
+      "100": 0.9735802469135802
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.8098609019209198,
+    "search_time_s": 0.04350071500084596,
+    "queries_per_sec": 7448.153438252662
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8765432098765432,
+      "10": 0.9314814814814817,
+      "100": 0.9720987654320988
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.852119100481178,
+    "search_time_s": 0.037661803005903494,
+    "queries_per_sec": 8602.880747616171
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8765432098765432,
+      "10": 0.9259259259259259,
+      "100": 0.9740432098765434
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.9768121474601889,
+    "search_time_s": 0.049524685004143976,
+    "queries_per_sec": 6542.1920396442565
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9012345679012346,
+      "10": 0.9601851851851853,
+      "100": 0.9863271604938272
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 1.167608747601102,
+    "search_time_s": 0.05717498499870999,
+    "queries_per_sec": 5666.813904845104
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9228395061728395,
+      "10": 0.9595679012345678,
+      "100": 0.985246913580247
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 1.962903194786978,
+    "search_time_s": 0.07296040199435083,
+    "queries_per_sec": 4440.765005997179
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9228395061728395,
+      "10": 0.959567901234568,
+      "100": 0.9869444444444444
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 1.7898451412888172,
+    "search_time_s": 0.06141417700564489,
+    "queries_per_sec": 5275.654837322326
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9320987654320988,
+      "10": 0.9638888888888889,
+      "100": 0.9871913580246914
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 1.694350458506681,
+    "search_time_s": 0.05602400100178784,
+    "queries_per_sec": 5783.235652692148
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9166666666666666,
+      "10": 0.9604938271604938,
+      "100": 0.9864506172839507
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 1.2556426004796768,
+    "search_time_s": 0.05716727500112029,
+    "queries_per_sec": 5667.578172890883
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.37962962962962965,
+      "10": 0.6373456790123457,
+      "100": 0.834537037037037
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01367613703796114,
+    "search_time_s": 0.03139881200331729,
+    "queries_per_sec": 10318.861744379672
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.6246913580246913,
+      "100": 0.8293827160493829
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.02317631635692741,
+    "search_time_s": 0.037983324997185264,
+    "queries_per_sec": 8530.058914642408
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3611111111111111,
+      "10": 0.634567901234568,
+      "100": 0.827716049382716
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.015001528394080837,
+    "search_time_s": 0.03398292500060052,
+    "queries_per_sec": 9534.199895808692
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.404320987654321,
+      "10": 0.6444444444444445,
+      "100": 0.8378703703703703
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.014418312655183355,
+    "search_time_s": 0.0324389829984284,
+    "queries_per_sec": 9987.98266936103
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4074074074074074,
+      "10": 0.6367283950617283,
+      "100": 0.8273148148148147
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.017147006173341472,
+    "search_time_s": 0.04579057900264161,
+    "queries_per_sec": 7075.691267876495
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4845679012345679,
+      "10": 0.7188271604938272,
+      "100": 0.8726851851851852
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.01789349290099639,
+    "search_time_s": 0.02778138699795818,
+    "queries_per_sec": 11662.484670898997
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.49074074074074076,
+      "10": 0.7092592592592593,
+      "100": 0.8729629629629629
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.019047825307895023,
+    "search_time_s": 0.03129672999784816,
+    "queries_per_sec": 10352.519257515944
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5339506172839507,
+      "10": 0.7175925925925926,
+      "100": 0.8733024691358025
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.019582221603393266,
+    "search_time_s": 0.029349950993491802,
+    "queries_per_sec": 11039.200715253164
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5401234567901234,
+      "10": 0.7,
+      "100": 0.873888888888889
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.0179117787029324,
+    "search_time_s": 0.030882654995366465,
+    "queries_per_sec": 10491.325957843064
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5185185185185185,
+      "10": 0.7070987654320988,
+      "100": 0.8722839506172839
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.017813883024234797,
+    "search_time_s": 0.032892158000322524,
+    "queries_per_sec": 9850.372237565654
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.595679012345679,
+      "10": 0.7885802469135803,
+      "100": 0.9085493827160493
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.022356596911530136,
+    "search_time_s": 0.030485890005365945,
+    "queries_per_sec": 10627.867513232235
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5771604938271605,
+      "10": 0.7675925925925926,
+      "100": 0.9058024691358025
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.022699720679673102,
+    "search_time_s": 0.030448439996689558,
+    "queries_per_sec": 10640.939241393851
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5648148148148148,
+      "10": 0.7780864197530865,
+      "100": 0.9105555555555555
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.022648172222191388,
+    "search_time_s": 0.02759795999736525,
+    "queries_per_sec": 11739.998174898867
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6358024691358025,
+      "10": 0.783641975308642,
+      "100": 0.9063580246913581
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.023114097530196887,
+    "search_time_s": 0.02845255599822849,
+    "queries_per_sec": 11387.37764087602
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5709876543209876,
+      "10": 0.7790123456790123,
+      "100": 0.908611111111111
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.022493491666898117,
+    "search_time_s": 0.03876446600042982,
+    "queries_per_sec": 8358.170082786835
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.38580246913580246,
+      "10": 0.6345679012345679,
+      "100": 0.8300000000000001
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012831838888994326,
+    "search_time_s": 0.03332259500166401,
+    "queries_per_sec": 9723.132306587184
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3765432098765432,
+      "10": 0.6339506172839506,
+      "100": 0.8301543209876544
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011731465432895664,
+    "search_time_s": 0.030995835993962828,
+    "queries_per_sec": 10453.016981477986
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.6314814814814814,
+      "100": 0.8261728395061727
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.010803470986839212,
+    "search_time_s": 0.02998913400369929,
+    "queries_per_sec": 10803.913176020127
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.637037037037037,
+      "100": 0.8377469135802469
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011901069134452243,
+    "search_time_s": 0.03578507500060368,
+    "queries_per_sec": 9054.053959493845
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4228395061728395,
+      "10": 0.6222222222222222,
+      "100": 0.827253086419753
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013271270061657696,
+    "search_time_s": 0.05204624899488408,
+    "queries_per_sec": 6225.232485665735
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.49382716049382713,
+      "10": 0.7203703703703704,
+      "100": 0.8763271604938272
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.015274754936579057,
+    "search_time_s": 0.03441734000080032,
+    "queries_per_sec": 9413.85940902074
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.49074074074074076,
+      "10": 0.7135802469135802,
+      "100": 0.8714814814814815
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.015851188270320518,
+    "search_time_s": 0.02780573999916669,
+    "queries_per_sec": 11652.270358915459
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5216049382716049,
+      "10": 0.7040123456790124,
+      "100": 0.8689197530864197
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.015523604629435549,
+    "search_time_s": 0.032539183004701044,
+    "queries_per_sec": 9957.226029712874
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5740740740740741,
+      "10": 0.7064814814814815,
+      "100": 0.8674074074074073
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.02138655956828806,
+    "search_time_s": 0.03499132100114366,
+    "queries_per_sec": 9259.438933140316
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5216049382716049,
+      "10": 0.7265432098765432,
+      "100": 0.8780864197530864
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.014013309569067874,
+    "search_time_s": 0.04214305400091689,
+    "queries_per_sec": 7688.099680506089
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5802469135802469,
+      "10": 0.7898148148148147,
+      "100": 0.9133024691358024
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.020401350000746013,
+    "search_time_s": 0.034088852000422776,
+    "queries_per_sec": 9504.573518521001
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6265432098765432,
+      "10": 0.7777777777777779,
+      "100": 0.9078086419753086
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.02461426388941214,
+    "search_time_s": 0.03458857600344345,
+    "queries_per_sec": 9367.254667198335
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6203703703703703,
+      "10": 0.7706790123456789,
+      "100": 0.9064197530864196
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.019926081790519093,
+    "search_time_s": 0.03619387000071583,
+    "queries_per_sec": 8951.792112686264
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6265432098765432,
+      "10": 0.7904320987654322,
+      "100": 0.9142592592592593
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.022184135184629052,
+    "search_time_s": 0.03820771599566797,
+    "queries_per_sec": 8479.962529996179
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6234567901234568,
+      "10": 0.7830246913580248,
+      "100": 0.9114506172839506
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.0197569425914862,
+    "search_time_s": 0.04135590900114039,
+    "queries_per_sec": 7834.430624921476
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2623456790123457,
+      "10": 0.5231481481481481,
+      "100": 0.7489814814814816
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012739383949079683,
+    "search_time_s": 0.04274782099673757,
+    "queries_per_sec": 7579.333693399882
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2993827160493827,
+      "10": 0.5040123456790124,
+      "100": 0.7539506172839506
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011820603701638857,
+    "search_time_s": 0.044053858997358475,
+    "queries_per_sec": 7354.633790865573
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.24074074074074073,
+      "10": 0.49475308641975313,
+      "100": 0.7457716049382715
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01207122314767337,
+    "search_time_s": 0.03853518700634595,
+    "queries_per_sec": 8407.900030344836
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2654320987654321,
+      "10": 0.5077160493827161,
+      "100": 0.7589197530864198
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.010903202775897413,
+    "search_time_s": 0.049264228000538424,
+    "queries_per_sec": 6576.780214569868
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.27469135802469136,
+      "10": 0.48364197530864195,
+      "100": 0.7498148148148148
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.010997956172857048,
+    "search_time_s": 0.03808373600622872,
+    "queries_per_sec": 8507.568688823196
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2623456790123457,
+      "10": 0.5231481481481481,
+      "100": 0.7489814814814816
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.01344585215980417,
+    "search_time_s": 0.04044438099663239,
+    "queries_per_sec": 8011.001578364568
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2993827160493827,
+      "10": 0.5040123456790124,
+      "100": 0.7539506172839506
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.012025888580315097,
+    "search_time_s": 0.0356266719973064,
+    "queries_per_sec": 9094.31001650944
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.24074074074074073,
+      "10": 0.49475308641975313,
+      "100": 0.7457716049382715
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.015100489816424312,
+    "search_time_s": 0.03804767499968875,
+    "queries_per_sec": 8515.632032775997
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2654320987654321,
+      "10": 0.5077160493827161,
+      "100": 0.7589197530864198
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.01315402037163702,
+    "search_time_s": 0.04992407299869228,
+    "queries_per_sec": 6489.855104740491
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.27469135802469136,
+      "10": 0.48364197530864195,
+      "100": 0.7498148148148148
+    },
+    "bytes_per_vector": 292.0,
+    "encode_time_ms": 0.0129998043211131,
+    "search_time_s": 0.04229554800258484,
+    "queries_per_sec": 7660.380709104399
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.26851851851851855,
+      "10": 0.5212962962962964,
+      "100": 0.7492592592592593
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.014245049690397997,
+    "search_time_s": 0.04334989500057418,
+    "queries_per_sec": 7474.0665460829505
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2962962962962963,
+      "10": 0.5055555555555555,
+      "100": 0.7551234567901235
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.01294165710005248,
+    "search_time_s": 0.04179609199491097,
+    "queries_per_sec": 7751.920922163004
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.24074074074074073,
+      "10": 0.4944444444444444,
+      "100": 0.7453395061728395
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.01368193271771838,
+    "search_time_s": 0.03915106400381774,
+    "queries_per_sec": 8275.637156844723
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.26851851851851855,
+      "10": 0.5064814814814814,
+      "100": 0.7589506172839505
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.01185696975297128,
+    "search_time_s": 0.035624030002509244,
+    "queries_per_sec": 9094.984480340334
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.27469135802469136,
+      "10": 0.48425925925925917,
+      "100": 0.7498456790123458
+    },
+    "bytes_per_vector": 388.0,
+    "encode_time_ms": 0.013592943518525306,
+    "search_time_s": 0.037546161001955625,
+    "queries_per_sec": 8629.377580922965
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.6290123456790123,
+      "100": 0.8116666666666668
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.005683899692002466,
+    "search_time_s": 0.5593586579998373,
+    "queries_per_sec": 579.2347992941842
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4074074074074074,
+      "10": 0.6074074074074074,
+      "100": 0.816141975308642
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.007042126851979166,
+    "search_time_s": 0.5663159249961609,
+    "queries_per_sec": 572.1188221966324
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.38271604938271603,
+      "10": 0.6188271604938271,
+      "100": 0.8235802469135801
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.006128146913082965,
+    "search_time_s": 0.5511623900019913,
+    "queries_per_sec": 587.8485286320596
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3765432098765432,
+      "10": 0.6027777777777779,
+      "100": 0.8140123456790124
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.00532994290102736,
+    "search_time_s": 0.538445344005595,
+    "queries_per_sec": 601.7323830673394
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3271604938271605,
+      "10": 0.5765432098765433,
+      "100": 0.8043827160493827
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.007117810803911085,
+    "search_time_s": 0.5635967849957524,
+    "queries_per_sec": 574.8790777833161
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.48148148148148145,
+      "10": 0.6839506172839506,
+      "100": 0.844753086419753
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.009854904013160576,
+    "search_time_s": 0.898609823998413,
+    "queries_per_sec": 360.55693065800733
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.48148148148148145,
+      "10": 0.658641975308642,
+      "100": 0.8435802469135802
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.0094573447526789,
+    "search_time_s": 0.9188996400043834,
+    "queries_per_sec": 352.5956327488108
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4351851851851852,
+      "10": 0.6796296296296296,
+      "100": 0.8535802469135803
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.008303651850804238,
+    "search_time_s": 0.8852706500038039,
+    "queries_per_sec": 365.9897682122499
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4506172839506173,
+      "10": 0.6737654320987655,
+      "100": 0.8505555555555557
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.007593692283046915,
+    "search_time_s": 0.8660380649962462,
+    "queries_per_sec": 374.1175048713411
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3888888888888889,
+      "10": 0.6327160493827161,
+      "100": 0.8401851851851853
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.012153796912717093,
+    "search_time_s": 0.8751568930019857,
+    "queries_per_sec": 370.21933163161964
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5154320987654321,
+      "10": 0.7166666666666667,
+      "100": 0.8637962962962965
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.016719963580580505,
+    "search_time_s": 1.239273013001366,
+    "queries_per_sec": 261.4436016929894
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5216049382716049,
+      "10": 0.6901234567901234,
+      "100": 0.8601543209876541
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.012725871911917003,
+    "search_time_s": 1.2855349390010815,
+    "queries_per_sec": 252.03515685988478
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4876543209876543,
+      "10": 0.7083333333333334,
+      "100": 0.8714506172839507
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.01780989012466442,
+    "search_time_s": 1.3007351160049438,
+    "queries_per_sec": 249.0899153973241
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.47530864197530864,
+      "10": 0.7179012345679013,
+      "100": 0.8734567901234568
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.012455695677662908,
+    "search_time_s": 1.2499567909981124,
+    "queries_per_sec": 259.208960128358
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4691358024691358,
+      "10": 0.6762345679012346,
+      "100": 0.8618518518518519
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.015349537035810365,
+    "search_time_s": 1.3194736750010634,
+    "queries_per_sec": 245.55245484510246
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.11419753086419752,
+      "10": 0.2876543209876543,
+      "100": 0.6253703703703704
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.006219516358719881,
+    "search_time_s": 0.020724259004055057,
+    "queries_per_sec": 15633.852092690206
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.18209876543209877,
+      "10": 0.43765432098765433,
+      "100": 0.7293518518518518
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.005852864506093204,
+    "search_time_s": 0.018058082001516595,
+    "queries_per_sec": 17942.104813389877
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.11419753086419752,
+      "10": 0.2925925925925926,
+      "100": 0.6137962962962963
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.0050102422841361806,
+    "search_time_s": 0.021625005996611435,
+    "queries_per_sec": 14982.654804848133
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2839506172839506,
+      "10": 0.5141975308641976,
+      "100": 0.8002777777777779
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.0072479277779491915,
+    "search_time_s": 0.022133580001536757,
+    "queries_per_sec": 14638.39107715536
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.27469135802469136,
+      "10": 0.4864197530864197,
+      "100": 0.785679012345679
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.00796430154249394,
+    "search_time_s": 0.01858563200221397,
+    "queries_per_sec": 17432.82122240472
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.1419753086419753,
+      "10": 0.3092592592592593,
+      "100": 0.6506481481481482
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.017708711729264234,
+    "search_time_s": 0.03045331299654208,
+    "queries_per_sec": 10639.236526968005
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.17901234567901234,
+      "10": 0.4367283950617284,
+      "100": 0.7328395061728395
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.008988573456098279,
+    "search_time_s": 0.03315718300291337,
+    "queries_per_sec": 9771.638319562056
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.08950617283950617,
+      "10": 0.24351851851851852,
+      "100": 0.566574074074074
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.01026872932139488,
+    "search_time_s": 0.02916704699600814,
+    "queries_per_sec": 11108.426576209216
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.22530864197530864,
+      "10": 0.5064814814814814,
+      "100": 0.7882407407407407
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.012848699074827802,
+    "search_time_s": 0.032043396997323725,
+    "queries_per_sec": 10111.287515086511
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.29012345679012347,
+      "10": 0.5126543209876543,
+      "100": 0.7907407407407409
+    },
+    "bytes_per_vector": 288,
+    "encode_time_ms": 0.008603220988861947,
+    "search_time_s": 0.03194456200435525,
+    "queries_per_sec": 10142.571369606714
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.10185185185185185,
+      "10": 0.2919753086419753,
+      "100": 0.6342901234567901
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.01160930462868203,
+    "search_time_s": 0.02559243999712635,
+    "queries_per_sec": 12659.988654320588
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.1882716049382716,
+      "10": 0.4506172839506173,
+      "100": 0.7383024691358024
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.011151100616301353,
+    "search_time_s": 0.03134468099597143,
+    "queries_per_sec": 10336.682004887592
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.10493827160493827,
+      "10": 0.24537037037037038,
+      "100": 0.5570987654320988
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.008521007098520555,
+    "search_time_s": 0.025257626999518834,
+    "queries_per_sec": 12827.808408373927
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.24691358024691357,
+      "10": 0.5154320987654321,
+      "100": 0.8016358024691357
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.00850579382569305,
+    "search_time_s": 0.02432959799625678,
+    "queries_per_sec": 13317.112763221525
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.23765432098765432,
+      "10": 0.46697530864197534,
+      "100": 0.7712037037037037
+    },
+    "bytes_per_vector": 384,
+    "encode_time_ms": 0.011636734566702306,
+    "search_time_s": 0.0277191560016945,
+    "queries_per_sec": 11688.667576321355
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.14506172839506173,
+      "10": 0.33858024691358024,
+      "100": 0.6187962962962963
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.019594634261325773,
+    "search_time_s": 0.5638433399944915,
+    "queries_per_sec": 574.6276971244624
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.18209876543209877,
+      "10": 0.3731481481481482,
+      "100": 0.6260802469135802
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.01406252777761202,
+    "search_time_s": 0.5513917069984018,
+    "queries_per_sec": 587.6040496940936
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.16358024691358025,
+      "10": 0.35462962962962963,
+      "100": 0.6475
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.01478636944582068,
+    "search_time_s": 0.5391923589995713,
+    "queries_per_sec": 600.8987230478494
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.12345679012345678,
+      "10": 0.3475308641975308,
+      "100": 0.6431790123456791
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.014244235495021308,
+    "search_time_s": 0.5624215850039036,
+    "queries_per_sec": 576.0803081513154
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.16358024691358025,
+      "10": 0.35802469135802467,
+      "100": 0.6441975308641976
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.013464696604825332,
+    "search_time_s": 0.5559975159994792,
+    "queries_per_sec": 582.7364163984925
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.1728395061728395,
+      "10": 0.4228395061728395,
+      "100": 0.6901543209876544
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.023804696295737365,
+    "search_time_s": 0.8808362950003357,
+    "queries_per_sec": 367.83225423275337
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.1697530864197531,
+      "10": 0.3987654320987654,
+      "100": 0.6541358024691358
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.020072696603210153,
+    "search_time_s": 0.9043793490054668,
+    "queries_per_sec": 358.25674298766137
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.16666666666666666,
+      "10": 0.4027777777777778,
+      "100": 0.6878703703703704
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.020426744752366638,
+    "search_time_s": 0.9076982400001725,
+    "queries_per_sec": 356.94681968309027
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.18209876543209877,
+      "10": 0.4095679012345679,
+      "100": 0.6927777777777778
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.02182502685172949,
+    "search_time_s": 0.8879434929986019,
+    "queries_per_sec": 364.8880841570739
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.16358024691358025,
+      "10": 0.4095679012345679,
+      "100": 0.6856481481481481
+    },
+    "bytes_per_vector": 288.0,
+    "encode_time_ms": 0.019020750000947127,
+    "search_time_s": 0.8967410089971963,
+    "queries_per_sec": 361.308334010866
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.22530864197530864,
+      "10": 0.47716049382716047,
+      "100": 0.7324382716049382
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.024536319753319675,
+    "search_time_s": 1.2741244999997434,
+    "queries_per_sec": 254.29226107814836
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25,
+      "10": 0.46419753086419757,
+      "100": 0.7062654320987654
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.024535852160759666,
+    "search_time_s": 1.2726420480030356,
+    "queries_per_sec": 254.5884763971174
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.22839506172839505,
+      "10": 0.4694444444444445,
+      "100": 0.7233024691358024
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.028477252469459882,
+    "search_time_s": 1.2876976519983145,
+    "queries_per_sec": 251.6118589617682
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2006172839506173,
+      "10": 0.46141975308641975,
+      "100": 0.728179012345679
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.02567964475244402,
+    "search_time_s": 1.261531639000168,
+    "queries_per_sec": 256.8306572610319
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.29012345679012347,
+      "10": 0.46944444444444444,
+      "100": 0.7267592592592593
+    },
+    "bytes_per_vector": 384.0,
+    "encode_time_ms": 0.025812615121263482,
+    "search_time_s": 1.288092886999948,
+    "queries_per_sec": 251.53465504697962
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.03430826299882028,
+    "queries_per_sec": 9443.789095680566
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.018535943003371358,
+    "queries_per_sec": 17479.55310075512
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.01756368699716404,
+    "queries_per_sec": 18447.15178836399
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.014733195996086579,
+    "queries_per_sec": 21991.15521751429
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "fp32_exact",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 1.0,
+      "10": 1.0,
+      "100": 1.0
+    },
+    "bytes_per_vector": 2048,
+    "encode_time_ms": 0.0,
+    "search_time_s": 0.013852392003173009,
+    "queries_per_sec": 23389.46226224215
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.45987654320987653,
+      "10": 0.6006172839506173,
+      "100": 0.748179012345679
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0002574773661987741,
+    "search_time_s": 0.19088086500414647,
+    "queries_per_sec": 1697.3938167818017
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4104938271604938,
+      "10": 0.6021604938271605,
+      "100": 0.7497530864197531
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00018243724394436997,
+    "search_time_s": 0.1908623749986873,
+    "queries_per_sec": 1697.5582537010157
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4722222222222222,
+      "10": 0.6151234567901235,
+      "100": 0.753179012345679
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00023236454071892893,
+    "search_time_s": 0.1936433510054485,
+    "queries_per_sec": 1673.1790599455371
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.6089506172839506,
+      "100": 0.7510493827160495
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.00021106172702754292,
+    "search_time_s": 0.18920256200362928,
+    "queries_per_sec": 1712.4503842278048
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "binary_hash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.43209876543209874,
+      "10": 0.6067901234567902,
+      "100": 0.7439197530864199
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0005178765433876225,
+    "search_time_s": 0.1908228800020879,
+    "queries_per_sec": 1697.909600758855
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7993827160493827,
+      "10": 0.8799382716049383,
+      "100": 0.9343209876543209
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.7158756351150078,
+    "search_time_s": 0.022936415000003763,
+    "queries_per_sec": 14126.008794310133
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7839506172839507,
+      "10": 0.885493827160494,
+      "100": 0.9364814814814814
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.7040084080917688,
+    "search_time_s": 0.019923687999835238,
+    "queries_per_sec": 16262.049476115033
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8364197530864198,
+      "10": 0.8864197530864198,
+      "100": 0.9342592592592593
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.7750284993137243,
+    "search_time_s": 0.02265318499848945,
+    "queries_per_sec": 14302.624554631273
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8333333333333334,
+      "10": 0.8787037037037039,
+      "100": 0.9355555555555556
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.6816068885456122,
+    "search_time_s": 0.02446405299997423,
+    "queries_per_sec": 13243.92160204776
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8117283950617284,
+      "10": 0.8907407407407408,
+      "100": 0.9341049382716049
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.7409127074761609,
+    "search_time_s": 0.02306182800384704,
+    "queries_per_sec": 14049.189853725047
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9506172839506173,
+      "10": 0.9601851851851853,
+      "100": 0.9796604938271606
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 1.323357173869563,
+    "search_time_s": 0.050943018999532796,
+    "queries_per_sec": 6360.04709502928
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9351851851851852,
+      "10": 0.9641975308641977,
+      "100": 0.980679012345679
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 1.3681961316872846,
+    "search_time_s": 0.04245996500685578,
+    "queries_per_sec": 7630.717546462543
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9290123456790124,
+      "10": 0.959567901234568,
+      "100": 0.9802777777777778
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 1.4711844876564037,
+    "search_time_s": 0.05024382500414504,
+    "queries_per_sec": 6448.553627699931
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9506172839506173,
+      "10": 0.9604938271604939,
+      "100": 0.9807407407407407
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 1.384469634087661,
+    "search_time_s": 0.0646125889979885,
+    "queries_per_sec": 5014.502669287663
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "product_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.9351851851851852,
+      "10": 0.9589506172839506,
+      "100": 0.9801234567901235
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 1.4338937482849068,
+    "search_time_s": 0.0396661819977453,
+    "queries_per_sec": 8168.167030000941
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.595679012345679,
+      "10": 0.7209876543209877,
+      "100": 0.8377469135802469
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.01769549722262632,
+    "search_time_s": 0.04852660800679587,
+    "queries_per_sec": 6676.749381589286
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5123456790123457,
+      "10": 0.7169753086419752,
+      "100": 0.8465123456790122
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.017496276852375838,
+    "search_time_s": 0.06622194800002035,
+    "queries_per_sec": 4892.637709780154
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5833333333333334,
+      "10": 0.7185185185185186,
+      "100": 0.844537037037037
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.016045205863778347,
+    "search_time_s": 0.06068795399914961,
+    "queries_per_sec": 5338.786013523211
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5370370370370371,
+      "10": 0.7052469135802469,
+      "100": 0.8408024691358025
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.019679543211280775,
+    "search_time_s": 0.05205211399879772,
+    "queries_per_sec": 6224.531053772064
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.49382716049382713,
+      "10": 0.7148148148148148,
+      "100": 0.8395987654320987
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.021283813888950124,
+    "search_time_s": 0.06196631300554145,
+    "queries_per_sec": 5228.647377665115
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7129629629629629,
+      "10": 0.8299382716049384,
+      "100": 0.9157098765432097
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01793359567755819,
+    "search_time_s": 0.04482417400140548,
+    "queries_per_sec": 7228.242510165181
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7160493827160493,
+      "10": 0.8314814814814814,
+      "100": 0.9196296296296296
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01982520956696618,
+    "search_time_s": 0.039115018997108564,
+    "queries_per_sec": 8283.26326580464
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7160493827160493,
+      "10": 0.8395061728395061,
+      "100": 0.9191666666666665
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.017304058333756086,
+    "search_time_s": 0.051649891000124626,
+    "queries_per_sec": 6273.004525783379
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7098765432098766,
+      "10": 0.8308641975308642,
+      "100": 0.9188580246913581
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.019755466975631727,
+    "search_time_s": 0.0457001289978507,
+    "queries_per_sec": 7089.695523950007
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6975308641975309,
+      "10": 0.8404320987654321,
+      "100": 0.9166049382716049
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.018042011418592553,
+    "search_time_s": 0.05673840900271898,
+    "queries_per_sec": 5710.41743494206
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8425925925925926,
+      "10": 0.9182098765432101,
+      "100": 0.9577469135802468
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.01852912531000056,
+    "search_time_s": 0.048163275998376776,
+    "queries_per_sec": 6727.1171506464725
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7932098765432098,
+      "10": 0.9089506172839507,
+      "100": 0.958641975308642
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.020141570061196597,
+    "search_time_s": 0.04904094900120981,
+    "queries_per_sec": 6606.723699249929
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8703703703703703,
+      "10": 0.9108024691358025,
+      "100": 0.9585802469135803
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.019364249691321157,
+    "search_time_s": 0.042441835001227446,
+    "queries_per_sec": 7633.977182905256
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8425925925925926,
+      "10": 0.9021604938271606,
+      "100": 0.9573765432098763
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.018843298458244888,
+    "search_time_s": 0.044630157004576176,
+    "queries_per_sec": 7259.665252057673
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_mse",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8425925925925926,
+      "10": 0.9172839506172841,
+      "100": 0.9584876543209875
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.018288950617895833,
+    "search_time_s": 0.04619018300581956,
+    "queries_per_sec": 7014.477512660619
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.595679012345679,
+      "10": 0.7175925925925926,
+      "100": 0.841851851851852
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.010471664198256028,
+    "search_time_s": 0.05334959999890998,
+    "queries_per_sec": 6073.147690078648
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.49691358024691357,
+      "10": 0.7283950617283951,
+      "100": 0.8476234567901234
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.010711824383358845,
+    "search_time_s": 0.046282012001029216,
+    "queries_per_sec": 7000.559958214326
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5648148148148148,
+      "10": 0.7243827160493826,
+      "100": 0.8478395061728397
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.00955249691253778,
+    "search_time_s": 0.0440287570017972,
+    "queries_per_sec": 7358.826868239199
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5555555555555556,
+      "10": 0.707716049382716,
+      "100": 0.8435185185185186
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.009056966667197196,
+    "search_time_s": 0.06134907000523526,
+    "queries_per_sec": 5281.253651805174
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5555555555555556,
+      "10": 0.7299382716049383,
+      "100": 0.8421604938271605
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.008519515122989778,
+    "search_time_s": 0.0321426340015023,
+    "queries_per_sec": 10080.069977614676
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7592592592592593,
+      "10": 0.8413580246913581,
+      "100": 0.9187654320987653
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.011500252468168683,
+    "search_time_s": 0.03461593900283333,
+    "queries_per_sec": 9359.850096034676
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7253086419753086,
+      "10": 0.8450617283950619,
+      "100": 0.9210493827160494
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012670917899806318,
+    "search_time_s": 0.03388946699851658,
+    "queries_per_sec": 9560.49264552264
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7253086419753086,
+      "10": 0.8385802469135804,
+      "100": 0.923858024691358
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012368918520044162,
+    "search_time_s": 0.038703050995536614,
+    "queries_per_sec": 8371.43304380228
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7376543209876543,
+      "10": 0.8348765432098767,
+      "100": 0.9189814814814815
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012433528394871649,
+    "search_time_s": 0.04116601800342323,
+    "queries_per_sec": 7870.569360705648
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.7098765432098766,
+      "10": 0.8364197530864198,
+      "100": 0.9209876543209876
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013901129321670907,
+    "search_time_s": 0.044472630994278006,
+    "queries_per_sec": 7285.379631389177
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8580246913580247,
+      "10": 0.912962962962963,
+      "100": 0.9582407407407408
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.013841833334694973,
+    "search_time_s": 0.03217789200425614,
+    "queries_per_sec": 10069.025029891482
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.845679012345679,
+      "10": 0.914814814814815,
+      "100": 0.9601851851851853
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.013631927778291872,
+    "search_time_s": 0.03360723800142296,
+    "queries_per_sec": 9640.78035768014
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.845679012345679,
+      "10": 0.9101851851851851,
+      "100": 0.9600617283950618
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.01383720000039493,
+    "search_time_s": 0.031450392001715954,
+    "queries_per_sec": 10301.93836637465
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8487654320987654,
+      "10": 0.9089506172839507,
+      "100": 0.9555246913580246
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.018531635185264565,
+    "search_time_s": 0.04130062500189524,
+    "queries_per_sec": 7844.917600765896
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.8549382716049383,
+      "10": 0.9135802469135802,
+      "100": 0.9600308641975309
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.018666136112401154,
+    "search_time_s": 0.03937886500352761,
+    "queries_per_sec": 8227.763800987552
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.41358024691358025,
+      "10": 0.5287037037037037,
+      "100": 0.7038888888888889
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.01155343611178888,
+    "search_time_s": 0.03910339000140084,
+    "queries_per_sec": 8285.726633634398
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3611111111111111,
+      "10": 0.5435185185185185,
+      "100": 0.7186728395061729
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.011447180863067416,
+    "search_time_s": 0.05843148900021333,
+    "queries_per_sec": 5544.95539209718
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4074074074074074,
+      "10": 0.549074074074074,
+      "100": 0.710462962962963
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.012833674999354923,
+    "search_time_s": 0.04012882800452644,
+    "queries_per_sec": 8073.996079911767
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3333333333333333,
+      "10": 0.5407407407407407,
+      "100": 0.7099691358024692
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.011931425925232126,
+    "search_time_s": 0.06413302999862935,
+    "queries_per_sec": 5051.998946672635
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3611111111111111,
+      "10": 0.5484567901234567,
+      "100": 0.7071604938271605
+    },
+    "bytes_per_vector": 132.0,
+    "encode_time_ms": 0.013959512654293104,
+    "search_time_s": 0.051398291005170904,
+    "queries_per_sec": 6303.711537167726
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.41358024691358025,
+      "10": 0.5287037037037037,
+      "100": 0.7038888888888889
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.016300364815699006,
+    "search_time_s": 0.047779927001101896,
+    "queries_per_sec": 6781.090310006709
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3611111111111111,
+      "10": 0.5435185185185185,
+      "100": 0.7186728395061729
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.01573915216099129,
+    "search_time_s": 0.03962612499890383,
+    "queries_per_sec": 8176.424013424546
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4074074074074074,
+      "10": 0.549074074074074,
+      "100": 0.710462962962963
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.014551991358687554,
+    "search_time_s": 0.0408871480030939,
+    "queries_per_sec": 7924.250426453887
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3333333333333333,
+      "10": 0.5407407407407407,
+      "100": 0.7099691358024692
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.013650809876393687,
+    "search_time_s": 0.04343138900003396,
+    "queries_per_sec": 7460.042320998453
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3611111111111111,
+      "10": 0.5484567901234567,
+      "100": 0.7071604938271605
+    },
+    "bytes_per_vector": 196.0,
+    "encode_time_ms": 0.012489814506818533,
+    "search_time_s": 0.04525747500156285,
+    "queries_per_sec": 7159.038368552631
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4228395061728395,
+      "10": 0.5398148148148149,
+      "100": 0.7087962962962963
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.015560004936156072,
+    "search_time_s": 0.046953501005191356,
+    "queries_per_sec": 6900.443908627332
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3487654320987654,
+      "10": 0.5503086419753086,
+      "100": 0.7219444444444444
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.014436561419351176,
+    "search_time_s": 0.03924396799993701,
+    "queries_per_sec": 8256.045871827233
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.39814814814814814,
+      "10": 0.5537037037037036,
+      "100": 0.7152777777777778
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.013505222222316482,
+    "search_time_s": 0.039487419999204576,
+    "queries_per_sec": 8205.14482856886
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3549382716049383,
+      "10": 0.5459876543209877,
+      "100": 0.7166975308641975
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.015658140124107805,
+    "search_time_s": 0.03960388099949341,
+    "queries_per_sec": 8181.016400997276
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.36419753086419754,
+      "10": 0.5530864197530864,
+      "100": 0.7091975308641976
+    },
+    "bytes_per_vector": 260.0,
+    "encode_time_ms": 0.013190312655089298,
+    "search_time_s": 0.04275436999887461,
+    "queries_per_sec": 7578.172710965649
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5216049382716049,
+      "10": 0.6737654320987654,
+      "100": 0.7922839506172841
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.003061437036879476,
+    "search_time_s": 0.49999499899422517,
+    "queries_per_sec": 648.0064813683109
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4382716049382716,
+      "10": 0.6614197530864198,
+      "100": 0.7923456790123458
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0021885098765688994,
+    "search_time_s": 0.5000619359998382,
+    "queries_per_sec": 647.9197408860666
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5308641975308642,
+      "10": 0.6589506172839507,
+      "100": 0.7917283950617283
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.002197383643457821,
+    "search_time_s": 0.5015778630040586,
+    "queries_per_sec": 645.9615224234453
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5154320987654321,
+      "10": 0.658641975308642,
+      "100": 0.7862345679012346
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0021813163595966836,
+    "search_time_s": 0.5024204069995903,
+    "queries_per_sec": 644.8782642705518
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5462962962962963,
+      "10": 0.662962962962963,
+      "100": 0.7893827160493828
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.006706732407716724,
+    "search_time_s": 0.5332900159992278,
+    "queries_per_sec": 607.5493451586935
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5771604938271605,
+      "10": 0.7129629629629629,
+      "100": 0.8239814814814815
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004017658333687894,
+    "search_time_s": 0.7269378080018214,
+    "queries_per_sec": 445.7052535079977
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5154320987654321,
+      "10": 0.7101851851851851,
+      "100": 0.8244753086419753
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004969700616870628,
+    "search_time_s": 0.7794492039975012,
+    "queries_per_sec": 415.6781459758072
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6141975308641975,
+      "10": 0.7141975308641976,
+      "100": 0.8303395061728395
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.004848852777173801,
+    "search_time_s": 0.7419752960049664,
+    "queries_per_sec": 436.6722204155855
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5679012345679012,
+      "10": 0.711111111111111,
+      "100": 0.8233641975308641
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.005085655862381423,
+    "search_time_s": 0.7137344419970759,
+    "queries_per_sec": 453.9503503479903
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5864197530864198,
+      "10": 0.7296296296296295,
+      "100": 0.831111111111111
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.0049894425916854855,
+    "search_time_s": 0.7161178660026053,
+    "queries_per_sec": 452.4394871036792
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6172839506172839,
+      "10": 0.7490740740740741,
+      "100": 0.8453395061728395
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.0056253660479768895,
+    "search_time_s": 0.9490756770028383,
+    "queries_per_sec": 341.3847892753773
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5740740740740741,
+      "10": 0.7506172839506172,
+      "100": 0.8473456790123456
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.005593292591561575,
+    "search_time_s": 0.9515037170058349,
+    "queries_per_sec": 340.51364614691585
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6820987654320988,
+      "10": 0.7503086419753087,
+      "100": 0.8534876543209877
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.005586562964046247,
+    "search_time_s": 0.9635156080039451,
+    "queries_per_sec": 336.26855373024057
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6203703703703703,
+      "10": 0.7388888888888888,
+      "100": 0.8461419753086419
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.005548014507192779,
+    "search_time_s": 1.036665011997684,
+    "queries_per_sec": 312.5406917859054
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6296296296296297,
+      "10": 0.7660493827160494,
+      "100": 0.8476851851851851
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.005701132716767685,
+    "search_time_s": 0.9979369890061207,
+    "queries_per_sec": 324.669797361337
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4691358024691358,
+      "10": 0.6462962962962964,
+      "100": 0.7613271604938271
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.0032541416680661643,
+    "search_time_s": 0.020507134002400562,
+    "queries_per_sec": 15799.379862738138
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.42592592592592593,
+      "10": 0.6305555555555555,
+      "100": 0.7670061728395061
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.0034961833327183684,
+    "search_time_s": 0.021031815005699173,
+    "queries_per_sec": 15405.232497157422
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4876543209876543,
+      "10": 0.6382716049382716,
+      "100": 0.7675000000000001
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.003555833335454219,
+    "search_time_s": 0.02426502699381672,
+    "queries_per_sec": 13352.550569284864
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5061728395061729,
+      "10": 0.6333333333333333,
+      "100": 0.7735185185185185
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.005352622222598717,
+    "search_time_s": 0.01919537100184243,
+    "queries_per_sec": 16879.069436527247
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4691358024691358,
+      "10": 0.6382716049382716,
+      "100": 0.7607098765432099
+    },
+    "bytes_per_vector": 128,
+    "encode_time_ms": 0.0030791509260903517,
+    "search_time_s": 0.02065349199983757,
+    "queries_per_sec": 15687.419832082058
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6172839506172839,
+      "10": 0.6891975308641975,
+      "100": 0.7969444444444443
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.004895694134720992,
+    "search_time_s": 0.02104930500354385,
+    "queries_per_sec": 15392.432194101018
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5524691358024691,
+      "10": 0.7067901234567902,
+      "100": 0.8185493827160493
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.004338236419839015,
+    "search_time_s": 0.02149680400179932,
+    "queries_per_sec": 15072.007912100824
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5987654320987654,
+      "10": 0.6984567901234568,
+      "100": 0.8061728395061728
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.00431807252930917,
+    "search_time_s": 0.021296965001965873,
+    "queries_per_sec": 15213.435340204218
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5802469135802469,
+      "10": 0.6996913580246914,
+      "100": 0.8156172839506174
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.004309765431515436,
+    "search_time_s": 0.020746307003719267,
+    "queries_per_sec": 15617.23732045011
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5462962962962963,
+      "10": 0.6972222222222222,
+      "100": 0.806358024691358
+    },
+    "bytes_per_vector": 192,
+    "encode_time_ms": 0.004361804322225335,
+    "search_time_s": 0.02082465800049249,
+    "queries_per_sec": 15558.478799139826
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6234567901234568,
+      "10": 0.7222222222222222,
+      "100": 0.8237037037037037
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006540326233525662,
+    "search_time_s": 0.022600030002649873,
+    "queries_per_sec": 14336.264153720624
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5092592592592593,
+      "10": 0.6975308641975309,
+      "100": 0.8225925925925925
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.0059408737640442725,
+    "search_time_s": 0.022521904997120146,
+    "queries_per_sec": 14385.994437034948
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.6172839506172839,
+      "10": 0.7358024691358024,
+      "100": 0.8374382716049382
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006282366666710004,
+    "search_time_s": 0.02439690200117184,
+    "queries_per_sec": 13280.374696116643
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5679012345679012,
+      "10": 0.7246913580246914,
+      "100": 0.8289197530864199
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006560877160087263,
+    "search_time_s": 0.023195719004434068,
+    "queries_per_sec": 13968.094713428134
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.5617283950617284,
+      "10": 0.712037037037037,
+      "100": 0.8171296296296297
+    },
+    "bytes_per_vector": 256,
+    "encode_time_ms": 0.006038922839690241,
+    "search_time_s": 0.022683356000925414,
+    "queries_per_sec": 14283.600715290178
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25617283950617287,
+      "10": 0.4166666666666667,
+      "100": 0.6071913580246914
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.013957879320829014,
+    "search_time_s": 0.5932949150010245,
+    "queries_per_sec": 546.1027758841326
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.27469135802469136,
+      "10": 0.4021604938271605,
+      "100": 0.610679012345679
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.01773094012336245,
+    "search_time_s": 0.5654382840002654,
+    "queries_per_sec": 573.0068323421976
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3148148148148148,
+      "10": 0.43919753086419755,
+      "100": 0.6112037037037037
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.011802335186839178,
+    "search_time_s": 0.5230044369964162,
+    "queries_per_sec": 619.49761241169
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25617283950617287,
+      "10": 0.4225308641975309,
+      "100": 0.6066975308641975
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.0132717811707321,
+    "search_time_s": 0.5096841560007306,
+    "queries_per_sec": 635.6878003473499
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 2,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.22530864197530864,
+      "10": 0.42037037037037034,
+      "100": 0.5769753086419753
+    },
+    "bytes_per_vector": 128.0,
+    "encode_time_ms": 0.012806644753939587,
+    "search_time_s": 0.525696330005303,
+    "queries_per_sec": 616.3253983468586
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.33024691358024694,
+      "10": 0.4932098765432098,
+      "100": 0.6581481481481481
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.015454750924326627,
+    "search_time_s": 0.785549952997826,
+    "queries_per_sec": 412.44990056144354
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.30246913580246915,
+      "10": 0.4790123456790123,
+      "100": 0.6668209876543211
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.0182289716048902,
+    "search_time_s": 0.8170341180011746,
+    "queries_per_sec": 396.55626718826227
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.38271604938271603,
+      "10": 0.5015432098765432,
+      "100": 0.6615123456790124
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.015769710493551418,
+    "search_time_s": 0.7641921030008234,
+    "queries_per_sec": 423.9771632390853
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3549382716049383,
+      "10": 0.4944444444444444,
+      "100": 0.6632407407407407
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.01581231543151475,
+    "search_time_s": 0.7578716829957557,
+    "queries_per_sec": 427.513004205772
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 3,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2993827160493827,
+      "10": 0.49567901234567907,
+      "100": 0.6460185185185185
+    },
+    "bytes_per_vector": 192.0,
+    "encode_time_ms": 0.015140913269589626,
+    "search_time_s": 0.8057147929939674,
+    "queries_per_sec": 402.1274063940711
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3888888888888889,
+      "10": 0.5509259259259259,
+      "100": 0.6892901234567902
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.018817553396213132,
+    "search_time_s": 1.1984731360062142,
+    "queries_per_sec": 270.3439820768081
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4104938271604938,
+      "10": 0.5367283950617284,
+      "100": 0.703611111111111
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.02057757993935849,
+    "search_time_s": 1.0453413060022285,
+    "queries_per_sec": 309.9466156552215
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4166666666666667,
+      "10": 0.5543209876543209,
+      "100": 0.7024382716049383
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.019009635185217054,
+    "search_time_s": 1.028811094998673,
+    "queries_per_sec": 314.92661925503234
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.39814814814814814,
+      "10": 0.5472222222222223,
+      "100": 0.7032407407407407
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.018596007408003642,
+    "search_time_s": 1.069686669994553,
+    "queries_per_sec": 302.8924348488421
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash",
+    "bits": 4,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.33024691358024694,
+      "10": 0.5367283950617283,
+      "100": 0.6739197530864197
+    },
+    "bytes_per_vector": 256.0,
+    "encode_time_ms": 0.020352004321466666,
+    "search_time_s": 0.9861160420041415,
+    "queries_per_sec": 328.5617373605603
+  }
+]

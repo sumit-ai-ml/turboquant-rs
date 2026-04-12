@@ -1,0 +1,172 @@
+[
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2777777777777778,
+      "10": 0.5169753086419753,
+      "100": 0.7487962962962963
+    },
+    "bytes_per_vector": 96.0,
+    "search_time_s": 0.035324947000844986,
+    "queries_per_sec": 9171.988283301594
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.30246913580246915,
+      "10": 0.5018518518518519,
+      "100": 0.7548148148148148
+    },
+    "bytes_per_vector": 96.0,
+    "search_time_s": 0.027429796999058453,
+    "queries_per_sec": 11811.972214417829
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25,
+      "10": 0.5018518518518519,
+      "100": 0.745679012345679
+    },
+    "bytes_per_vector": 96.0,
+    "search_time_s": 0.02754268399985449,
+    "queries_per_sec": 11763.559426587173
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.2716049382716049,
+      "10": 0.5027777777777778,
+      "100": 0.7575308641975309
+    },
+    "bytes_per_vector": 96.0,
+    "search_time_s": 0.03192426100031298,
+    "queries_per_sec": 10149.021147171537
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.25,
+      "10": 0.4864197530864197,
+      "100": 0.7503703703703702
+    },
+    "bytes_per_vector": 96.0,
+    "search_time_s": 0.029526066000471474,
+    "queries_per_sec": 10973.35486531888
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.404320987654321,
+      "10": 0.5833333333333334,
+      "100": 0.733858024691358
+    },
+    "bytes_per_vector": 64.0,
+    "search_time_s": 0.020388988001286634,
+    "queries_per_sec": 15890.930927005998
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.31790123456790126,
+      "10": 0.5623456790123457,
+      "100": 0.7326851851851851
+    },
+    "bytes_per_vector": 64.0,
+    "search_time_s": 0.021789829999761423,
+    "queries_per_sec": 14869.322064630494
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.4228395061728395,
+      "10": 0.5765432098765432,
+      "100": 0.7326543209876543
+    },
+    "bytes_per_vector": 64.0,
+    "search_time_s": 0.01843553600156156,
+    "queries_per_sec": 17574.753452926783
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3765432098765432,
+      "10": 0.5549382716049384,
+      "100": 0.7229012345679012
+    },
+    "bytes_per_vector": 64.0,
+    "search_time_s": 0.031895979000182706,
+    "queries_per_sec": 10158.020231896442
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 16200,
+    "recall": {
+      "1": 0.3888888888888889,
+      "10": 0.5577160493827161,
+      "100": 0.7216666666666667
+    },
+    "bytes_per_vector": 64.0,
+    "search_time_s": 0.026445617000717903,
+    "queries_per_sec": 12251.5576018213
+  }
+]

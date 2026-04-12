@@ -1,0 +1,362 @@
+[
+  {
+    "seed": 42,
+    "rotation_type": "srht",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.6167746997461843,
+    "ks_max_D": 0.9815263145854988,
+    "ks_min_D": 0.3341993499367411,
+    "ks_std_D": 0.15286192380625638,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5712470125080471,
+      "max_abs_correlation": 0.9844118274025616,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 42,
+    "rotation_type": "dense",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.6167746997461843,
+    "ks_max_D": 0.9815263145854988,
+    "ks_min_D": 0.3341993499367411,
+    "ks_std_D": 0.15286192380625638,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5712470125080471,
+      "max_abs_correlation": 0.9844118274025616,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 123,
+    "rotation_type": "srht",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5992818104127826,
+    "ks_max_D": 0.9636028267236567,
+    "ks_min_D": 0.22332296817639102,
+    "ks_std_D": 0.18860084612721933,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.6232941674591451,
+      "max_abs_correlation": 0.9557929499902766,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 123,
+    "rotation_type": "dense",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5992818104127826,
+    "ks_max_D": 0.9636028267236567,
+    "ks_min_D": 0.22332296817639102,
+    "ks_std_D": 0.18860084612721933,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.6232941674591451,
+      "max_abs_correlation": 0.9557929499902766,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 456,
+    "rotation_type": "srht",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5673226707640832,
+    "ks_max_D": 0.8746503032484702,
+    "ks_min_D": 0.2355895603442787,
+    "ks_std_D": 0.15288668748609693,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5548906825961963,
+      "max_abs_correlation": 0.981862747496052,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 456,
+    "rotation_type": "dense",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5673226707640832,
+    "ks_max_D": 0.8746503032484702,
+    "ks_min_D": 0.2355895603442787,
+    "ks_std_D": 0.15288668748609693,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5548906825961963,
+      "max_abs_correlation": 0.981862747496052,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 789,
+    "rotation_type": "srht",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5837223139690881,
+    "ks_max_D": 0.8988608963287738,
+    "ks_min_D": 0.21267651717775604,
+    "ks_std_D": 0.19027234893284967,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5748914325551437,
+      "max_abs_correlation": 0.9678513641632343,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 789,
+    "rotation_type": "dense",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.5837223139690881,
+    "ks_max_D": 0.8988608963287738,
+    "ks_min_D": 0.21267651717775604,
+    "ks_std_D": 0.19027234893284967,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5748914325551437,
+      "max_abs_correlation": 0.9678513641632343,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 1024,
+    "rotation_type": "srht",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.6025029538659358,
+    "ks_max_D": 0.9312166071475323,
+    "ks_min_D": 0.30964634461057794,
+    "ks_std_D": 0.16269531964811654,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5611607366567066,
+      "max_abs_correlation": 0.9200581781022533,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 1024,
+    "rotation_type": "dense",
+    "d": 768,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.6025029538659358,
+    "ks_max_D": 0.9312166071475323,
+    "ks_min_D": 0.30964634461057794,
+    "ks_std_D": 0.16269531964811654,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.5611607366567066,
+      "max_abs_correlation": 0.9200581781022533,
+      "n_pairs_checked": 50
+    },
+    "model": "prithvi",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 42,
+    "rotation_type": "srht",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.40286529874779187,
+    "ks_max_D": 0.8176168289294933,
+    "ks_min_D": 0.1875989229082633,
+    "ks_std_D": 0.14674677446731124,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.22684176430112105,
+      "max_abs_correlation": 0.5822902758544527,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 42,
+    "rotation_type": "dense",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.4216831870742528,
+    "ks_max_D": 0.9440743150272594,
+    "ks_min_D": 0.06229670520672881,
+    "ks_std_D": 0.19517854961928802,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.1819996140597608,
+      "max_abs_correlation": 0.5317892581862753,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 123,
+    "rotation_type": "srht",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.49319435970575737,
+    "ks_max_D": 0.8381281015583892,
+    "ks_min_D": 0.13607015145994905,
+    "ks_std_D": 0.17692299127523078,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.17178528185786432,
+      "max_abs_correlation": 0.48730283747982367,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 123,
+    "rotation_type": "dense",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.3994005209228851,
+    "ks_max_D": 0.8152830884346678,
+    "ks_min_D": 0.14679972197776725,
+    "ks_std_D": 0.17223862698430614,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.18272187290718697,
+      "max_abs_correlation": 0.5001220803335918,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 456,
+    "rotation_type": "srht",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.42387078596455324,
+    "ks_max_D": 0.7787476342144346,
+    "ks_min_D": 0.1266152297291062,
+    "ks_std_D": 0.1817005030361043,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.21236591746346759,
+      "max_abs_correlation": 0.506597186733903,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 456,
+    "rotation_type": "dense",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.40930329274378935,
+    "ks_max_D": 0.9047575205910671,
+    "ks_min_D": 0.10285372586481262,
+    "ks_std_D": 0.19981819494939781,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.19521587383540154,
+      "max_abs_correlation": 0.6355552709118089,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 789,
+    "rotation_type": "srht",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.4492058075552761,
+    "ks_max_D": 0.8060764134607573,
+    "ks_min_D": 0.1828923277927197,
+    "ks_std_D": 0.17328651725263952,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.18419581638336086,
+      "max_abs_correlation": 0.4583119499133198,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 789,
+    "rotation_type": "dense",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.39210921060093784,
+    "ks_max_D": 0.8580264732922724,
+    "ks_min_D": 0.14108453953723676,
+    "ks_std_D": 0.1790552858437579,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.17516152019804934,
+      "max_abs_correlation": 0.6050099464227168,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 1024,
+    "rotation_type": "srht",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.4656918087150945,
+    "ks_max_D": 0.8010227921539498,
+    "ks_min_D": 0.10932027502117594,
+    "ks_std_D": 0.18309280449509288,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.20553324619467017,
+      "max_abs_correlation": 0.5891698962135908,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  },
+  {
+    "seed": 1024,
+    "rotation_type": "dense",
+    "d": 512,
+    "n_vectors": 16200,
+    "ks_mean_D": 0.40057652749439987,
+    "ks_max_D": 0.8833708241657563,
+    "ks_min_D": 0.15277709852393023,
+    "ks_std_D": 0.15707290248570366,
+    "fit_quality": "POOR",
+    "independence": {
+      "mean_abs_correlation": 0.1586955324171129,
+      "max_abs_correlation": 0.5115857842141898,
+      "n_pairs_checked": 49
+    },
+    "model": "remoteclip",
+    "dataset": "eurosat"
+  }
+]
