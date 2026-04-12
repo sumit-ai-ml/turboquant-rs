@@ -1,6 +1,96 @@
 [
   {
     "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 42,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.116,
+      "10": 0.2518,
+      "100": 0.4121
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0034797744859954376,
+    "search_time_s": 1.7877291359982337,
+    "queries_per_sec": 559.3688550819636
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 123,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.137,
+      "10": 0.26630000000000004,
+      "100": 0.44718
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0034671001130210134,
+    "search_time_s": 1.8048694180033635,
+    "queries_per_sec": 554.0567035072542
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 456,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.129,
+      "10": 0.26489999999999997,
+      "100": 0.42831
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0035073307996247947,
+    "search_time_s": 1.7881567910008016,
+    "queries_per_sec": 559.2350766066306
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 789,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.1,
+      "10": 0.23839999999999997,
+      "100": 0.40037
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.003359884665967562,
+    "search_time_s": 1.7885048110038042,
+    "queries_per_sec": 559.1262566628192
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 1024,
+    "d": 768,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.134,
+      "10": 0.2589,
+      "100": 0.4181
+    },
+    "bytes_per_vector": 96.0,
+    "encode_time_ms": 0.0037506107454828644,
+    "search_time_s": 1.8967862600038643,
+    "queries_per_sec": 527.207530487891
+  },
+  {
+    "model": "prithvi",
     "dataset": "eurosat",
     "method": "rabitq",
     "bits": 1,
@@ -13,8 +103,9 @@
       "100": 0.7487962962962963
     },
     "bytes_per_vector": 96.0,
-    "search_time_s": 0.035324947000844986,
-    "queries_per_sec": 9171.988283301594
+    "encode_time_ms": 0.004399298146987955,
+    "search_time_s": 0.08118016899970826,
+    "queries_per_sec": 3991.122511720373
   },
   {
     "model": "prithvi",
@@ -30,8 +121,9 @@
       "100": 0.7548148148148148
     },
     "bytes_per_vector": 96.0,
-    "search_time_s": 0.027429796999058453,
-    "queries_per_sec": 11811.972214417829
+    "encode_time_ms": 0.0036804694451505237,
+    "search_time_s": 0.02366203300334746,
+    "queries_per_sec": 13692.821743345714
   },
   {
     "model": "prithvi",
@@ -47,8 +139,9 @@
       "100": 0.745679012345679
     },
     "bytes_per_vector": 96.0,
-    "search_time_s": 0.02754268399985449,
-    "queries_per_sec": 11763.559426587173
+    "encode_time_ms": 0.00256917716157019,
+    "search_time_s": 0.031206378000206314,
+    "queries_per_sec": 10382.49296338902
   },
   {
     "model": "prithvi",
@@ -64,8 +157,9 @@
       "100": 0.7575308641975309
     },
     "bytes_per_vector": 96.0,
-    "search_time_s": 0.03192426100031298,
-    "queries_per_sec": 10149.021147171537
+    "encode_time_ms": 0.0034237682102909194,
+    "search_time_s": 0.027910148004593793,
+    "queries_per_sec": 11608.680826295587
   },
   {
     "model": "prithvi",
@@ -81,8 +175,99 @@
       "100": 0.7503703703703702
     },
     "bytes_per_vector": 96.0,
-    "search_time_s": 0.029526066000471474,
-    "queries_per_sec": 10973.35486531888
+    "encode_time_ms": 0.0029858179016033024,
+    "search_time_s": 0.026962231000652537,
+    "queries_per_sec": 12016.8097362625
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 42,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.262,
+      "10": 0.41029999999999994,
+      "100": 0.5349200000000001
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0018249272510573766,
+    "search_time_s": 1.5034436810019542,
+    "queries_per_sec": 665.1396474881989
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 123,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.315,
+      "10": 0.4209,
+      "100": 0.53305
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0016356806391978403,
+    "search_time_s": 1.5514232610003091,
+    "queries_per_sec": 644.5694254675744
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 456,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.295,
+      "10": 0.42560000000000003,
+      "100": 0.54002
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0017498890783275395,
+    "search_time_s": 1.5746513529957156,
+    "queries_per_sec": 635.0612140887805
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 789,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.283,
+      "10": 0.4176,
+      "100": 0.5386400000000001
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0017651580118698313,
+    "search_time_s": 1.5514994949990069,
+    "queries_per_sec": 644.5377541039032
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "bits": 1,
+    "seed": 1024,
+    "d": 512,
+    "n_vectors": 269695,
+    "recall": {
+      "1": 0.292,
+      "10": 0.4152,
+      "100": 0.5368399999999999
+    },
+    "bytes_per_vector": 64.0,
+    "encode_time_ms": 0.0017956973247304523,
+    "search_time_s": 1.7292593789970852,
+    "queries_per_sec": 578.2822473861428
   },
   {
     "model": "remoteclip",
@@ -98,8 +283,9 @@
       "100": 0.733858024691358
     },
     "bytes_per_vector": 64.0,
-    "search_time_s": 0.020388988001286634,
-    "queries_per_sec": 15890.930927005998
+    "encode_time_ms": 0.0018728345686988043,
+    "search_time_s": 0.07067472500057193,
+    "queries_per_sec": 4584.382889319741
   },
   {
     "model": "remoteclip",
@@ -115,8 +301,9 @@
       "100": 0.7326851851851851
     },
     "bytes_per_vector": 64.0,
-    "search_time_s": 0.021789829999761423,
-    "queries_per_sec": 14869.322064630494
+    "encode_time_ms": 0.0016340688276097444,
+    "search_time_s": 0.021859974003746174,
+    "queries_per_sec": 14821.60957485474
   },
   {
     "model": "remoteclip",
@@ -132,8 +319,9 @@
       "100": 0.7326543209876543
     },
     "bytes_per_vector": 64.0,
-    "search_time_s": 0.01843553600156156,
-    "queries_per_sec": 17574.753452926783
+    "encode_time_ms": 0.001049229011883137,
+    "search_time_s": 0.031166776003374252,
+    "queries_per_sec": 10395.685455721257
   },
   {
     "model": "remoteclip",
@@ -149,8 +337,9 @@
       "100": 0.7229012345679012
     },
     "bytes_per_vector": 64.0,
-    "search_time_s": 0.031895979000182706,
-    "queries_per_sec": 10158.020231896442
+    "encode_time_ms": 0.0010413851859881601,
+    "search_time_s": 0.02403415899607353,
+    "queries_per_sec": 13480.812873582638
   },
   {
     "model": "remoteclip",
@@ -166,7 +355,8 @@
       "100": 0.7216666666666667
     },
     "bytes_per_vector": 64.0,
-    "search_time_s": 0.026445617000717903,
-    "queries_per_sec": 12251.5576018213
+    "encode_time_ms": 0.0010491546309361935,
+    "search_time_s": 0.024665998003911227,
+    "queries_per_sec": 13135.49121136814
   }
 ]
