@@ -268,19 +268,21 @@ def run_single_config(model_name: str, dataset_name: str, method: str,
 
         t0 = time.perf_counter()
         q_codes = rq.encode(queries)
-        q_corrections = rq.corrections.copy()
         db_codes = rq.encode(database)
         db_corrections = rq.corrections.copy()
+        db_norms = rq.norms.copy()
         encode_time = time.perf_counter() - t0
 
         # Ground truth for recall computation
         fp32 = FP32Exact(d)
         gt_indices = fp32.search(queries, database, max(RECALL_K))
 
-        # RaBitQ search with correction factors
+        # RaBitQ search with correction factors and norms
         t0 = time.perf_counter()
         approx_indices = rq.search(q_codes, db_codes, max(RECALL_K),
-                                   queries=queries, db_corrections=db_corrections)
+                                   queries=queries,
+                                   db_corrections=db_corrections,
+                                   db_norms=db_norms)
         search_time = time.perf_counter() - t0
 
         recall = {}

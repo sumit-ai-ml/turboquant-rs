@@ -343,8 +343,12 @@ class RaBitQ:
     Encodes each D-dim vector into D sign bits after random rotation,
     plus a scalar correction factor that makes the IP estimate unbiased.
 
+    The estimator: <o, q> ≈ ||o|| * ||q|| * <x_bar, q'> / <x_bar, o'>
+    where x_bar = (2*binary_codes - 1) / sqrt(d), o' = P^T @ o/||o||,
+    q' = P^T @ q/||q||. Error bound: O(1/sqrt(d)).
+
     Training-free: only needs a random orthogonal matrix P (sampled once).
-    Storage: D/8 bytes (binary code) + 4 bytes (norm) + 4 bytes (correction).
+    Storage per vector: D/8 bytes (binary code) + 4 bytes (norm) + 4 bytes (correction).
     """
 
     def __init__(self, d: int, seed: int):
@@ -352,57 +356,24 @@ class RaBitQ:
         self.seed = seed
         self.P = random_orthogonal(d, seed)
         self.norms = None
-        self.corrections = None  # <x_bar, o> per vector
+        self.corrections = None
 
     def encode(self, embeddings: np.ndarray) -> np.ndarray:
-        """Encode: rotate then binarize. Store correction factors."""
-        # Rotate into randomized basis
+        """Encode: rotate then binarize. Store norms and correction factors."""
+        self.norms = np.linalg.norm(embeddings, axis=1)  # (N,)
         rotated = embeddings @ self.P.T  # (N, d)
-
-        # Binary codes: sign bits
         codes = (rotated >= 0).astype(np.uint8)  # (N, d)
-
-        # Compute correction factor: <x_bar, o'>
-        # x_bar in rotated space = (2*codes - 1) / sqrt(d)
-        x_bar_rotated = (2 * codes.astype(np.float32) - 1) / np.sqrt(self.d)
-        # Correction = <x_bar, o'> = per-vector dot product
-        self.corrections = np.sum(x_bar_rotated * rotated, axis=1)  # (N,)
-
-        # Store norms (already unit-norm in our case, but keep for generality)
-        self.norms = np.linalg.norm(embeddings, axis=1)
-
+        # Correction factor: <x_bar, o'> where x_bar = (2*codes - 1)/sqrt(d)
+        x_bar = (2 * codes.astype(np.float32) - 1) / np.sqrt(self.d)
+        self.corrections = np.sum(x_bar * rotated, axis=1)  # (N,)
         return codes
 
-    def estimate_inner_products(self, query: np.ndarray, db_codes: np.ndarray,
-                                db_corrections: np.ndarray) -> np.ndarray:
-        """Estimate <query, db_vector> for all db vectors.
-
-        Uses: <o, q> ≈ <x_bar, q'> / <x_bar, o'>
-        where x_bar = (2*codes - 1)/sqrt(d) and q' = P^T @ q.
-        """
-        # Rotate query
-        q_rotated = query @ self.P.T  # (d,)
-
-        # <x_bar, q'> for all db vectors via binary codes
-        # (2*codes - 1)/sqrt(d) . q' = (2 * codes @ q' - sum(q')) / sqrt(d)
-        # This avoids materializing x_bar
-        q_sum = q_rotated.sum()
-        codes_dot_q = db_codes.astype(np.float32) @ q_rotated  # (N_db,)
-        x_bar_dot_q = (2 * codes_dot_q - q_sum) / np.sqrt(self.d)
-
-        # Unbiased estimate: <o, q> ≈ x_bar_dot_q / correction
-        # Clamp corrections away from zero to avoid division issues
-        safe_corrections = np.where(np.abs(db_corrections) < 1e-8,
-                                     1e-8, db_corrections)
-        ip_estimates = x_bar_dot_q / safe_corrections
-
-        return ip_estimates
-
     def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int,
-               queries: np.ndarray = None, db_corrections: np.ndarray = None) -> np.ndarray:
-        """Search using RaBitQ's unbiased IP estimator."""
-        if queries is None or db_corrections is None:
-            # Fallback to simple Hamming if raw data not available
+               queries: np.ndarray = None, db_corrections: np.ndarray = None,
+               db_norms: np.ndarray = None) -> np.ndarray:
+        """Vectorized search using RaBitQ's unbiased IP estimator."""
+        if queries is None or db_corrections is None or db_norms is None:
+            # Hamming fallback
             n_q = len(query_codes)
             indices = np.zeros((n_q, k), dtype=np.int64)
             for i in range(n_q):
@@ -410,12 +381,24 @@ class RaBitQ:
                 indices[i] = np.argsort(hamming)[:k]
             return indices
 
-        n_q = len(queries)
-        indices = np.zeros((n_q, k), dtype=np.int64)
-        for i in range(n_q):
-            ip_est = self.estimate_inner_products(queries[i], db_codes, db_corrections)
-            indices[i] = np.argsort(-ip_est)[:k]  # highest IP = most similar
-        return indices
+        # Rotate all queries at once: (n_q, d)
+        Q_rot = queries @ self.P.T
+        q_norms = np.linalg.norm(queries, axis=1, keepdims=True)  # (n_q, 1)
+
+        # <x_bar, q'> for all (query, db) pairs via matrix multiply
+        # x_bar = (2*codes - 1)/sqrt(d), so:
+        # <x_bar, q'> = (2 * codes @ q'.T - sum(q', axis=1)) / sqrt(d)
+        q_sums = Q_rot.sum(axis=1, keepdims=True)  # (n_q, 1)
+        codes_float = db_codes.astype(np.float32)  # (n_db, d)
+        x_bar_dot_q = (2 * (Q_rot @ codes_float.T) - q_sums) / np.sqrt(self.d)  # (n_q, n_db)
+
+        # Clamp corrections preserving sign
+        safe_corr = np.sign(db_corrections) * np.maximum(np.abs(db_corrections), 1e-8)
+
+        # Unbiased IP estimate: ||q|| * ||o|| * <x_bar, q'> / <x_bar, o'>
+        ip_estimates = q_norms * db_norms[None, :] * x_bar_dot_q / safe_corr[None, :]
+
+        return np.argsort(-ip_estimates, axis=1)[:, :k]
 
     def bytes_per_vector(self) -> float:
         return self.d / 8 + 4 + 4  # binary code + norm + correction factor
