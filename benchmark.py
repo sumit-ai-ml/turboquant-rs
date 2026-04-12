@@ -269,29 +269,18 @@ def run_single_config(model_name: str, dataset_name: str, method: str,
         t0 = time.perf_counter()
         q_codes = rq.encode(queries)
         db_codes = rq.encode(database)
-        db_corrections = rq.corrections.copy()
-        db_norms = rq.norms.copy()
         encode_time = time.perf_counter() - t0
 
-        # Ground truth for recall computation
-        fp32 = FP32Exact(d)
-        gt_indices = fp32.search(queries, database, max(RECALL_K))
+        def search_fn(qc, dbc, k):
+            return rq.search(qc, dbc, k)
 
-        # RaBitQ search with correction factors and norms
+        recall = recall_at_k(queries, database, q_codes, db_codes, search_fn, RECALL_K)
+
         t0 = time.perf_counter()
-        approx_indices = rq.search(q_codes, db_codes, max(RECALL_K),
-                                   queries=queries,
-                                   db_corrections=db_corrections,
-                                   db_norms=db_norms)
+        rq.search(q_codes, db_codes, max(RECALL_K))
         search_time = time.perf_counter() - t0
 
-        recall = {}
-        for k in RECALL_K:
-            gt_sets = [set(gt_indices[i, :k]) for i in range(n_queries)]
-            ap_sets = [set(approx_indices[i, :k]) for i in range(n_queries)]
-            recall[str(k)] = float(np.mean([len(g & a) / k for g, a in zip(gt_sets, ap_sets)]))
-
-        result["recall"] = recall
+        result["recall"] = {str(k): v for k, v in recall.items()}
         result["bytes_per_vector"] = rq.bytes_per_vector()
         result["encode_time_ms"] = encode_time / (len(queries) + len(database)) * 1000
         result["search_time_s"] = search_time
