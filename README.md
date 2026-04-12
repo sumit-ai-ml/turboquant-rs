@@ -21,34 +21,48 @@ Benchmark for scalar vector quantization methods on remote sensing foundation mo
 | **Product Quantization** | FAISS PQ with learned subspace codebooks | m*nbits/8 bytes |
 | TurboQuant Adaptive | Rotation + empirical Lloyd-Max codebook | b*d/8 + 4 bytes |
 
-## Results (EuroSAT, R@10, 4-bit budget)
+## Results (R@10, 4-bit budget unless noted)
 
-### Prithvi (d=768)
-| Method | R@10 | B/vec | Training? |
-|--------|------|-------|-----------|
-| FP32 Exact | 1.000 | 3072 | - |
-| Product Quant | 0.961 | 384 | Yes |
-| TurboQuant MSE | 0.779 | 388 | **No** |
-| TurboQuant Adaptive | 0.782 | 388 | Yes |
-| SimHash Multi-bit | 0.702 | 384 | No |
-| Uniform SQ | 0.502 | 388 | No |
-| RaBitQ (1-bit) | 0.502 | 96 | No |
-| Binary Hash (1-bit) | 0.451 | 96 | No |
-| FlyHash | 0.468 | 384 | No |
+### EuroSAT (16K vectors)
 
-### RemoteCLIP (d=512)
-| Method | R@10 | B/vec | Training? |
-|--------|------|-------|-----------|
-| FP32 Exact | 1.000 | 2048 | - |
-| Product Quant | 0.961 | 256 | Yes |
-| TurboQuant MSE | 0.911 | 260 | **No** |
-| TurboQuant Adaptive | 0.912 | 260 | Yes |
-| SimHash Multi-bit | 0.751 | 256 | No |
-| RandProj Quant | 0.718 | 256 | No |
-| RaBitQ (1-bit) | 0.567 | 64 | No |
-| Binary Hash (1-bit) | 0.607 | 64 | No |
+| Method | Prithvi (d=768) | RemoteCLIP (d=512) | B/vec | Training? |
+|--------|----------------|-------------------|-------|-----------|
+| FP32 Exact | 1.000 | 1.000 | 3072 / 2048 | - |
+| Product Quant | 0.961 | 0.961 | 384 / 256 | Yes |
+| **TurboQuant MSE** | **0.779** | **0.911** | 388 / 260 | **No** |
+| TurboQuant Adaptive | 0.782 | 0.912 | 388 / 260 | Yes |
+| SimHash Multi-bit | 0.702 | 0.751 | 384 / 256 | No |
+| RandProj Quant | 0.394 | 0.718 | 384 / 256 | No |
+| Uniform SQ | 0.502 | 0.549 | 388 / 260 | No |
+| FlyHash | 0.468 | 0.545 | 384 / 256 | No |
+| RaBitQ (1-bit) | 0.502 | 0.567 | 96 / 64 | No |
+| Binary Hash (1-bit) | 0.451 | 0.607 | 96 / 64 | No |
 
-**TurboQuant MSE is the best training-free method**, closing 60-70% of the gap between naive hashing and data-adaptive PQ without requiring any training data.
+### BigEarthNet (269K vectors)
+
+| Method | Prithvi (d=768) | RemoteCLIP (d=512) | B/vec | Training? |
+|--------|----------------|-------------------|-------|-----------|
+| FP32 Exact | 1.000 | 1.000 | 3072 / 2048 | - |
+| Product Quant | 0.925 | 0.944 | 384 / 256 | Yes |
+| **TurboQuant MSE** | **0.572** | **0.878** | 388 / 260 | **No** |
+| TurboQuant Adaptive | 0.584 | 0.887 | 388 / 260 | Yes |
+| SimHash Multi-bit | 0.481 | 0.648 | 384 / 256 | No |
+| RandProj Quant | 0.073 | 0.619 | 384 / 256 | No |
+| Uniform SQ | 0.255 | 0.399 | 388 / 260 | No |
+| FlyHash | 0.207 | 0.409 | 384 / 256 | No |
+| RaBitQ (1-bit) | 0.256 | 0.418 | 96 / 64 | No |
+| Binary Hash (1-bit) | 0.273 | 0.473 | 96 / 64 | No |
+
+### Gap closed by TurboQuant MSE (training-free, between Binary Hash and PQ)
+
+| Setting | Gap Closed |
+|---------|-----------|
+| RemoteCLIP / BigEarthNet | **86%** |
+| RemoteCLIP / EuroSAT | **86%** |
+| Prithvi / EuroSAT | **64%** |
+| Prithvi / BigEarthNet | **46%** |
+
+**TurboQuant MSE is the best training-free method**, closing 46-86% of the gap between naive hashing and data-adaptive PQ without requiring any training data.
 
 ## Models
 
@@ -69,31 +83,73 @@ bash setup.sh
 
 Requires Python 3.10+, PyTorch 2.0+ with CUDA. Tested on NVIDIA RTX A3000 (6GB).
 
-## Running
+## Reproducing Results
 
-### Full pipeline
+### Quick start (EuroSAT only)
 ```bash
 bash run.sh
 ```
 
-### Step by step
-```bash
-# Phase 0: Sanity check (synthetic data, no GPU needed)
-python sanity_check.py
+### Full reproduction (all datasets)
 
-# Phase 1: Extract embeddings
+#### Phase 0: Sanity check (synthetic data, no GPU needed)
+```bash
+python sanity_check.py
+```
+Validates the quantization implementation on synthetic vectors (isotropic, clustered, tight clusters). Checks rotation quality, codebook range, and recall monotonicity.
+
+#### Phase 1: Extract embeddings
+```bash
+# EuroSAT (~27K patches, ~2 min each)
 python extract.py --model prithvi --dataset eurosat
 python extract.py --model remoteclip --dataset eurosat
 
-# Phase 2: Validate Beta distribution assumption
-python validate.py --model all --dataset eurosat
+# BigEarthNet (~269K patches used for train split, ~50 min each)
+# Requires downloading BigEarthNet-S2 from Zenodo (~66GB)
+python extract.py --model prithvi --dataset bigearthnet
+python extract.py --model remoteclip --dataset bigearthnet
+```
+Runs each foundation model on each dataset. Prithvi uses the custom `PrithviMAE` class loaded from HuggingFace (`ibm-nasa-geospatial/Prithvi-EO-1.0-100M`). RemoteCLIP uses `open_clip` ViT-B-32 with weights from `chendelong/RemoteCLIP`. Embeddings are L2-normalized and saved to `embeddings/*.npz`.
 
-# Phase 3: Benchmark all methods
+#### Phase 2: Validate Beta distribution assumption
+```bash
+python validate.py --model all --dataset eurosat
+```
+KS-tests each rotated coordinate against Beta(d/2, d/2). Generates QQ plots in `figures/`.
+
+#### Phase 3: Benchmark all methods
+```bash
+# EuroSAT (~30 min)
 python benchmark.py --model all --dataset eurosat --method all
 
-# Phase 4: Generate tables and figures
-python analyze.py
+# BigEarthNet (~3-4 hours, bottleneck: adaptive Lloyd-Max + Hamming loops)
+python benchmark.py --model all --dataset bigearthnet --method all
 ```
+For each (model, dataset, method, bits, seed) configuration:
+1. Split embeddings 80/20 into train/eval
+2. Use first min(1000, 10% of eval) vectors as queries, rest as database
+3. Encode queries + database with each method
+4. Compute ground-truth top-k via FP32 inner product
+5. Compute approximate top-k via the method's search
+6. Measure Recall@1/10/100 across 5 seeds (42, 123, 456, 789, 1024)
+
+RaBitQ is 1-bit only and skips the bits parameter loop automatically.
+
+#### Phase 4: Generate paper assets
+```bash
+python analyze.py                  # Summary tables and basic plots
+python generate_paper_assets.py    # All figures (PNG+PDF), LaTeX tables, CSV
+```
+Merges all results, aggregates over seeds (mean +/- std), generates:
+- `figures/fig1_recall_vs_bits.{png,pdf}` -- Main figure: R@10 vs bits (2x2 grid)
+- `figures/fig2_pareto.{png,pdf}` -- Compression ratio vs recall (Pareto frontier)
+- `figures/fig3_training_free_comparison.{png,pdf}` -- Bar chart: all training-free methods
+- `figures/fig4_scaling.{png,pdf}` -- EuroSAT (16K) vs BigEarthNet (269K) scaling
+- `figures/fig5_codebook_ablation.{png,pdf}` -- Beta vs Adaptive vs Uniform codebook
+- `figures/qq_*.png` -- QQ plots for Beta distribution validation
+- `results/table_main.tex` -- LaTeX tables sorted by R@10
+- `results/all_results.csv` -- Complete results for custom analysis
+- `results/aggregated_results.json` -- Aggregated JSON
 
 ### Run individual methods
 ```bash
