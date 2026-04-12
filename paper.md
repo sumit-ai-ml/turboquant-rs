@@ -201,4 +201,46 @@ All code, results, and paper assets are available at: https://github.com/sumit-a
 
 ## References
 
-- Guo, R., et al. "TurboQuant: Online Vector Quantization with Near-Optimal Distortion." 2024.
+### Quantization Methods
+
+- Guo, R., Sim, K.C., and Holtmann-Rice, D. "TurboQuant: Online Vector Quantization with Near-Optimal Distortion." arXiv:2501.06036, 2024.
+
+- Gao, J. and Long, C. "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search." In *Proceedings of the ACM SIGMOD International Conference on Management of Data*, 2024.
+
+- Jegou, H., Douze, M., and Schmid, C. "Product Quantization for Nearest Neighbor Search." *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 33(1):117-128, 2011.
+
+- Charikar, M. "Similarity Estimation Techniques from Rounding Algorithms." In *Proceedings of the 34th Annual ACM Symposium on Theory of Computing (STOC)*, pp. 380-388, 2002. *(SimHash)*
+
+- Dasgupta, S., Stevens, C.F., and Bhatt, S. "A Neural Algorithm for a Fundamental Computing Problem." *Science*, 358(6364):793-796, 2017. *(FlyHash)*
+
+- Johnson, W.B. and Lindenstrauss, J. "Extensions of Lipschitz Mappings into a Hilbert Space." *Contemporary Mathematics*, 26:189-206, 1984. *(Random Projection, Johnson-Lindenstrauss Lemma)*
+
+- Lloyd, S.P. "Least Squares Quantization in PCM." *IEEE Transactions on Information Theory*, 28(2):129-137, 1982. *(Lloyd-Max optimal quantization)*
+
+### Foundation Models
+
+- Jakubik, J., Roy, S., Phillips, C.E., Fraccaro, P., Godwin, D., Zadrozny, B., Szwarcman, D., Gomes, C., Nyirjesy, G., Edwards, B., Kimura, D., Simumba, N., Chu, L., Mukkavilli, S.K., Poutiainen, R., Zhu, X.X., Schmitt, M., Lam, H., Hain, M., and Alemohammad, H. "Foundation Models for Generalist Geospatial Artificial Intelligence." arXiv:2310.18660, 2023. *(Prithvi-EO)*
+
+- Liu, F., Chen, D., Guan, Z., Zhou, X., Zhu, J., Ye, Q., Fu, L., and Zhou, J. "RemoteCLIP: A Vision Language Foundation Model for Remote Sensing." *IEEE Transactions on Geoscience and Remote Sensing*, 62:1-16, 2024.
+
+- He, K., Chen, X., Xie, S., Li, Y., Dollar, P., and Girshick, R. "Masked Autoencoders Are Scalable Vision Learners." In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 16000-16009, 2022. *(MAE architecture used by Prithvi)*
+
+- Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., and Sutskever, I. "Learning Transferable Visual Models From Natural Language Supervision." In *Proceedings of the 38th International Conference on Machine Learning (ICML)*, pp. 8748-8763, 2021. *(CLIP architecture used by RemoteCLIP)*
+
+### Datasets
+
+- Helber, P., Bischke, B., Dengel, A., and Borth, D. "EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification." *IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing*, 12(7):2217-2226, 2019.
+
+- Sumbul, G., Charfuelan, M., Demir, B., and Markl, V. "BigEarthNet: A Large-Scale Benchmark Archive for Remote Sensing Image Understanding." In *Proceedings of the IEEE International Geoscience and Remote Sensing Symposium (IGARSS)*, pp. 5901-5904, 2019.
+
+### Embedding Geometry
+
+- Wang, T. and Isola, P. "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere." In *Proceedings of the 37th International Conference on Machine Learning (ICML)*, pp. 9929-9939, 2020. *(Uniformity property of contrastive embeddings)*
+
+### Libraries
+
+- Johnson, J., Douze, M., and Jegou, H. "Billion-Scale Similarity Search with GPUs." *IEEE Transactions on Big Data*, 7(3):535-547, 2021. *(FAISS)*
+
+- Cherti, M., Beaumont, R., Wightman, R., Wortsman, M., Ilharco, G., Gordon, C., Schuhmann, C., Schmidt, L., and Jitsev, J. "Reproducible Scaling Laws for Contrastive Language-Image Learning." In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 2818-2829, 2023. *(OpenCLIP)*
+
+- Stewart, A.J., Lehmann, N., Corley, I.A., Wang, Y., Chang, Y., Ber, N.A., Sherber, R., Breen, C., Clifton, J., Kerner, H., and Banerjee, A. "TorchGeo: Deep Learning with Geospatial Data." In *Proceedings of the 30th International Conference on Advances in Geographic Information Systems (SIGSPATIAL)*, pp. 1-12, 2022. *(TorchGeo dataset loading)*
