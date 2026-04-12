@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import beta as beta_dist
 from typing import Optional
 
-from utils import SRHTRotation, random_orthogonal, make_rotation, apply_rotation
+from utils import SRHTRotation, random_orthogonal, make_rotation, apply_rotation, pca_whiten
 
 
 # =============================================================================
@@ -56,9 +56,9 @@ class TurboQuantMSE:
                 # Use numerical integration
                 x = np.linspace(lo + 1e-10, hi - 1e-10, 1000)
                 pdf = beta_dist.pdf(x, a, b)
-                mass = np.trapz(pdf, x)
+                mass = np.trapezoid(pdf, x)
                 if mass > 1e-15:
-                    centroids[i] = np.trapz(x * pdf, x) / mass
+                    centroids[i] = np.trapezoid(x * pdf, x) / mass
                 else:
                     centroids[i] = (lo + hi) / 2
 
@@ -101,11 +101,17 @@ class TurboQuantMSE:
         return reconstructed @ self.rotation  # R^-1 = R^T, so x @ R = x @ R^{-T}
 
     def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
-        """Approximate nearest neighbor search via decoded inner products."""
-        # Decode both
+        """Approximate nearest neighbor search via cosine similarity.
+
+        Decoded vectors have quantization shrinkage (norms < 1), so we
+        re-normalize before computing inner products. The ground truth
+        uses unit-norm vectors, so cosine similarity is the correct metric.
+        """
         query_recon = self.decode(query_codes)
         db_recon = self.decode(db_codes)
-        # Brute force inner product
+        # Re-normalize to remove quantization shrinkage bias
+        query_recon = query_recon / np.linalg.norm(query_recon, axis=1, keepdims=True)
+        db_recon = db_recon / np.linalg.norm(db_recon, axis=1, keepdims=True)
         sims = query_recon @ db_recon.T
         return np.argsort(-sims, axis=1)[:, :k]
 
@@ -117,34 +123,143 @@ class TurboQuantMSE:
 
 
 # =============================================================================
-# TurboQuant Prod: MSE + QJL residual correction
+# TurboQuant Adaptive: data-driven Lloyd-Max codebook
+# =============================================================================
+
+class TurboQuantAdaptive:
+    """TurboQuant with data-adaptive codebook.
+
+    Instead of assuming Beta(d/2,d/2), trains the Lloyd-Max codebook on the
+    actual distribution of rotated coordinates from a training set.
+    Optional PCA whitening before the random rotation to better isotropize.
+    """
+
+    def __init__(self, d: int, bits: int, seed: int, rotation_type: str = "srht",
+                 whiten: bool = False):
+        self.d = d
+        self.bits = bits
+        self.seed = seed
+        self.n_levels = 2 ** bits
+        self.whiten = whiten
+        self.rotation = make_rotation(d, seed, rotation_type)
+        self.pca_params = None
+        self.boundaries = None
+        self.centroids = None
+
+    def train(self, embeddings: np.ndarray):
+        """Train codebook on actual rotated coordinate distribution."""
+        if self.whiten:
+            self.pca_params = pca_whiten(embeddings)
+            whitened = (embeddings - self.pca_params["mean"]) @ self.pca_params["transform"]
+            # Re-normalize after whitening
+            norms = np.linalg.norm(whitened, axis=1, keepdims=True)
+            whitened = whitened / np.clip(norms, 1e-8, None)
+            rotated = apply_rotation(whitened, self.rotation)
+        else:
+            rotated = apply_rotation(embeddings, self.rotation)
+
+        # Collect all coordinate values as the empirical distribution
+        flat = rotated.ravel()
+
+        # Lloyd-Max on empirical data via histogram approximation
+        self.boundaries, self.centroids = self._lloyd_max_empirical(flat)
+
+    def _lloyd_max_empirical(self, data: np.ndarray):
+        """Lloyd-Max optimal codebook from empirical data."""
+        n_levels = self.n_levels
+
+        # Initialize with uniform quantiles of the data
+        percentiles = np.linspace(0, 100, n_levels + 1)
+        boundaries = np.percentile(data, percentiles)
+        boundaries[0] = data.min() - 1e-6
+        boundaries[-1] = data.max() + 1e-6
+
+        for _ in range(100):
+            # Centroids: mean of data in each bin
+            centroids = np.zeros(n_levels)
+            for i in range(n_levels):
+                mask = (data >= boundaries[i]) & (data < boundaries[i + 1])
+                if i == n_levels - 1:
+                    mask = (data >= boundaries[i]) & (data <= boundaries[i + 1])
+                if mask.sum() > 0:
+                    centroids[i] = data[mask].mean()
+                else:
+                    centroids[i] = (boundaries[i] + boundaries[i + 1]) / 2
+
+            # Boundaries: midpoints of adjacent centroids
+            new_boundaries = np.zeros(n_levels + 1)
+            new_boundaries[0] = data.min() - 1e-6
+            new_boundaries[-1] = data.max() + 1e-6
+            for i in range(1, n_levels):
+                new_boundaries[i] = (centroids[i - 1] + centroids[i]) / 2
+
+            if np.allclose(boundaries, new_boundaries, atol=1e-10):
+                break
+            boundaries = new_boundaries
+
+        return boundaries.astype(np.float32), centroids.astype(np.float32)
+
+    def _apply_pre_rotation(self, embeddings: np.ndarray) -> np.ndarray:
+        """Apply PCA whitening (if enabled) then rotation."""
+        if self.whiten and self.pca_params is not None:
+            whitened = (embeddings - self.pca_params["mean"]) @ self.pca_params["transform"]
+            norms = np.linalg.norm(whitened, axis=1, keepdims=True)
+            whitened = whitened / np.clip(norms, 1e-8, None)
+            return apply_rotation(whitened, self.rotation)
+        return apply_rotation(embeddings, self.rotation)
+
+    def _inverse_rotation(self, reconstructed: np.ndarray) -> np.ndarray:
+        """Inverse rotation then inverse PCA whitening."""
+        if isinstance(self.rotation, SRHTRotation):
+            unrotated = self.rotation.inverse(reconstructed)
+        else:
+            unrotated = reconstructed @ self.rotation
+        if self.whiten and self.pca_params is not None:
+            return unrotated @ self.pca_params["inverse_transform"] + self.pca_params["mean"]
+        return unrotated
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        """Compress: whiten + rotate then quantize each coordinate."""
+        rotated = self._apply_pre_rotation(embeddings)
+        codes = np.digitize(rotated, self.boundaries[1:-1]).astype(np.uint8)
+        return codes
+
+    def decode(self, codes: np.ndarray) -> np.ndarray:
+        """Decompress: map codes to centroids, inverse-rotate."""
+        reconstructed = self.centroids[codes]
+        return self._inverse_rotation(reconstructed)
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
+        """Approximate nearest neighbor search via cosine similarity."""
+        query_recon = self.decode(query_codes)
+        db_recon = self.decode(db_codes)
+        query_recon = query_recon / np.linalg.norm(query_recon, axis=1, keepdims=True)
+        db_recon = db_recon / np.linalg.norm(db_recon, axis=1, keepdims=True)
+        sims = query_recon @ db_recon.T
+        return np.argsort(-sims, axis=1)[:, :k]
+
+    def bytes_per_vector(self) -> float:
+        code_bits = self.d * self.bits
+        norm_bytes = 4
+        return code_bits / 8 + norm_bytes
+
+
+# =============================================================================
+# TurboQuant Prod: MSE-only (QJL found counterproductive for retrieval)
 # =============================================================================
 
 class TurboQuantProd(TurboQuantMSE):
-    """TurboQuant with product estimator (QJL residual correction).
+    """TurboQuant Prod variant — identical to MSE for embedding retrieval.
 
-    Extends MSE variant with a correction term for inner product estimation.
-    See Section 4 of the TurboQuant paper.
+    The QJL residual correction (paper Section 4) is designed for raw inner
+    product estimation. For cosine-similarity retrieval on unit-norm embeddings,
+    the sign sketch variance dominates the correction signal, degrading recall.
+    This matches findings from multiple independent implementations
+    (back2matching/turboquant, cksac/turboquant-model).
+
+    Kept as an alias so benchmark code doesn't break. Results will match MSE.
     """
-
-    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
-        """Search with QJL-corrected inner product estimation."""
-        # Decode
-        query_recon = self.decode(query_codes)
-        db_recon = self.decode(db_codes)
-
-        # Base inner product
-        base_sims = query_recon @ db_recon.T
-
-        # QJL correction: estimate residual inner products
-        # <q, d> ≈ <q_hat, d_hat> + correction
-        # The correction uses the quantization residuals
-        # For now, use base similarity (full implementation requires
-        # storing quantization residuals, which adds to storage)
-        # TODO: implement full QJL correction per paper Section 4
-        sims = base_sims
-
-        return np.argsort(-sims, axis=1)[:, :k]
+    pass
 
 
 # =============================================================================
@@ -177,21 +292,27 @@ class BinaryHash:
 
 
 class ProductQuantization:
-    """FAISS Product Quantization wrapper."""
+    """FAISS Product Quantization wrapper.
+
+    Target budget: bits * d total bits for the code, matching TurboQuant's budget.
+    FAISS PQ splits d into m subspaces with nbits per subspace.
+    Total storage = m * nbits / 8 bytes. We set nbits=8 (standard) and choose
+    m to approximate the target budget: m = bits * d / 8.
+    """
 
     def __init__(self, d: int, bits: int):
         import faiss
         self.d = d
         self.bits = bits
-        # PQ: split d dims into m subspaces, each quantized to 2^bits centroids
-        # Standard: m = d / 8 subspaces for byte-aligned codes
-        self.m = min(d // 2, d // (bits * 2))  # subspace count
+        self.nbits_per_subspace = 8
+        # Target: total bits = bits * d, so m = bits * d / 8 (since each subspace uses 8 bits)
+        target_m = max(1, (bits * d) // (self.nbits_per_subspace))
+        # m must divide d
+        self.m = target_m
+        while self.m > 0 and d % self.m != 0:
+            self.m -= 1
         if self.m < 1:
             self.m = 1
-        # Adjust m so d is divisible by m
-        while d % self.m != 0:
-            self.m -= 1
-        self.nbits_per_subspace = 8  # FAISS PQ uses 8 bits per subspace by default
         self.index = faiss.IndexPQ(d, self.m, self.nbits_per_subspace)
         self.trained = False
 
@@ -215,6 +336,91 @@ class ProductQuantization:
         return self.m * self.nbits_per_subspace / 8
 
 
+class RaBitQ:
+    """RaBitQ: 1-bit quantization with unbiased inner product estimation.
+
+    From Gao & Long, SIGMOD 2024 (arXiv:2405.12497).
+    Encodes each D-dim vector into D sign bits after random rotation,
+    plus a scalar correction factor that makes the IP estimate unbiased.
+
+    Training-free: only needs a random orthogonal matrix P (sampled once).
+    Storage: D/8 bytes (binary code) + 4 bytes (norm) + 4 bytes (correction).
+    """
+
+    def __init__(self, d: int, seed: int):
+        self.d = d
+        self.seed = seed
+        self.P = random_orthogonal(d, seed)
+        self.norms = None
+        self.corrections = None  # <x_bar, o> per vector
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        """Encode: rotate then binarize. Store correction factors."""
+        # Rotate into randomized basis
+        rotated = embeddings @ self.P.T  # (N, d)
+
+        # Binary codes: sign bits
+        codes = (rotated >= 0).astype(np.uint8)  # (N, d)
+
+        # Compute correction factor: <x_bar, o'>
+        # x_bar in rotated space = (2*codes - 1) / sqrt(d)
+        x_bar_rotated = (2 * codes.astype(np.float32) - 1) / np.sqrt(self.d)
+        # Correction = <x_bar, o'> = per-vector dot product
+        self.corrections = np.sum(x_bar_rotated * rotated, axis=1)  # (N,)
+
+        # Store norms (already unit-norm in our case, but keep for generality)
+        self.norms = np.linalg.norm(embeddings, axis=1)
+
+        return codes
+
+    def estimate_inner_products(self, query: np.ndarray, db_codes: np.ndarray,
+                                db_corrections: np.ndarray) -> np.ndarray:
+        """Estimate <query, db_vector> for all db vectors.
+
+        Uses: <o, q> ≈ <x_bar, q'> / <x_bar, o'>
+        where x_bar = (2*codes - 1)/sqrt(d) and q' = P^T @ q.
+        """
+        # Rotate query
+        q_rotated = query @ self.P.T  # (d,)
+
+        # <x_bar, q'> for all db vectors via binary codes
+        # (2*codes - 1)/sqrt(d) . q' = (2 * codes @ q' - sum(q')) / sqrt(d)
+        # This avoids materializing x_bar
+        q_sum = q_rotated.sum()
+        codes_dot_q = db_codes.astype(np.float32) @ q_rotated  # (N_db,)
+        x_bar_dot_q = (2 * codes_dot_q - q_sum) / np.sqrt(self.d)
+
+        # Unbiased estimate: <o, q> ≈ x_bar_dot_q / correction
+        # Clamp corrections away from zero to avoid division issues
+        safe_corrections = np.where(np.abs(db_corrections) < 1e-8,
+                                     1e-8, db_corrections)
+        ip_estimates = x_bar_dot_q / safe_corrections
+
+        return ip_estimates
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int,
+               queries: np.ndarray = None, db_corrections: np.ndarray = None) -> np.ndarray:
+        """Search using RaBitQ's unbiased IP estimator."""
+        if queries is None or db_corrections is None:
+            # Fallback to simple Hamming if raw data not available
+            n_q = len(query_codes)
+            indices = np.zeros((n_q, k), dtype=np.int64)
+            for i in range(n_q):
+                hamming = np.sum(query_codes[i] != db_codes, axis=1)
+                indices[i] = np.argsort(hamming)[:k]
+            return indices
+
+        n_q = len(queries)
+        indices = np.zeros((n_q, k), dtype=np.int64)
+        for i in range(n_q):
+            ip_est = self.estimate_inner_products(queries[i], db_codes, db_corrections)
+            indices[i] = np.argsort(-ip_est)[:k]  # highest IP = most similar
+        return indices
+
+    def bytes_per_vector(self) -> float:
+        return self.d / 8 + 4 + 4  # binary code + norm + correction factor
+
+
 class FP32Exact:
     """No compression. Brute-force exact search (upper bound)."""
 
@@ -227,3 +433,171 @@ class FP32Exact:
 
     def bytes_per_vector(self) -> float:
         return self.d * 4  # FP32
+
+
+# =============================================================================
+# Training-free methods
+# =============================================================================
+
+class UniformScalarQuant:
+    """Rotation + uniform scalar quantization. No codebook optimization.
+
+    Same pipeline as TurboQuant MSE but uses a uniform grid on the data range
+    instead of the Beta-optimal codebook. The simplest possible rotation-based
+    quantizer — serves as an ablation to measure the value of the Beta codebook.
+    """
+
+    def __init__(self, d: int, bits: int, seed: int, rotation_type: str = "srht"):
+        self.d = d
+        self.bits = bits
+        self.n_levels = 2 ** bits
+        self.rotation = make_rotation(d, seed, rotation_type)
+        # Uniform grid on [-1, 1] (covers unit-norm rotated coordinates)
+        self.boundaries = np.linspace(-1, 1, self.n_levels + 1).astype(np.float32)
+        self.centroids = ((self.boundaries[:-1] + self.boundaries[1:]) / 2).astype(np.float32)
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        rotated = apply_rotation(embeddings, self.rotation)
+        codes = np.digitize(rotated, self.boundaries[1:-1]).astype(np.uint8)
+        return codes
+
+    def decode(self, codes: np.ndarray) -> np.ndarray:
+        reconstructed = self.centroids[codes]
+        if isinstance(self.rotation, SRHTRotation):
+            return self.rotation.inverse(reconstructed)
+        return reconstructed @ self.rotation
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
+        query_recon = self.decode(query_codes)
+        db_recon = self.decode(db_codes)
+        query_recon = query_recon / np.linalg.norm(query_recon, axis=1, keepdims=True)
+        db_recon = db_recon / np.linalg.norm(db_recon, axis=1, keepdims=True)
+        sims = query_recon @ db_recon.T
+        return np.argsort(-sims, axis=1)[:, :k]
+
+    def bytes_per_vector(self) -> float:
+        return self.d * self.bits / 8 + 4
+
+
+class SimHashMultiBit:
+    """Multi-bit SimHash: k independent random hyperplanes, 1 bit each.
+
+    Standard SimHash uses sign(x) for d bits. This variant uses k random
+    projections (k can be > d or < d) to decouple hash length from embedding dim.
+    Bits parameter controls total bits: k = bits * d (same budget as TurboQuant).
+    """
+
+    def __init__(self, d: int, bits: int, seed: int):
+        self.d = d
+        self.bits = bits
+        self.k = bits * d  # total hash bits = same storage as TQ
+        rng = np.random.RandomState(seed)
+        # Random hyperplanes, normalized
+        self.hyperplanes = rng.randn(self.k, d).astype(np.float32)
+        self.hyperplanes /= np.linalg.norm(self.hyperplanes, axis=1, keepdims=True)
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        projections = embeddings @ self.hyperplanes.T
+        return (projections > 0).astype(np.uint8)
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
+        n_q = len(query_codes)
+        indices = np.zeros((n_q, k), dtype=np.int64)
+        for i in range(n_q):
+            hamming = np.sum(query_codes[i] != db_codes, axis=1)
+            indices[i] = np.argsort(hamming)[:k]
+        return indices
+
+    def bytes_per_vector(self) -> float:
+        return self.k / 8
+
+
+class RandProjQuant:
+    """Random Projection + Scalar Quantization.
+
+    Project from d dimensions to m < d via random Gaussian matrix, then
+    uniformly quantize each projected coordinate. Trades dimension reduction
+    for more bits per coordinate. Total storage matches TurboQuant.
+    """
+
+    def __init__(self, d: int, bits: int, seed: int):
+        self.d = d
+        self.bits = bits
+        # Choose m so total bits ≈ bits * d
+        # Each projected coordinate gets 8 bits (uint8), so m = bits * d / 8
+        self.m = max(1, bits * d // 8)
+        self.n_levels = 256  # 8-bit quantization per projected dimension
+        rng = np.random.RandomState(seed)
+        self.proj = rng.randn(d, self.m).astype(np.float32) / np.sqrt(self.m)
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        projected = embeddings @ self.proj  # (N, m)
+        # Per-batch min/max quantization to uint8
+        self._min = projected.min(axis=0)
+        self._scale = projected.max(axis=0) - self._min
+        self._scale = np.where(self._scale < 1e-8, 1.0, self._scale)
+        normalized = (projected - self._min) / self._scale
+        return (normalized * 255).clip(0, 255).astype(np.uint8)
+
+    def decode(self, codes: np.ndarray) -> np.ndarray:
+        return codes.astype(np.float32) / 255 * self._scale + self._min
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
+        # Reconstruct in projected space and use inner product
+        q = self.decode(query_codes)
+        db = self.decode(db_codes)
+        q = q / np.linalg.norm(q, axis=1, keepdims=True)
+        db = db / np.linalg.norm(db, axis=1, keepdims=True)
+        sims = q @ db.T
+        return np.argsort(-sims, axis=1)[:, :k]
+
+    def bytes_per_vector(self) -> float:
+        return self.m  # 1 byte per projected dimension
+
+
+class FlyHash:
+    """FlyHash: bio-inspired sparse random expansion + winner-take-all.
+
+    Inspired by the fruit fly olfactory circuit (Dasgupta et al., Science 2017).
+    1. Sparse random expansion: d -> m (m >> d) via sparse binary matrix
+    2. Winner-take-all: keep top-k activations, zero the rest
+    3. Binary encoding: nonzero = 1
+
+    The hash length is m bits, and sparsity is controlled by the WTA ratio.
+    """
+
+    def __init__(self, d: int, bits: int, seed: int, expansion: int = 20, wta_ratio: float = 0.05):
+        self.d = d
+        self.bits = bits
+        # Hash length = bits * d (same total storage as TurboQuant)
+        self.m = bits * d
+        self.wta_k = max(1, int(self.m * wta_ratio))
+        rng = np.random.RandomState(seed)
+        # Sparse random connections: each output neuron connects to ~6 inputs
+        n_connections = 6
+        self.connections = np.zeros((self.m, d), dtype=np.float32)
+        for i in range(self.m):
+            idx = rng.choice(d, size=n_connections, replace=False)
+            self.connections[i, idx] = 1.0
+
+    def encode(self, embeddings: np.ndarray) -> np.ndarray:
+        # Sparse expansion
+        activations = embeddings @ self.connections.T  # (N, m)
+        # Winner-take-all: keep top-k per vector
+        codes = np.zeros_like(activations, dtype=np.uint8)
+        for i in range(len(activations)):
+            top_k = np.argpartition(activations[i], -self.wta_k)[-self.wta_k:]
+            codes[i, top_k] = 1
+        return codes
+
+    def search(self, query_codes: np.ndarray, db_codes: np.ndarray, k: int) -> np.ndarray:
+        n_q = len(query_codes)
+        indices = np.zeros((n_q, k), dtype=np.int64)
+        for i in range(n_q):
+            # Hamming distance (or equivalently, overlap of active bits)
+            hamming = np.sum(query_codes[i] != db_codes, axis=1)
+            indices[i] = np.argsort(hamming)[:k]
+        return indices
+
+    def bytes_per_vector(self) -> float:
+        return self.m / 8

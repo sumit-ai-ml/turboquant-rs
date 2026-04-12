@@ -78,6 +78,30 @@ class SRHTRotation:
         return inv
 
 
+def pca_whiten(embeddings: np.ndarray) -> dict:
+    """Compute PCA whitening transform from training data.
+
+    Returns dict with mean, transform (W), and inverse_transform (W^-1).
+    After whitening, coordinates are decorrelated and unit-variance,
+    which makes the random rotation more effective at isotropizing.
+    """
+    mean = embeddings.mean(axis=0)
+    centered = embeddings - mean
+    cov = centered.T @ centered / len(centered)
+    eigvals, eigvecs = np.linalg.eigh(cov)
+    # Clamp small eigenvalues to avoid division by zero
+    eigvals = np.maximum(eigvals, 1e-8)
+    # Whitening transform: W = V * diag(1/sqrt(lambda))
+    W = eigvecs * (1.0 / np.sqrt(eigvals))[None, :]
+    # Inverse: W^-1 = diag(sqrt(lambda)) * V^T
+    W_inv = (eigvecs * np.sqrt(eigvals)[None, :]).T
+    return {
+        "mean": mean.astype(np.float32),
+        "transform": W.astype(np.float32),
+        "inverse_transform": W_inv.astype(np.float32),
+    }
+
+
 def make_rotation(d: int, seed: int, rotation_type: str = "srht"):
     """Build a rotation. Uses SRHT for power-of-2 d, dense orthogonal otherwise.
 

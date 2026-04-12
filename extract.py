@@ -10,16 +10,44 @@ from config import MODELS, DATASETS, EMBED_DIR, BATCH_SIZE, NUM_WORKERS
 from utils import filter_zero_norm, l2_normalize
 
 
+def _load_prithvi_model():
+    """Load Prithvi-EO-1.0-100M from HuggingFace using its custom class."""
+    import importlib.util
+    from huggingface_hub import hf_hub_download
+
+    repo_id = MODELS["prithvi"]["name"]
+    mae_py = hf_hub_download(repo_id, "prithvi_mae.py")
+    weights_path = hf_hub_download(repo_id, "Prithvi_EO_V1_100M.pt")
+
+    spec = importlib.util.spec_from_file_location("prithvi_mae", mae_py)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    model = mod.PrithviMAE(
+        img_size=224,
+        patch_size=(1, 16, 16),
+        num_frames=3,
+        in_chans=6,
+        embed_dim=768,
+        depth=12,
+        num_heads=12,
+        decoder_embed_dim=512,
+        decoder_depth=8,
+        decoder_num_heads=16,
+        mlp_ratio=4.0,
+    )
+    state_dict = torch.load(weights_path, map_location="cpu", weights_only=False)
+    model.load_state_dict(state_dict, strict=False)
+    return model
+
+
 def extract_prithvi(dataset_name: str, dataset_cfg: dict) -> np.ndarray:
     """Extract embeddings from Prithvi-EO-1.0-100M."""
-    from transformers import AutoModel
     import torchgeo.datasets as tgd
 
-    model = AutoModel.from_pretrained(MODELS["prithvi"]["name"], trust_remote_code=True)
+    model = _load_prithvi_model()
     model = model.cuda().eval()
 
-    # Load dataset with appropriate bands
-    # NOTE: adjust this based on actual torchgeo API for your dataset version
     if dataset_name == "bigearthnet":
         dataset = tgd.BigEarthNet(
             root=str(Path("data") / "bigearthnet"),
@@ -45,15 +73,13 @@ def extract_prithvi(dataset_name: str, dataset_cfg: dict) -> np.ndarray:
             # Select Prithvi's 6 bands
             band_indices = dataset_cfg["prithvi_bands"]
             images = images[:, band_indices, :, :]
-            images = images.cuda().float()
+            # Prithvi expects (B, C, T, H, W) with T=3 frames
+            images = images.unsqueeze(2).expand(-1, -1, 3, -1, -1).cuda().float()
 
-            # Prithvi is a ViT-MAE; use encoder output, take CLS token or mean pool
-            outputs = model(images)
-            # Adjust based on actual Prithvi output format:
-            # Option A: CLS token
-            # emb = outputs.last_hidden_state[:, 0, :]
-            # Option B: Mean pool all patch tokens
-            emb = outputs.last_hidden_state.mean(dim=1)
+            # Forward through encoder, get list of layer features
+            features = model.forward_features(images)
+            # Use last layer output, mean-pool patch tokens
+            emb = features[-1].mean(dim=1)
 
             embeddings.append(emb.cpu().numpy())
 
@@ -88,11 +114,16 @@ def extract_remoteclip(dataset_name: str, dataset_cfg: dict) -> np.ndarray:
     with torch.no_grad():
         for batch in tqdm(loader, desc=f"RemoteCLIP/{dataset_name}"):
             images = batch["image"]
-            # Select RGB bands and normalize for CLIP
+            # Select RGB bands, resize to 224x224, normalize for CLIP
             rgb_indices = dataset_cfg["rgb_bands"]
             images = images[:, rgb_indices, :, :]
-            # TODO: apply CLIP preprocessing (resize, normalize)
-            images = images.cuda().float()
+            images = torch.nn.functional.interpolate(images.float(), size=(224, 224), mode="bilinear", align_corners=False)
+            # Normalize to [0,1] then apply CLIP normalization
+            images = images / (images.amax(dim=(2, 3), keepdim=True) + 1e-8)
+            mean = torch.tensor([0.48145466, 0.4578275, 0.40821073]).view(1, 3, 1, 1)
+            std = torch.tensor([0.26862954, 0.26130258, 0.27577711]).view(1, 3, 1, 1)
+            images = (images - mean) / std
+            images = images.cuda()
 
             emb = model.encode_image(images)
             embeddings.append(emb.cpu().numpy())

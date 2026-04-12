@@ -90,21 +90,37 @@ def print_results_table(aggregated: dict):
 
 def plot_recall_vs_bits(aggregated: dict):
     """Plot recall@10 vs bits for each model/dataset combination."""
-    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-
-    combos = [
+    # Only plot combos that have data
+    all_combos = [
         ("prithvi", "bigearthnet"),
         ("prithvi", "eurosat"),
         ("remoteclip", "bigearthnet"),
         ("remoteclip", "eurosat"),
     ]
+    combos = [(m, d) for m, d in all_combos
+              if any((m, d, method, bits) in aggregated
+                     for method in METHODS for bits in BITS)]
+    n = len(combos)
+    if n == 0:
+        print("No data to plot.")
+        return
+    cols = min(n, 2)
+    rows = (n + cols - 1) // cols
+    fig, axes = plt.subplots(rows, cols, figsize=(7 * cols, 5 * rows), squeeze=False)
+    axes = axes.flat
 
-    quantized_methods = ["turboquant_mse", "turboquant_prod", "product_quant"]
-    colors = {"turboquant_mse": "#2196F3", "turboquant_prod": "#4CAF50", "product_quant": "#FF9800"}
-    labels = {"turboquant_mse": "TurboQuant MSE", "turboquant_prod": "TurboQuant Prod",
-              "product_quant": "Product Quant"}
+    quantized_methods = ["turboquant_mse", "turboquant_ada", "product_quant",
+                         "uniform_sq", "simhash_multi", "randproj_quant", "flyhash"]
+    colors = {"turboquant_mse": "#2196F3", "turboquant_ada": "#9C27B0",
+              "product_quant": "#FF9800", "uniform_sq": "#607D8B",
+              "simhash_multi": "#E91E63", "randproj_quant": "#795548",
+              "flyhash": "#009688"}
+    labels = {"turboquant_mse": "TQ MSE (Beta)", "turboquant_ada": "TQ Adaptive",
+              "product_quant": "Product Quant", "uniform_sq": "Uniform SQ",
+              "simhash_multi": "SimHash Multi", "randproj_quant": "RandProj+Q",
+              "flyhash": "FlyHash"}
 
-    for ax, (model, dataset) in zip(axes.flat, combos):
+    for ax, (model, dataset) in zip(axes, combos):
         # Plot FP32 exact as horizontal line
         fp32_key = (model, dataset, "fp32_exact", BITS[0])
         if fp32_key in aggregated:
@@ -151,7 +167,7 @@ def plot_compression_vs_recall(aggregated: dict):
     fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
     for ax, model in zip(axes, ["prithvi", "remoteclip"]):
-        for dataset, marker in [("bigearthnet", "o"), ("eurosat", "s")]:
+        for dataset, marker in [("eurosat", "o"), ("bigearthnet", "s")]:
             for method in METHODS:
                 for bits in BITS:
                     key = (model, dataset, method, bits)
@@ -164,7 +180,9 @@ def plot_compression_vs_recall(aggregated: dict):
                     a = aggregated[key]
                     color = {"fp32_exact": "black", "binary_hash": "red",
                              "product_quant": "#FF9800", "turboquant_mse": "#2196F3",
-                             "turboquant_prod": "#4CAF50"}.get(method, "gray")
+                             "turboquant_ada": "#9C27B0", "uniform_sq": "#607D8B",
+                             "simhash_multi": "#E91E63", "randproj_quant": "#795548",
+                             "flyhash": "#009688"}.get(method, "gray")
 
                     ax.scatter(a["bytes_per_vector"], a["recall@10_mean"],
                                c=color, marker=marker, s=60, alpha=0.8)
@@ -197,10 +215,16 @@ def scaling_projection(aggregated: dict):
         for bits in BITS:
             # Use first available config for bytes_per_vector
             for model in ["prithvi", "remoteclip"]:
-                key = (model, "bigearthnet", method, bits)
-                if key not in aggregated:
-                    key = (model, "bigearthnet", method, BITS[0])
-                if key in aggregated:
+                key = None
+                for ds in ["eurosat", "bigearthnet"]:
+                    key = (model, ds, method, bits)
+                    if key in aggregated:
+                        break
+                    key = (model, ds, method, BITS[0])
+                    if key in aggregated:
+                        break
+                    key = None
+                if key and key in aggregated:
                     bpv = aggregated[key]["bytes_per_vector"]
                     bits_str = "-" if method in ("fp32_exact", "binary_hash") else str(bits)
                     mem_1m = bpv * 1e6 / 1e9
@@ -225,7 +249,7 @@ def practitioner_recommendation(aggregated: dict):
         best_method = None
         best_recall = -1
 
-        for method in ["turboquant_mse", "turboquant_prod", "product_quant"]:
+        for method in ["turboquant_mse", "turboquant_ada", "product_quant"]:
             recalls = []
             for model in ["prithvi", "remoteclip"]:
                 for dataset in ["bigearthnet", "eurosat"]:

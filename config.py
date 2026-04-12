@@ -52,8 +52,12 @@ METHODS = [
     "fp32_exact",       # upper bound, no compression
     "binary_hash",      # sign(x) -> Hamming distance
     "product_quant",    # FAISS PQ (trained on 80% split)
-    "turboquant_mse",   # rotation + Lloyd-Max optimal codebook
-    "turboquant_prod",  # MSE + QJL residual correction
+    "turboquant_mse",   # rotation + Lloyd-Max optimal codebook (Beta assumption)
+    "turboquant_ada",   # data-adaptive codebook (trained on data)
+    "uniform_sq",       # rotation + uniform grid (no codebook optimization)
+    "simhash_multi",    # multi-bit SimHash (k random hyperplanes)
+    "randproj_quant",   # random projection + 8-bit quantization
+    "flyhash",          # bio-inspired sparse expansion + WTA
 ]
 
 # --- Evaluation ---
