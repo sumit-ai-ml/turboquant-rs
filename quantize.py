@@ -336,6 +336,79 @@ class ProductQuantization:
         return self.m * self.nbits_per_subspace / 8
 
 
+class TurboQuantResidualPQ:
+    """Hybrid: TurboQuant (training-free) + PQ on residuals (data-adaptive).
+
+    TQ captures the isotropic component for free.
+    PQ learns only the structured residual that TQ couldn't handle.
+
+    Inner product decomposition: <q, x> = <q, x_hat> + <q, r>
+    where x_hat = TQ reconstruction, r = x - x_hat.
+    """
+
+    def __init__(self, d: int, tq_bits: int, pq_m: int, seed: int,
+                 rotation_type: str = "srht"):
+        self.d = d
+        self.tq_bits = tq_bits
+        self.pq_m = pq_m
+        self.seed = seed
+        self.tq = TurboQuantMSE(d, tq_bits, seed, rotation_type)
+        self.pq_index = None
+        self.tq_reconstructed_db = None
+        self.actual_pq_m = None
+
+    def train(self, embeddings: np.ndarray):
+        """Encode with TQ, compute residuals, train PQ on residuals."""
+        import faiss
+
+        codes_tq = self.tq.encode(embeddings)
+        tq_recon = self.tq.decode(codes_tq)
+        # Re-normalize TQ reconstruction (critical for cosine similarity)
+        tq_recon = tq_recon / np.linalg.norm(tq_recon, axis=1, keepdims=True)
+        residuals = (embeddings - tq_recon).astype(np.float32)
+
+        # Find valid m that divides d
+        m = self.pq_m
+        while m > 0 and self.d % m != 0:
+            m -= 1
+        self.actual_pq_m = max(1, m)
+
+        self.pq_index = faiss.IndexPQ(self.d, self.actual_pq_m, 8)
+        self.pq_index.train(residuals)
+
+    def encode(self, database: np.ndarray):
+        """Encode database: TQ codes + residuals added to PQ index."""
+        import faiss
+        codes_tq = self.tq.encode(database)
+        tq_recon = self.tq.decode(codes_tq)
+        tq_recon = tq_recon / np.linalg.norm(tq_recon, axis=1, keepdims=True)
+        residuals = (database - tq_recon).astype(np.float32)
+
+        self.pq_index.add(residuals)
+        self.tq_reconstructed_db = tq_recon
+        return codes_tq
+
+    def search(self, queries: np.ndarray, k: int) -> np.ndarray:
+        """Search: reconstruct full vector (TQ + PQ residual), then cosine."""
+        # Reconstruct: x_approx = x_hat + r_hat
+        n_db = self.pq_index.ntotal
+        residual_recon = np.zeros((n_db, self.d), dtype=np.float32)
+        for i in range(n_db):
+            residual_recon[i] = self.pq_index.reconstruct(i)
+
+        full_recon = self.tq_reconstructed_db + residual_recon
+        # Re-normalize for cosine similarity
+        full_recon = full_recon / np.linalg.norm(full_recon, axis=1, keepdims=True)
+
+        sims = queries @ full_recon.T
+        return np.argsort(-sims, axis=1)[:, :k]
+
+    def bytes_per_vector(self) -> float:
+        tq_bytes = self.d * self.tq_bits / 8 + 4
+        pq_bytes = self.actual_pq_m  # 1 byte per subspace (8 bits each)
+        return tq_bytes + pq_bytes
+
+
 class RaBitQ:
     """RaBitQ: random rotation + binarization for approximate nearest neighbor.
 
