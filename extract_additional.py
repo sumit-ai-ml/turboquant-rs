@@ -127,10 +127,56 @@ def extract_mae_base():
     return np.concatenate(embeddings, axis=0)
 
 
+def extract_ssl4eo():
+    """Extract embeddings from SSL4EO-S12 MAE ViT-B/16 (RS-specific MAE)."""
+    import timm
+
+    # Create ViT-B/16 with 13-band input
+    model = timm.create_model("vit_base_patch16_224", pretrained=False,
+                               num_classes=0, in_chans=13)
+    state_dict = torch.load("data/B13_vitb16_mae_ep99_enc.pth",
+                            map_location="cpu", weights_only=False)
+    model.load_state_dict(state_dict, strict=False)
+    model = model.cuda().eval()
+
+    # Load EuroSAT with all 13 bands
+    import torchgeo.datasets as tgd
+    dataset = tgd.EuroSAT(root=str(DATA_ROOT), download=True)
+    loader = torch.utils.data.DataLoader(
+        dataset, batch_size=BATCH_SIZE, num_workers=NUM_WORKERS, shuffle=False
+    )
+
+    embeddings = []
+    with torch.no_grad():
+        for batch in tqdm(loader, desc="SSL4EO/eurosat"):
+            images = batch["image"]  # all bands
+            # SSL4EO expects 13 bands; EuroSAT has 13 via torchgeo
+            if images.shape[1] < 13:
+                # Pad with zeros if fewer bands
+                pad = torch.zeros(images.shape[0], 13 - images.shape[1],
+                                  images.shape[2], images.shape[3])
+                images = torch.cat([images, pad], dim=1)
+            elif images.shape[1] > 13:
+                images = images[:, :13, :, :]
+
+            images = torch.nn.functional.interpolate(
+                images.float(), size=(224, 224), mode="bilinear", align_corners=False
+            )
+            # Normalize per-band to roughly [0, 1]
+            images = images / (images.amax(dim=(2, 3), keepdim=True) + 1e-8)
+            images = images.cuda()
+
+            emb = model(images)
+            embeddings.append(emb.cpu().numpy())
+
+    return np.concatenate(embeddings, axis=0)
+
+
 MODELS = {
     "dinov2": {"extract_fn": extract_dinov2, "embed_dim": 768, "training": "self-distillation"},
     "georsclip": {"extract_fn": extract_georsclip, "embed_dim": 768, "training": "contrastive"},
     "mae_base": {"extract_fn": extract_mae_base, "embed_dim": 768, "training": "MAE"},
+    "ssl4eo": {"extract_fn": extract_ssl4eo, "embed_dim": 768, "training": "MAE (RS)"},
 }
 
 
