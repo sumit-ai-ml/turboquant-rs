@@ -8,13 +8,13 @@ TurboQuant (Guo et al., 2024) compresses these embeddings to 2-4 bits per dimens
 
 We tested TurboQuant on embeddings from two remote sensing foundation models (Prithvi-EO and RemoteCLIP) across two datasets (EuroSAT and BigEarthNet) and compared it against seven other compression methods.
 
-The main finding: **TurboQuant works great on some embeddings and poorly on others, and the difference comes down to one thing: how isotropic the embeddings are.**
+The main finding: **TurboQuant's MSE optimality holds for any unit-norm input, but retrieval recall depends strongly on the isotropy of the embedding distribution.**
 
 On RemoteCLIP (trained with contrastive learning, naturally isotropic), TurboQuant at 4 bits gets Recall@10 = 0.878 on BigEarthNet. That closes 86% of the gap between naive binary hashing and trained Product Quantization, without any training.
 
 On Prithvi (trained with masked autoencoding, anisotropic), the same method gets R@10 = 0.572. Only 46% of the gap. Same algorithm, same bit budget, very different outcome.
 
-The embedding model you choose matters more than the quantizer you choose. Contrastive learning produces embeddings that are ready for cheap compression. Reconstruction-based training does not.
+This distinction has not been tested before. The original TurboQuant paper proves near-optimal MSE distortion for any unit-norm vector. But MSE distortion and retrieval recall are different objectives. A quantizer can have low per-vector MSE and still scramble nearest-neighbor rankings if the error distribution interacts badly with the data geometry. Our contribution is showing that this interaction is governed by the foundation model's training objective: contrastive learning produces embeddings that are ready for cheap compression, reconstruction-based training does not.
 
 ## 1. The Problem
 
@@ -120,7 +120,11 @@ Two things jump out:
 
 ### 4.2 Why: The Isotropy Story
 
-TurboQuant assumes that after rotation, each coordinate is independently Beta-distributed. This assumption holds when embeddings are spread uniformly on the unit sphere (isotropic). It fails when embeddings cluster along certain directions (anisotropic).
+TurboQuant's theory proves that after rotation, each coordinate of any unit-norm vector follows Beta(d/2, d/2), and that the resulting Lloyd-Max codebook achieves near-optimal MSE distortion. This is mathematically correct for any input. But MSE distortion measures per-vector reconstruction error. Retrieval recall measures whether the ranking of neighbors is preserved. These are different things.
+
+A quantizer can achieve low MSE but still degrade recall if the quantization errors across database vectors are correlated in a way that reshuffles rankings. This happens when the input distribution has strong directional structure (anisotropy): the rotation reduces but cannot eliminate coordinate correlations, and correlated errors accumulate systematically instead of canceling out.
+
+We measured this directly:
 
 We measured this directly using the Kolmogorov-Smirnov test on rotated coordinates:
 
@@ -129,15 +133,17 @@ We measured this directly using the Kolmogorov-Smirnov test on rotated coordinat
 | RemoteCLIP | 0.405 | 0.179 |
 | Prithvi | 0.594 | 0.577 |
 
-RemoteCLIP embeddings are much more isotropic. The KS statistic is 32% lower. The correlation between rotated coordinates is 3.2x lower.
+RemoteCLIP embeddings are much closer to isotropic. The KS statistic is 32% lower. The correlation between rotated coordinates is 3.2x lower.
+
+Note: both models have "POOR" Beta fit by KS test standards. Neither is truly isotropic. But the degree of deviation differs, and that degree predicts retrieval quality.
 
 **Why the difference? The training objective.**
 
-RemoteCLIP uses contrastive learning. The InfoNCE loss pulls matched pairs together and pushes unmatched pairs apart in cosine similarity space. Wang & Isola (2020) showed this produces embeddings with a "uniformity" property: they spread out on the sphere. More uniform means more isotropic. More isotropic means TurboQuant's Beta assumption is closer to correct.
+RemoteCLIP uses contrastive learning. The InfoNCE loss pulls matched pairs together and pushes unmatched pairs apart in cosine similarity space. Wang & Isola (2020) showed this produces embeddings with a "uniformity" property: they spread out on the sphere. More uniform means lower coordinate correlation after rotation. Lower correlation means quantization errors across coordinates are more independent and tend to cancel out in inner product computations rather than accumulating.
 
-Prithvi uses masked autoencoding. The MAE objective reconstructs pixel patches from partial observations. This doesn't care about distributing embeddings uniformly. The result is an embedding space with strong directional structure. Some coordinates carry much more variance than others. The random rotation helps, but it can't fully decorrelate a fundamentally anisotropic distribution.
+Prithvi uses masked autoencoding. The MAE objective reconstructs pixel patches from partial observations. This doesn't care about distributing embeddings uniformly. The result is an embedding space with strong directional structure. Some coordinates carry much more variance than others. The random rotation reduces but cannot eliminate these correlations (correlation 0.577 vs the ideal of ~0). When quantization errors are correlated, they shift inner products systematically, reshuffling neighbor rankings.
 
-When TurboQuant quantizes correlated coordinates with a codebook designed for independent ones, the errors add up in the same direction instead of canceling out. That's why recall drops.
+To be precise: TurboQuant's MSE guarantee holds equally for both models. Each vector's reconstruction error is near-optimal. But recall depends on the relative errors across vectors, and correlated errors degrade relative rankings even when absolute error is small.
 
 ### 4.3 Does a Better Codebook Help?
 
@@ -255,11 +261,15 @@ A uniform grid on [-1, 1] wastes almost every bin. At d=768, rotated coordinates
 
 ## 8. Conclusion
 
-TurboQuant is a good training-free compressor for remote sensing embeddings. How good depends on whether your embeddings are isotropic.
+TurboQuant achieves near-optimal MSE distortion for any unit-norm vector. That guarantee is real and it holds on both models we tested. But MSE optimality does not imply recall optimality.
 
-Contrastive models like RemoteCLIP produce isotropic embeddings where TurboQuant closes 86% of the gap to trained PQ. Reconstruction models like Prithvi produce anisotropic embeddings where only 46% is closed.
+On isotropic embeddings (RemoteCLIP, contrastive training), quantization errors are nearly independent across coordinates and across vectors. Inner product rankings are preserved well. TurboQuant closes 86% of the gap to trained PQ.
 
-The training objective of the embedding model shapes the geometry of the embedding space. That geometry determines how well cheap compression works. If you want embeddings that are both good for retrieval and cheap to store, contrastive learning gives you both.
+On anisotropic embeddings (Prithvi, MAE training), quantization errors are correlated. The same per-vector MSE produces larger ranking distortions. TurboQuant closes only 46% of the gap.
+
+Nobody tested this distinction before. The TurboQuant paper evaluated on contrastive embeddings (OpenAI, already isotropic) and KV caches (different task). Our contribution is showing that the MSE-to-recall gap depends on the embedding distribution, and that the foundation model's training objective is what determines that distribution.
+
+The practical implication: if you're building a retrieval system over RS embeddings, the choice of foundation model affects your storage costs as much as the choice of compression algorithm. Contrastive models give you both better retrieval and cheaper compression. That's a compounding advantage worth planning for.
 
 Code, data, and all results: https://github.com/sumit-ai-ml/turboquant-rs
 
