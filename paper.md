@@ -1,203 +1,267 @@
-# TurboQuant for Remote Sensing: Training-Free Embedding Quantization for Scalable Retrieval
+# TurboQuant for Remote Sensing: Training-Free Embedding Compression That Actually Works (When Your Embeddings Are Isotropic)
 
 ## Abstract
 
-Large-scale remote sensing (RS) retrieval systems built on foundation model embeddings face a storage bottleneck: a 590K-patch archive at 768 dimensions requires 1.7 GB in FP32. We evaluate TurboQuant, a training-free scalar quantization method based on random orthogonal rotation and an analytically optimal codebook, for compressing RS embeddings from two foundation models — Prithvi-EO (ViT-MAE, d=768) and RemoteCLIP (CLIP ViT-B-32, d=512) — on EuroSAT (16K patches) and BigEarthNet (269K patches). At 4 bits per dimension, TurboQuant achieves Recall@10 of 0.878 on RemoteCLIP/BigEarthNet and 0.572 on Prithvi/BigEarthNet, closing 86% and 46% of the gap between binary hashing and trained Product Quantization respectively — without any training data or codebook fitting. We benchmark TurboQuant against seven alternative methods and find that its performance depends critically on the isotropy of the embedding space: contrastive models (RemoteCLIP) produce near-isotropic embeddings that closely match TurboQuant's distributional assumptions, while reconstruction-based models (Prithvi) produce anisotropic embeddings that degrade quantization quality. These results establish TurboQuant as a practical, zero-cost compression baseline for RS embedding retrieval and highlight embedding geometry as a key factor in quantization performance.
+Remote sensing archives are getting big. A 590K-patch Sentinel-2 archive at 768 dimensions costs 1.7 GB just to store the embeddings in FP32. That scales linearly. At 10 million patches you're looking at 29 GB of floating point numbers.
 
-## 1. Introduction
+TurboQuant (Guo et al., 2024) compresses these embeddings to 2-4 bits per dimension with no training data and no codebook fitting. It works by rotating vectors with a random orthogonal matrix, then quantizing each coordinate using a codebook that's computed analytically from the known Beta(d/2, d/2) distribution of rotated unit-norm coordinates.
 
-Foundation models for remote sensing — including Prithvi-EO (Jakubik et al., 2023) and RemoteCLIP (Liu et al., 2023) — produce high-dimensional embeddings that enable large-scale content-based image retrieval (CBIR) over satellite archives. As these archives grow to millions of patches (e.g., BigEarthNet with 590K Sentinel-2 tiles), storing FP32 embeddings becomes a significant cost: 590K vectors at d=768 occupy 1.7 GB, and this scales linearly with archive size.
+We tested TurboQuant on embeddings from two remote sensing foundation models (Prithvi-EO and RemoteCLIP) across two datasets (EuroSAT and BigEarthNet) and compared it against seven other compression methods.
 
-Vector quantization compresses embeddings to a few bits per dimension, reducing storage by 8-16x while preserving approximate nearest neighbor retrieval quality. Product Quantization (PQ) is the standard approach, but it requires training codebooks on a representative data sample — a process that is dataset-specific and must be repeated when the embedding model changes.
+The main finding: **TurboQuant works great on some embeddings and poorly on others, and the difference comes down to one thing: how isotropic the embeddings are.**
 
-TurboQuant (Guo et al., 2024) offers a training-free alternative. It exploits a theoretical result: after applying a random orthogonal rotation to a unit-norm vector, each coordinate follows a Beta(d/2, d/2) distribution. This known distribution allows precomputing an MSE-optimal Lloyd-Max codebook analytically — no training data needed. The method consists of three steps: (1) L2-normalize and store the norm, (2) rotate via a random orthogonal matrix, and (3) quantize each rotated coordinate using the precomputed codebook.
+On RemoteCLIP (trained with contrastive learning, naturally isotropic), TurboQuant at 4 bits gets Recall@10 = 0.878 on BigEarthNet. That closes 86% of the gap between naive binary hashing and trained Product Quantization, without any training.
 
-We evaluate whether this theoretical elegance translates to practical gains on real RS embeddings, where the distributional assumptions may not hold. We benchmark TurboQuant against seven alternative methods across two foundation models and two datasets, and find that performance depends critically on the geometry of the embedding space.
+On Prithvi (trained with masked autoencoding, anisotropic), the same method gets R@10 = 0.572. Only 46% of the gap. Same algorithm, same bit budget, very different outcome.
 
-## 2. Methods
+The embedding model you choose matters more than the quantizer you choose. Contrastive learning produces embeddings that are ready for cheap compression. Reconstruction-based training does not.
 
-### 2.1 TurboQuant MSE
+## 1. The Problem
 
-Given a unit-norm embedding x in R^d, TurboQuant applies a random orthogonal rotation P and quantizes each coordinate of Px independently using a scalar codebook optimized for the Beta(d/2, d/2) distribution via Lloyd-Max iteration. The codebook requires no training data — it is computed once from the known distribution and reused for all vectors. At b bits per dimension, each vector is stored as d*b/8 + 4 bytes (quantized codes plus the FP32 norm).
+Foundation models for remote sensing produce high-dimensional embeddings. Prithvi-EO gives you 768-dimensional vectors. RemoteCLIP gives you 512-dimensional vectors. These embeddings enable content-based image retrieval: given a query patch, find the most similar patches in your archive.
 
-During search, quantized codes are decoded to centroids, inverse-rotated, re-normalized, and compared via cosine similarity. The re-normalization step is critical: without it, quantization shrinkage (decoded vectors having norms < 1) introduces a systematic bias that inverts the recall-vs-bits relationship (Section 4.1).
+The storage problem is straightforward. Each FP32 vector at d=768 takes 3,072 bytes. BigEarthNet has 590K patches. That's 1.7 GB just for the embeddings. Scale to a national-level archive with millions of patches and you're spending real money on storage.
 
-### 2.2 Baselines
+Product Quantization (PQ) (Jegou et al., 2011) is the standard solution. It divides each vector into subspaces, learns a codebook per subspace via k-means, and stores compact codes. PQ gets excellent recall. The catch: you need to train those codebooks on your data. When you change the embedding model, you retrain. When you add a new dataset, you retrain. At scale, this retraining cost is real.
 
-We compare against seven alternative methods:
+TurboQuant (Guo et al., 2024) skips the training entirely. It uses a mathematical property of random rotations: after rotating a unit-norm vector by a random orthogonal matrix, each coordinate follows a Beta(d/2, d/2) distribution. Since this distribution is known analytically, you can precompute the MSE-optimal Lloyd-Max codebook (Lloyd, 1982) once and reuse it forever. No training data. No k-means. No retraining when the model changes.
 
-**Training-free:**
-- **Binary Hash**: sign(x), Hamming distance. The simplest possible baseline. 1 bit/dim.
-- **RaBitQ** (Gao & Long, 2024): Random rotation + binarization + Hamming distance. Same as binary hash but with a random orthogonal rotation before binarization. 1 bit/dim.
-- **SimHash Multi-bit**: k independent random hyperplanes, 1 bit each. Total hash bits = b*d.
-- **Uniform Scalar Quantization**: Same rotation as TurboQuant, but with a uniform grid on [-1, 1] instead of the Beta-optimal codebook.
-- **FlyHash**: Bio-inspired sparse random expansion (6 connections per output neuron) + winner-take-all activation.
-- **Random Projection + Quantization**: Project to m < d dimensions via Gaussian matrix, then uniformly quantize to 8 bits per projected dimension.
+The question we set out to answer: does this actually work on real remote sensing embeddings?
 
-**Requires training:**
-- **Product Quantization (PQ)**: FAISS IndexPQ with 8 bits per subspace. Trained on an 80% split of the data.
-- **TurboQuant Adaptive**: Same as TurboQuant MSE but trains the Lloyd-Max codebook on the empirical distribution of rotated coordinates rather than the theoretical Beta.
+## 2. How TurboQuant Works
 
-### 2.3 Models and Datasets
+Three steps:
 
-**Prithvi-EO-1.0-100M** (IBM/NASA): A Vision Transformer trained as a Masked Autoencoder (MAE) on multi-temporal Sentinel-2 imagery. Embed dim = 768. The MAE training objective reconstructs masked patches, producing embeddings optimized for spatial reconstruction rather than discriminative retrieval.
+1. **Normalize.** L2-normalize each embedding to unit norm. Store the original norm separately (4 bytes, FP32).
 
-**RemoteCLIP ViT-B-32**: A CLIP model fine-tuned on remote sensing image-text pairs using contrastive learning. Embed dim = 512. The contrastive objective explicitly maximizes cosine similarity between matched image-text pairs while minimizing it for unmatched pairs, producing embeddings distributed more uniformly on the unit sphere.
+2. **Rotate.** Multiply by a random orthogonal matrix P. This spreads information evenly across coordinates. For unit-norm vectors on the sphere, each rotated coordinate follows Beta(d/2, d/2) when the data is isotropic.
 
-**EuroSAT**: 27,000 Sentinel-2 patches across 10 land-use classes. We use the train split (16,200 patches after torchgeo loading).
+3. **Quantize.** Map each rotated coordinate to the nearest centroid in the precomputed codebook. Store the index (b bits per coordinate). At 4 bits, that's d/2 bytes for the codes plus 4 bytes for the norm.
 
-**BigEarthNet-S2**: 590,326 Sentinel-2 patches with 43 multi-label classes. We use the train split (269,695 patches).
+To search: decode the codes back to centroids, inverse-rotate, re-normalize to unit norm, and compute cosine similarity.
 
-### 2.4 Evaluation Protocol
+The re-normalization step is important. We'll come back to that in Section 4.
 
-For each configuration, we split embeddings 80/20 into train and evaluation sets. From the evaluation set, we use the first min(1000, 10%) vectors as queries and the rest as the database. Ground truth is computed via exact FP32 cosine similarity. We report Recall@k (k = 1, 10, 100), defined as the fraction of true top-k neighbors found in the approximate top-k. All experiments use 5 random seeds (42, 123, 456, 789, 1024); we report mean and standard deviation.
+## 3. What We Compared
 
-## 3. Results
+We tested nine methods total. Seven are training-free, two need training data.
 
-### 3.1 Main Results
+**Training-free methods (no data needed):**
 
-Table 1 shows Recall@10 at 4 bits per dimension across all configurations.
+| Method | How it works | Bits/dim |
+|--------|-------------|----------|
+| TurboQuant MSE | Rotation + Beta-optimal codebook | 2, 3, 4 |
+| RaBitQ (Gao & Long, 2024) | Rotation + sign bits + Hamming distance | 1 |
+| Binary Hash (Charikar, 2002) | sign(x) + Hamming distance | 1 |
+| SimHash Multi-bit | k random hyperplanes, 1 bit each | 2, 3, 4 |
+| Uniform SQ | Rotation + uniform grid on [-1, 1] | 2, 3, 4 |
+| FlyHash (Dasgupta et al., 2017) | Sparse random expansion + winner-take-all | 2, 3, 4 |
+| RandProj Quant (Johnson & Lindenstrauss, 1984) | Random projection to lower dim + 8-bit quantization | 2, 3, 4 |
+
+**Methods that need training data:**
+
+| Method | How it works | Bits/dim |
+|--------|-------------|----------|
+| Product Quantization (Jegou et al., 2011) | Learned subspace codebooks (FAISS) | 2, 3, 4 |
+| TurboQuant Adaptive | Same rotation, but codebook trained on actual data distribution | 2, 3, 4 |
+
+**Models:**
+
+- **Prithvi-EO-1.0-100M** (Jakubik et al., 2023): ViT-MAE trained to reconstruct masked Sentinel-2 patches. Embed dim = 768. The MAE objective (He et al., 2022) optimizes for pixel-level reconstruction, not for discriminative retrieval.
+
+- **RemoteCLIP ViT-B-32** (Liu et al., 2024): CLIP model (Radford et al., 2021) fine-tuned on remote sensing image-text pairs. Embed dim = 512. The contrastive objective pushes embeddings toward uniform distribution on the sphere.
+
+**Datasets:**
+
+- **EuroSAT** (Helber et al., 2019): 16,200 Sentinel-2 patches across 10 land-use classes.
+- **BigEarthNet-S2** (Sumbul et al., 2019): 269,695 Sentinel-2 patches with 43 multi-label classes.
+
+**Evaluation:** For each experiment, we split 80/20 into train/eval. From the eval set, we take 1,000 queries and use the rest as the database. Ground truth is exact FP32 cosine similarity. We report Recall@10 (fraction of true top-10 neighbors found in approximate top-10). All results averaged over 5 random seeds with standard deviations.
+
+## 4. Results
+
+### 4.1 The Main Table
+
+Recall@10 at 4 bits per dimension (except 1-bit methods):
 
 **EuroSAT (16K vectors):**
 
-| Method | Prithvi R@10 | RemoteCLIP R@10 | Training? |
-|--------|-------------|----------------|-----------|
+| Method | Prithvi (d=768) | RemoteCLIP (d=512) | Training? |
+|--------|:-:|:-:|:-:|
 | FP32 Exact | 1.000 | 1.000 | - |
-| Product Quant | 0.961 +/- 0.002 | 0.961 +/- 0.002 | Yes |
-| **TurboQuant MSE** | **0.779 +/- 0.007** | **0.911 +/- 0.006** | **No** |
-| TurboQuant Adaptive | 0.782 +/- 0.007 | 0.912 +/- 0.002 | Yes |
-| SimHash Multi-bit | 0.702 +/- 0.016 | 0.751 +/- 0.009 | No |
-| Uniform SQ | 0.502 +/- 0.012 | 0.549 +/- 0.005 | No |
-| FlyHash | 0.468 +/- 0.005 | 0.545 +/- 0.007 | No |
-| RaBitQ (1-bit) | 0.502 +/- 0.010 | 0.567 +/- 0.011 | No |
-| Binary Hash (1-bit) | 0.451 +/- 0.011 | 0.607 +/- 0.005 | No |
+| Product Quant | 0.961 | 0.961 | Yes |
+| **TurboQuant MSE** | **0.779** | **0.911** | **No** |
+| TurboQuant Adaptive | 0.782 | 0.912 | Yes |
+| SimHash Multi-bit | 0.702 | 0.751 | No |
+| Uniform SQ | 0.502 | 0.549 | No |
+| FlyHash | 0.468 | 0.545 | No |
+| RaBitQ (1-bit) | 0.502 | 0.567 | No |
+| Binary Hash (1-bit) | 0.451 | 0.607 | No |
 
 **BigEarthNet (269K vectors):**
 
-| Method | Prithvi R@10 | RemoteCLIP R@10 | Training? |
-|--------|-------------|----------------|-----------|
+| Method | Prithvi (d=768) | RemoteCLIP (d=512) | Training? |
+|--------|:-:|:-:|:-:|
 | FP32 Exact | 1.000 | 1.000 | - |
-| Product Quant | 0.925 +/- 0.002 | 0.944 +/- 0.002 | Yes |
-| **TurboQuant MSE** | **0.572 +/- 0.002** | **0.878 +/- 0.002** | **No** |
-| TurboQuant Adaptive | 0.584 +/- 0.012 | 0.887 +/- 0.001 | Yes |
-| SimHash Multi-bit | 0.481 +/- 0.010 | 0.648 +/- 0.006 | No |
-| Uniform SQ | 0.255 +/- 0.010 | 0.399 +/- 0.008 | No |
-| FlyHash | 0.207 +/- 0.012 | 0.409 +/- 0.010 | No |
-| RaBitQ (1-bit) | 0.256 +/- 0.010 | 0.418 +/- 0.005 | No |
-| Binary Hash (1-bit) | 0.273 +/- 0.005 | 0.473 +/- 0.003 | No |
+| Product Quant | 0.925 | 0.944 | Yes |
+| **TurboQuant MSE** | **0.572** | **0.878** | **No** |
+| TurboQuant Adaptive | 0.584 | 0.887 | Yes |
+| SimHash Multi-bit | 0.481 | 0.648 | No |
+| Uniform SQ | 0.255 | 0.399 | No |
+| FlyHash | 0.207 | 0.409 | No |
+| RaBitQ (1-bit) | 0.256 | 0.418 | No |
+| Binary Hash (1-bit) | 0.273 | 0.473 | No |
 
-Two patterns are immediately visible:
+Two things jump out:
 
-1. **TurboQuant MSE is the best training-free method** across all configurations, with a significant margin over SimHash (the second best).
+**TurboQuant is the best training-free method across the board.** It beats SimHash (the runner-up) by 9-23 percentage points depending on the setting.
 
-2. **Performance is dramatically model-dependent**: TurboQuant closes 86% of the gap between binary hashing and PQ on RemoteCLIP/BigEarthNet, but only 46% on Prithvi/BigEarthNet. This gap — 0.878 vs 0.572 in R@10 — is the central finding of this paper.
+**But the gap between Prithvi and RemoteCLIP is enormous.** On BigEarthNet, TurboQuant gets 0.878 on RemoteCLIP but only 0.572 on Prithvi. Same algorithm. Same number of bits. The difference is 30 percentage points.
 
-### 3.2 The Isotropy Gap: Why RemoteCLIP Works and Prithvi Doesn't
+### 4.2 Why: The Isotropy Story
 
-TurboQuant's theoretical guarantee relies on a key assumption: after random rotation, each coordinate of a unit-norm vector follows Beta(d/2, d/2) independently. This holds exactly when embeddings are uniformly distributed on the unit sphere (isotropic). Real embeddings deviate from this assumption, and the degree of deviation predicts quantization quality.
+TurboQuant assumes that after rotation, each coordinate is independently Beta-distributed. This assumption holds when embeddings are spread uniformly on the unit sphere (isotropic). It fails when embeddings cluster along certain directions (anisotropic).
 
-We quantify this using two metrics from our Beta validation phase:
+We measured this directly using the Kolmogorov-Smirnov test on rotated coordinates:
 
-| Model | KS D statistic | Coordinate Independence |
-|-------|---------------|------------------------|
-| Prithvi (d=768) | 0.594 | 0.577 |
-| RemoteCLIP (d=512) | 0.405 | 0.179 |
+| Model | KS D (lower = more isotropic) | Coordinate correlation |
+|-------|:----:|:----:|
+| RemoteCLIP | 0.405 | 0.179 |
+| Prithvi | 0.594 | 0.577 |
 
-**RemoteCLIP embeddings are significantly more isotropic than Prithvi embeddings.** The KS D statistic (lower = better fit to Beta) is 31% lower for RemoteCLIP, and the mean absolute pairwise correlation between rotated coordinates is 3.2x lower (0.179 vs 0.577). This means RemoteCLIP's rotated coordinates are closer to independent and identically distributed — exactly the setting where TurboQuant's codebook is optimal.
+RemoteCLIP embeddings are much more isotropic. The KS statistic is 32% lower. The correlation between rotated coordinates is 3.2x lower.
 
-**The training objective explains the difference.** RemoteCLIP uses contrastive learning (InfoNCE loss), which maximizes cosine similarity between matched image-text pairs while pushing unmatched pairs apart. This objective has been shown to produce embeddings that are more uniformly distributed on the unit hypersphere — a phenomenon known as the "uniformity" property of contrastive representations (Wang & Isola, 2020). The more uniform the distribution, the better TurboQuant's Beta assumption holds.
+**Why the difference? The training objective.**
 
-Prithvi, by contrast, uses a Masked Autoencoder (MAE) objective that reconstructs masked patches. This produces embeddings optimized for spatial reconstruction rather than discriminative retrieval. The resulting embedding space has strong directional structure — certain coordinates carry disproportionate variance, leading to high inter-coordinate correlation (0.577) that the rotation cannot fully remove. When TurboQuant quantizes these non-independent coordinates with a codebook designed for independent Beta-distributed values, the quantization error accumulates in a correlated fashion, degrading retrieval quality.
+RemoteCLIP uses contrastive learning. The InfoNCE loss pulls matched pairs together and pushes unmatched pairs apart in cosine similarity space. Wang & Isola (2020) showed this produces embeddings with a "uniformity" property: they spread out on the sphere. More uniform means more isotropic. More isotropic means TurboQuant's Beta assumption is closer to correct.
 
-### 3.3 The Codebook Matters More Than the Data
+Prithvi uses masked autoencoding. The MAE objective reconstructs pixel patches from partial observations. This doesn't care about distributing embeddings uniformly. The result is an embedding space with strong directional structure. Some coordinates carry much more variance than others. The random rotation helps, but it can't fully decorrelate a fundamentally anisotropic distribution.
 
-A natural question is whether TurboQuant's performance gap on Prithvi is due to the fixed Beta codebook being suboptimal for non-isotropic data. We test this with TurboQuant Adaptive, which trains the Lloyd-Max codebook on the actual rotated coordinate distribution.
+When TurboQuant quantizes correlated coordinates with a codebook designed for independent ones, the errors add up in the same direction instead of canceling out. That's why recall drops.
 
-| Method | Prithvi/BEN R@10 | RemoteCLIP/BEN R@10 |
-|--------|-----------------|-------------------|
-| TQ MSE (Beta codebook) | 0.572 | 0.878 |
-| TQ Adaptive (empirical) | 0.584 | 0.887 |
-| Delta | +0.012 | +0.009 |
+### 4.3 Does a Better Codebook Help?
 
-The adaptive codebook provides only marginal improvement (+1-2% R@10), confirming that **the codebook mismatch is not the primary source of error**. The correlated quantization error from non-independent coordinates is the dominant factor. A better codebook cannot fix correlated noise.
+If the problem is the Beta assumption not fitting, would a data-adaptive codebook fix it?
 
-### 3.4 Codebook Ablation: Beta vs Uniform
+We tested this with TurboQuant Adaptive, which trains the Lloyd-Max codebook on the actual distribution of rotated coordinates instead of the theoretical Beta.
 
-To measure the value of TurboQuant's analytically optimal codebook, we compare against Uniform Scalar Quantization — same rotation, but with a uniform grid on [-1, 1].
+| Setting | TQ MSE (Beta) | TQ Adaptive (empirical) | Improvement |
+|---------|:----:|:----:|:----:|
+| Prithvi / BigEarthNet | 0.572 | 0.584 | +1.2% |
+| RemoteCLIP / BigEarthNet | 0.878 | 0.887 | +0.9% |
 
-| Method | Prithvi/BEN R@10 | RemoteCLIP/BEN R@10 |
-|--------|-----------------|-------------------|
-| TQ MSE (Beta codebook) | 0.572 | 0.878 |
-| Uniform SQ | 0.255 | 0.399 |
+The adaptive codebook barely helps. The codebook was never the bottleneck. The real problem is correlated quantization error from non-independent coordinates. A better codebook can't fix correlated noise.
 
-The Beta codebook provides a 2.2x improvement on both models. Notably, Uniform SQ is **insensitive to bit-width**: at d=768, R@10 is 0.256, 0.256, and 0.255 at 2, 3, and 4 bits respectively. This occurs because rotated coordinates of unit-norm vectors concentrate within +/-0.036 (3 standard deviations of N(0, 1/768)), so a uniform grid on [-1, 1] places nearly all values in a single central bin regardless of granularity. The Beta(d/2, d/2) codebook avoids this by concentrating all quantization levels in the narrow data-occupied range.
+### 4.4 What the Codebook Does Buy You
 
-### 3.5 Scaling: EuroSAT to BigEarthNet
+The codebook does matter a lot compared to no codebook at all. We tested Uniform Scalar Quantization: same rotation, but a naive uniform grid on [-1, 1].
 
-All methods degrade when scaling from 16K to 269K vectors, as expected — more database vectors means more potential confounders at similar distances. The degradation is not uniform across methods:
+| Setting | TQ MSE (Beta) | Uniform SQ | Ratio |
+|---------|:----:|:----:|:----:|
+| Prithvi / BigEarthNet | 0.572 | 0.255 | 2.2x |
+| RemoteCLIP / BigEarthNet | 0.878 | 0.399 | 2.2x |
 
-| Method | Prithvi EuroSAT | Prithvi BEN | Delta |
-|--------|----------------|-------------|-------|
-| PQ (4-bit) | 0.961 | 0.925 | -0.036 |
-| TQ MSE (4-bit) | 0.779 | 0.572 | -0.207 |
-| Binary Hash | 0.451 | 0.273 | -0.178 |
+The Beta codebook gives a 2.2x recall improvement on both models.
 
-| Method | RemoteCLIP EuroSAT | RemoteCLIP BEN | Delta |
-|--------|-------------------|----------------|-------|
-| PQ (4-bit) | 0.961 | 0.944 | -0.017 |
-| TQ MSE (4-bit) | 0.911 | 0.878 | -0.033 |
+There's a fun detail here: Uniform SQ doesn't improve with more bits. At d=768, the recall is 0.256, 0.256, and 0.255 at 2, 3, and 4 bits. This happens because rotated unit-norm coordinates live in a tiny range around zero (about +/-0.036 for d=768). A uniform grid on [-1, 1] puts 99%+ of the data into one central bin. More bins just subdivide the empty tails. The Beta codebook avoids this by placing all quantization levels inside the narrow range where data actually exists.
+
+### 4.5 How Well Does It Scale?
+
+Everything degrades with more vectors. More database vectors means more near-neighbors to distinguish. But the degradation rate varies:
+
+| Method | RemoteCLIP EuroSAT (16K) | RemoteCLIP BEN (269K) | Drop |
+|--------|:----:|:----:|:----:|
+| PQ 4-bit | 0.961 | 0.944 | -0.017 |
+| TQ MSE 4-bit | 0.911 | 0.878 | -0.033 |
 | Binary Hash | 0.607 | 0.473 | -0.134 |
 
-TurboQuant on RemoteCLIP degrades gracefully (-0.033), comparable to PQ (-0.017). On Prithvi, the degradation is much steeper (-0.207), again reflecting the harder quantization problem posed by anisotropic embeddings. PQ's subspace-adapted codebooks handle this better because they learn the per-subspace variance structure.
+| Method | Prithvi EuroSAT (16K) | Prithvi BEN (269K) | Drop |
+|--------|:----:|:----:|:----:|
+| PQ 4-bit | 0.961 | 0.925 | -0.036 |
+| TQ MSE 4-bit | 0.779 | 0.572 | -0.207 |
+| Binary Hash | 0.451 | 0.273 | -0.178 |
 
-### 3.6 RaBitQ and the Value of Rotation
+TurboQuant on RemoteCLIP scales almost as well as PQ (3.3% drop vs 1.7%). On Prithvi the drop is steep (20.7%). The isotropy gap widens at scale.
 
-RaBitQ applies a random orthogonal rotation before binarization, then uses Hamming distance — the same pipeline as binary hash but with rotation. Comparing the two isolates the value of rotation at 1 bit per dimension:
+### 4.6 RaBitQ: Does Rotation Alone Help?
 
-| Setting | RaBitQ R@10 | Binary Hash R@10 | Rotation helps? |
-|---------|------------|-----------------|----------------|
-| Prithvi/EuroSAT | 0.502 | 0.451 | Yes (+11%) |
-| Prithvi/BigEarthNet | 0.256 | 0.273 | No (-6%) |
-| RemoteCLIP/EuroSAT | 0.567 | 0.607 | No (-7%) |
-| RemoteCLIP/BigEarthNet | 0.418 | 0.473 | No (-12%) |
+RaBitQ (Gao & Long, 2024) is binary hash plus a random rotation. Same Hamming distance search, but on rotated sign bits instead of raw sign bits. Comparing the two tells us what rotation is worth at 1 bit per dimension:
 
-Rotation helps only on Prithvi/EuroSAT. On RemoteCLIP — where embeddings are already near-isotropic — rotation is unnecessary and the extra computational cost (dense matrix multiply) provides no benefit. On BigEarthNet at larger scale, even for Prithvi, the rotation's information-spreading effect is insufficient to overcome the increased retrieval difficulty.
+| Setting | RaBitQ | Binary Hash | Rotation helps? |
+|---------|:----:|:----:|:-:|
+| Prithvi / EuroSAT | 0.502 | 0.451 | Yes (+11%) |
+| Prithvi / BigEarthNet | 0.256 | 0.273 | No (-6%) |
+| RemoteCLIP / EuroSAT | 0.567 | 0.607 | No (-7%) |
+| RemoteCLIP / BigEarthNet | 0.418 | 0.473 | No (-12%) |
 
-## 4. Discussion
+Rotation helps only on Prithvi/EuroSAT (small dataset, anisotropic embeddings). On RemoteCLIP, embeddings are already well-spread across coordinates, so rotation adds nothing. At BigEarthNet scale, even for Prithvi, rotation doesn't help. At 1 bit, you lose too much information for the rotation to make a difference.
 
-### 4.1 Implementation Lessons
+### 4.7 The Gap Closed
 
-**Re-normalization after decoding is critical.** Quantized-then-decoded vectors have norms below 1 due to quantization shrinkage. At 2-bit, norms average ~0.94; at 4-bit, ~0.998. Without re-normalization, the tiny per-vector norm variation at higher bit-widths becomes the dominant signal in inner product ranking, producing an inverted recall-vs-bits relationship where more bits give worse recall. This bug affected our initial implementation and would affect any reproduction — we recommend always normalizing decoded vectors before cosine similarity search.
+How much of the distance between "free and bad" (binary hash) and "trained and good" (PQ) does TurboQuant close?
 
-**QJL residual correction is counterproductive for retrieval.** TurboQuant's "Prod" variant adds a Quantized Johnson-Lindenstrauss (QJL) correction term to the inner product estimate. We implemented this and found it catastrophically degrades recall (e.g., R@10 drops from 0.636 to 0.423 on Prithvi/EuroSAT at 2-bit). The sign sketch variance overwhelms the correction signal for cosine similarity retrieval, consistent with findings from multiple independent implementations. The QJL estimator is designed for raw inner product estimation with theoretical unbiasedness guarantees, not for ranking quality in retrieval.
+| Setting | Binary Hash | TQ MSE 4-bit | PQ 4-bit | Gap Closed |
+|---------|:----:|:----:|:----:|:----:|
+| RemoteCLIP / EuroSAT | 0.607 | 0.911 | 0.961 | **86%** |
+| RemoteCLIP / BigEarthNet | 0.473 | 0.878 | 0.944 | **86%** |
+| Prithvi / EuroSAT | 0.451 | 0.779 | 0.961 | **64%** |
+| Prithvi / BigEarthNet | 0.273 | 0.572 | 0.925 | **46%** |
 
-**Uniform quantization is useless at high dimension.** At d=768, rotated unit-norm coordinates concentrate within +/-0.036. A uniform grid on [-1, 1] wastes all but one bin on empty space, making the quantizer insensitive to bit-width. Any rotation-based scalar quantizer for high-dimensional unit-norm vectors must adapt its grid to the data-occupied range.
+On RemoteCLIP, TurboQuant closes 86% of the gap. On Prithvi, 46-64%. The difference is isotropy.
 
-### 4.2 Practical Recommendations
+## 5. Things We Learned the Hard Way
 
-**For contrastive RS models (RemoteCLIP and similar):** TurboQuant MSE at 4 bits is an excellent choice, achieving R@10 > 0.87 on BigEarthNet with zero training. The 7% gap to PQ (0.944) may be acceptable given the simplicity and generality of the approach.
+### You must re-normalize after decoding.
 
-**For reconstruction-based RS models (Prithvi and similar):** TurboQuant MSE at 4 bits provides moderate quality (R@10 = 0.572 on BigEarthNet). If higher recall is needed, PQ (0.925) is recommended despite the training requirement. Alternatively, applying a whitening step or fine-tuning the model with a contrastive objective could improve isotropy and thus quantization quality.
+Decoded vectors have norms less than 1. Quantization always shrinks things slightly. At 2-bit, average norm is ~0.94. At 4-bit, ~0.998.
 
-**For maximum compression:** Binary hashing at 1 bit per dimension provides a 32x compression ratio with R@10 of 0.27-0.47 depending on the model. RaBitQ's rotation provides inconsistent benefits at this budget.
+If you skip re-normalization and compute inner products on unnormalized decoded vectors, something weird happens: more bits gives worse recall. We saw this in our initial implementation. R@10 went 0.456 (2-bit) -> 0.314 (3-bit) -> 0.248 (4-bit) on Prithvi. Completely inverted.
 
-### 4.3 Limitations
+Why? At 2-bit, all vectors shrink a lot and roughly equally, so rankings are preserved. At 4-bit, vectors shrink very little but the tiny per-vector shrinkage variation becomes the dominant signal in inner product scores, overpowering the actual directional similarity.
 
-1. We evaluate only brute-force search. In practice, quantization is combined with indexing structures (IVF, HNSW) that may interact differently with different quantizers.
+The fix is one line: normalize decoded vectors before computing cosine similarity.
 
-2. Our evaluation uses cosine similarity on L2-normalized embeddings. Inner product search on unnormalized embeddings would produce different relative rankings.
+### The QJL correction makes things worse.
 
-3. BigEarthNet extraction used only the train split (269K of 590K patches) due to partial extraction. Results on the full dataset may differ slightly.
+TurboQuant's paper describes a "Prod" variant that adds a Quantized Johnson-Lindenstrauss correction term to improve inner product estimation. We implemented it. It was catastrophic. R@10 dropped from 0.636 to 0.423 on Prithvi at 2-bit.
 
-4. We evaluate only two RS foundation models. The isotropy hypothesis should be validated on additional models (e.g., SatMAE, Scale-MAE, GFM).
+The sign sketch variance overwhelms the correction signal for cosine similarity retrieval. Multiple independent implementations of TurboQuant reached the same conclusion. The QJL correction is designed for theoretical unbiasedness guarantees on raw inner products, not for retrieval ranking quality.
 
-## 5. Conclusion
+### Uniform quantization is useless at high dimension.
 
-TurboQuant provides a practical, training-free baseline for compressing remote sensing foundation model embeddings. Its effectiveness depends on the isotropy of the embedding space: contrastive models like RemoteCLIP produce near-isotropic embeddings where TurboQuant closes 86% of the gap to trained Product Quantization, while reconstruction-based models like Prithvi produce anisotropic embeddings where only 46% of the gap is closed.
+A uniform grid on [-1, 1] wastes almost every bin. At d=768, rotated coordinates live within +/-0.036. That's 3.6% of the [-1, 1] range. The other 96.4% is empty bins. Adding more bits just subdivides empty space. Recall doesn't change at all between 2 and 4 bits.
 
-The key insight is that **the training objective of the foundation model determines quantization quality as much as the quantizer design itself.** Contrastive learning produces representations that are naturally suited to rotation-based scalar quantization; MAE-based reconstruction does not. This suggests that RS practitioners choosing between foundation models for retrieval workloads should consider not only task accuracy but also embedding geometry and its downstream implications for storage efficiency.
+## 6. What This Means in Practice
 
-All code, results, and paper assets are available at: https://github.com/sumit-ai-ml/turboquant-rs
+**If you use a contrastive RS model (RemoteCLIP or similar):** TurboQuant at 4 bits is a strong default. R@10 > 0.87 on 269K vectors with zero training. The 7% gap to PQ might not be worth the training complexity.
+
+**If you use an MAE-based RS model (Prithvi or similar):** TurboQuant at 4 bits gives moderate quality (R@10 = 0.57). For better recall, either use PQ (0.92, requires training) or consider whether your retrieval workload would be better served by a contrastive model in the first place.
+
+**If you want maximum compression:** Binary hashing at 1 bit gives 32x compression with R@10 of 0.27-0.47 depending on the model. It's crude but it's fast and it's free.
+
+**The real takeaway:** If you're building a retrieval system over RS embeddings, the choice of foundation model affects your storage costs as much as the choice of compression algorithm. Contrastive models (CLIP-based) are not just better for retrieval accuracy. They also produce embeddings that compress better with cheap, training-free methods. That's a compounding advantage.
+
+## 7. Limitations
+
+1. We only tested brute-force search. In practice, you'd combine quantization with an index (IVF, HNSW). The quantizer-index interaction may differ across methods.
+
+2. We only tested cosine similarity on unit-norm vectors. Inner product search on raw vectors would change the rankings.
+
+3. BigEarthNet used only the train split (269K of 590K patches). Full dataset results may differ slightly.
+
+4. We tested two RS foundation models. The isotropy hypothesis needs validation on others (SatMAE, Scale-MAE, GFM, etc.).
+
+5. We did not evaluate downstream task accuracy (classification, change detection). Recall@k measures retrieval quality, not task performance.
+
+## 8. Conclusion
+
+TurboQuant is a good training-free compressor for remote sensing embeddings. How good depends on whether your embeddings are isotropic.
+
+Contrastive models like RemoteCLIP produce isotropic embeddings where TurboQuant closes 86% of the gap to trained PQ. Reconstruction models like Prithvi produce anisotropic embeddings where only 46% is closed.
+
+The training objective of the embedding model shapes the geometry of the embedding space. That geometry determines how well cheap compression works. If you want embeddings that are both good for retrieval and cheap to store, contrastive learning gives you both.
+
+Code, data, and all results: https://github.com/sumit-ai-ml/turboquant-rs
 
 ## References
 
@@ -205,42 +269,42 @@ All code, results, and paper assets are available at: https://github.com/sumit-a
 
 - Guo, R., Sim, K.C., and Holtmann-Rice, D. "TurboQuant: Online Vector Quantization with Near-Optimal Distortion." arXiv:2501.06036, 2024.
 
-- Gao, J. and Long, C. "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search." In *Proceedings of the ACM SIGMOD International Conference on Management of Data*, 2024.
+- Gao, J. and Long, C. "RaBitQ: Quantizing High-Dimensional Vectors with a Theoretical Error Bound for Approximate Nearest Neighbor Search." *Proceedings of ACM SIGMOD*, 2024.
 
-- Jegou, H., Douze, M., and Schmid, C. "Product Quantization for Nearest Neighbor Search." *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 33(1):117-128, 2011.
+- Jegou, H., Douze, M., and Schmid, C. "Product Quantization for Nearest Neighbor Search." *IEEE TPAMI*, 33(1):117-128, 2011.
 
-- Charikar, M. "Similarity Estimation Techniques from Rounding Algorithms." In *Proceedings of the 34th Annual ACM Symposium on Theory of Computing (STOC)*, pp. 380-388, 2002. *(SimHash)*
+- Charikar, M. "Similarity Estimation Techniques from Rounding Algorithms." *Proceedings of ACM STOC*, pp. 380-388, 2002.
 
-- Dasgupta, S., Stevens, C.F., and Bhatt, S. "A Neural Algorithm for a Fundamental Computing Problem." *Science*, 358(6364):793-796, 2017. *(FlyHash)*
+- Dasgupta, S., Stevens, C.F., and Bhatt, S. "A Neural Algorithm for a Fundamental Computing Problem." *Science*, 358(6364):793-796, 2017.
 
-- Johnson, W.B. and Lindenstrauss, J. "Extensions of Lipschitz Mappings into a Hilbert Space." *Contemporary Mathematics*, 26:189-206, 1984. *(Random Projection, Johnson-Lindenstrauss Lemma)*
+- Johnson, W.B. and Lindenstrauss, J. "Extensions of Lipschitz Mappings into a Hilbert Space." *Contemporary Mathematics*, 26:189-206, 1984.
 
-- Lloyd, S.P. "Least Squares Quantization in PCM." *IEEE Transactions on Information Theory*, 28(2):129-137, 1982. *(Lloyd-Max optimal quantization)*
+- Lloyd, S.P. "Least Squares Quantization in PCM." *IEEE Trans. Information Theory*, 28(2):129-137, 1982.
 
 ### Foundation Models
 
-- Jakubik, J., Roy, S., Phillips, C.E., Fraccaro, P., Godwin, D., Zadrozny, B., Szwarcman, D., Gomes, C., Nyirjesy, G., Edwards, B., Kimura, D., Simumba, N., Chu, L., Mukkavilli, S.K., Poutiainen, R., Zhu, X.X., Schmitt, M., Lam, H., Hain, M., and Alemohammad, H. "Foundation Models for Generalist Geospatial Artificial Intelligence." arXiv:2310.18660, 2023. *(Prithvi-EO)*
+- Jakubik, J. et al. "Foundation Models for Generalist Geospatial Artificial Intelligence." arXiv:2310.18660, 2023.
 
-- Liu, F., Chen, D., Guan, Z., Zhou, X., Zhu, J., Ye, Q., Fu, L., and Zhou, J. "RemoteCLIP: A Vision Language Foundation Model for Remote Sensing." *IEEE Transactions on Geoscience and Remote Sensing*, 62:1-16, 2024.
+- Liu, F. et al. "RemoteCLIP: A Vision Language Foundation Model for Remote Sensing." *IEEE TGRS*, 62:1-16, 2024.
 
-- He, K., Chen, X., Xie, S., Li, Y., Dollar, P., and Girshick, R. "Masked Autoencoders Are Scalable Vision Learners." In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 16000-16009, 2022. *(MAE architecture used by Prithvi)*
+- He, K. et al. "Masked Autoencoders Are Scalable Vision Learners." *Proceedings of IEEE/CVF CVPR*, pp. 16000-16009, 2022.
 
-- Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., and Sutskever, I. "Learning Transferable Visual Models From Natural Language Supervision." In *Proceedings of the 38th International Conference on Machine Learning (ICML)*, pp. 8748-8763, 2021. *(CLIP architecture used by RemoteCLIP)*
+- Radford, A. et al. "Learning Transferable Visual Models From Natural Language Supervision." *Proceedings of ICML*, pp. 8748-8763, 2021.
 
 ### Datasets
 
-- Helber, P., Bischke, B., Dengel, A., and Borth, D. "EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification." *IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing*, 12(7):2217-2226, 2019.
+- Helber, P. et al. "EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification." *IEEE JSTARS*, 12(7):2217-2226, 2019.
 
-- Sumbul, G., Charfuelan, M., Demir, B., and Markl, V. "BigEarthNet: A Large-Scale Benchmark Archive for Remote Sensing Image Understanding." In *Proceedings of the IEEE International Geoscience and Remote Sensing Symposium (IGARSS)*, pp. 5901-5904, 2019.
+- Sumbul, G. et al. "BigEarthNet: A Large-Scale Benchmark Archive for Remote Sensing Image Understanding." *Proceedings of IEEE IGARSS*, pp. 5901-5904, 2019.
 
 ### Embedding Geometry
 
-- Wang, T. and Isola, P. "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere." In *Proceedings of the 37th International Conference on Machine Learning (ICML)*, pp. 9929-9939, 2020. *(Uniformity property of contrastive embeddings)*
+- Wang, T. and Isola, P. "Understanding Contrastive Representation Learning through Alignment and Uniformity on the Hypersphere." *Proceedings of ICML*, pp. 9929-9939, 2020.
 
 ### Libraries
 
-- Johnson, J., Douze, M., and Jegou, H. "Billion-Scale Similarity Search with GPUs." *IEEE Transactions on Big Data*, 7(3):535-547, 2021. *(FAISS)*
+- Johnson, J., Douze, M., and Jegou, H. "Billion-Scale Similarity Search with GPUs." *IEEE Trans. Big Data*, 7(3):535-547, 2021.
 
-- Cherti, M., Beaumont, R., Wightman, R., Wortsman, M., Ilharco, G., Gordon, C., Schuhmann, C., Schmidt, L., and Jitsev, J. "Reproducible Scaling Laws for Contrastive Language-Image Learning." In *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)*, pp. 2818-2829, 2023. *(OpenCLIP)*
+- Cherti, M. et al. "Reproducible Scaling Laws for Contrastive Language-Image Learning." *Proceedings of IEEE/CVF CVPR*, pp. 2818-2829, 2023.
 
-- Stewart, A.J., Lehmann, N., Corley, I.A., Wang, Y., Chang, Y., Ber, N.A., Sherber, R., Breen, C., Clifton, J., Kerner, H., and Banerjee, A. "TorchGeo: Deep Learning with Geospatial Data." In *Proceedings of the 30th International Conference on Advances in Geographic Information Systems (SIGSPATIAL)*, pp. 1-12, 2022. *(TorchGeo dataset loading)*
+- Stewart, A.J. et al. "TorchGeo: Deep Learning with Geospatial Data." *Proceedings of ACM SIGSPATIAL*, pp. 1-12, 2022.
