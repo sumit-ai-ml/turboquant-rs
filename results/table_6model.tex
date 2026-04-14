@@ -1,0 +1,46 @@
+% EuroSAT (16K vectors), 4-bit R@10
+\begin{tabular}{llccccc}
+\toprule
+Model & Training & Coord Corr & TQ MSE & PQ & BinHash & Gap \\
+\midrule
+dinov2 & self-distillation & 0.132 & 0.943 & 0.960 & 0.654 & 95\% \\
+remoteclip & contrastive (CLIP) & 0.205 & 0.911 & 0.961 & 0.607 & 86\% \\
+georsclip & contrastive (CLIP) & 0.190 & 0.882 & 0.965 & 0.576 & 79\% \\
+mae\_base & MAE (ImageNet) & 0.510 & 0.859 & 0.953 & 0.179 & 88\% \\
+ssl4eo & MAE (RS) & 0.293 & 0.834 & 0.968 & 0.609 & 62\% \\
+prithvi & MAE (RS) & 0.629 & 0.779 & 0.961 & 0.451 & 64\% \\
+\bottomrule
+\multicolumn{7}{l}{Pearson $r$ = -0.851} \\
+\end{tabular}
+
+% BigEarthNet (269K vectors), 4-bit R@10
+\begin{tabular}{llccccc}
+\toprule
+Model & Training & Coord Corr & TQ MSE & PQ & BinHash & Gap \\
+\midrule
+dinov2 & self-distillation & 0.253 & 0.900 & 0.947 & 0.483 & 90\% \\
+remoteclip & contrastive (CLIP) & 0.215 & 0.878 & 0.944 & 0.473 & 86\% \\
+georsclip & contrastive (CLIP) & 0.247 & 0.830 & 0.950 & 0.447 & 76\% \\
+ssl4eo & MAE (RS) & 0.345 & 0.770 & 0.955 & 0.468 & 62\% \\
+mae\_base & MAE (ImageNet) & 0.521 & 0.737 & 0.935 & 0.128 & 76\% \\
+prithvi & MAE (RS) & 0.663 & 0.572 & 0.925 & 0.273 & 46\% \\
+\bottomrule
+\multicolumn{7}{l}{Pearson $r$ = -0.951} \\
+\end{tabular}
+
+% All methods, BigEarthNet, 4-bit R@10
+\begin{tabular}{llcccc}
+\toprule
+Method & Bits & Prithvi R@10 & RemoteCLIP R@10 & B/vec & Training \\
+\midrule
+fp32\_exact & - & 1.000 & 1.000 & 3072/2048 & No \\
+Product Quant & 4 & 0.925 & 0.944 & 384/256 & Yes \\
+\textbf{TQ MSE} & 4 & 0.572 & 0.878 & 388/260 & \textbf{No} \\
+TQ Adaptive & 4 & 0.584 & 0.887 & 388/260 & Yes \\
+SimHash Multi & 4 & 0.481 & 0.648 & 384/256 & No \\
+Uniform SQ & 4 & 0.255 & 0.399 & 388/260 & No \\
+FlyHash & 4 & 0.207 & 0.409 & 384/256 & No \\
+RaBitQ & 1 & 0.256 & 0.418 & 96/64 & No \\
+Binary Hash & - & 0.273 & 0.473 & 96/64 & No \\
+\bottomrule
+\end{tabular}
