@@ -1,0 +1,74 @@
+[
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "training": "MAE (RS)",
+    "d": 768,
+    "ks_d": 0.729610295364598,
+    "coord_corr": 0.6627810995602958,
+    "tq_r10": 0.5721,
+    "pq_r10": 0.9245400000000001,
+    "bh_r10": 0.27276,
+    "gap_closed": 45.92653962993648
+  },
+  {
+    "model": "mae_base",
+    "dataset": "bigearthnet",
+    "training": "MAE (ImageNet)",
+    "d": 768,
+    "ks_d": 0.3601132940313503,
+    "coord_corr": 0.521090997029898,
+    "tq_r10": 0.7372400000000001,
+    "pq_r10": 0.9346400000000001,
+    "bh_r10": 0.12838000000000002,
+    "gap_closed": 75.51658274005904
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "bigearthnet",
+    "training": "MAE (RS)",
+    "d": 768,
+    "ks_d": 0.8464003043528745,
+    "coord_corr": 0.34487084043783817,
+    "tq_r10": 0.77022,
+    "pq_r10": 0.9547800000000001,
+    "bh_r10": 0.46778000000000003,
+    "gap_closed": 62.10266940451744
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "training": "contrastive (CLIP)",
+    "d": 512,
+    "ks_d": 0.5510644744490654,
+    "coord_corr": 0.21471670373085094,
+    "tq_r10": 0.8780800000000001,
+    "pq_r10": 0.9444200000000003,
+    "bh_r10": 0.47261999999999993,
+    "gap_closed": 85.93895718524796
+  },
+  {
+    "model": "georsclip",
+    "dataset": "bigearthnet",
+    "training": "contrastive (CLIP)",
+    "d": 768,
+    "ks_d": 0.8492889177205721,
+    "coord_corr": 0.24737339316181242,
+    "tq_r10": 0.8297200000000002,
+    "pq_r10": 0.9501200000000001,
+    "bh_r10": 0.44722,
+    "gap_closed": 76.058858620004
+  },
+  {
+    "model": "dinov2",
+    "dataset": "bigearthnet",
+    "training": "self-distillation",
+    "d": 768,
+    "ks_d": 0.44990943287397545,
+    "coord_corr": 0.25286992431376776,
+    "tq_r10": 0.9002800000000002,
+    "pq_r10": 0.94732,
+    "bh_r10": 0.48278,
+    "gap_closed": 89.8738537047402
+  }
+]
