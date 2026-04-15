@@ -113,23 +113,21 @@ for i, r in enumerate(models_sorted):
     ax.text(x[i] - w, tq[i] + 0.01, f'{r["gap_closed"]:.0f}%',
             ha='center', fontsize=7, fontweight='bold', color=colors[i])
 
-# Training type below bars
-for i, n in enumerate(names):
-    training = {'dinov2': 'self-distill.', 'remoteclip': 'contrastive',
-                'georsclip': 'contrastive', 'ssl4eo': 'MAE (RS)',
-                'mae_base': 'MAE', 'prithvi': 'MAE (RS)'}[n]
-    ax.text(x[i], -0.07, training, ha='center', fontsize=6.5, color='#777777', style='italic')
+TRAINING_SHORT = {'dinov2': 'self-distill.', 'remoteclip': 'contrastive',
+                   'georsclip': 'contrastive', 'ssl4eo': 'MAE (RS)',
+                   'mae_base': 'MAE', 'prithvi': 'MAE (RS)'}
 
 ax.set_ylabel('Recall@10')
 ax.set_title('BigEarthNet (269K vectors)', fontweight='bold')
 ax.set_xticks(x)
-ax.set_xticklabels([LABELS[n] for n in names], fontsize=8)
+tick_labels = [f'{LABELS[n]}\n({TRAINING_SHORT[n]})' for n in names]
+ax.set_xticklabels(tick_labels, fontsize=7, rotation=30, ha='right')
 ax.set_ylim(0, 1.08)
 ax.legend(loc='upper right', framealpha=0.95, edgecolor='#CCCCCC')
 ax.tick_params(direction='in')
 ax.grid(True, alpha=0.08, axis='y')
 
-plt.tight_layout(rect=[0, 0.04, 1, 1])
+plt.tight_layout()
 fig.savefig(FIGURES_DIR / 'results_6model_bars.png', dpi=300)
 fig.savefig(FIGURES_DIR / 'results_6model_bars.pdf')
 plt.close(fig)
