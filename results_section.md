@@ -12,26 +12,26 @@ All methods use 4 bits per dimension except Binary Hash (1 bit). Kendall's $\tau
 
 | Model | Method | R@1 | R@10 | R@100 | $\tau$ | Pearson | B/vec |
 |-------|--------|:----:|:----:|:----:|:----:|:----:|:----:|
-| DINOv2 | TQ MSE (4-bit) | --- | 0.943 | --- | 0.959 | 0.998 | 388 |
-| DINOv2 | PQ (4-bit) | --- | 0.960 | --- | 0.975 | 0.999 | 384 |
-| DINOv2 | Binary Hash | --- | 0.654 | --- | 0.705 | 0.907 | 96 |
-| RemoteCLIP | TQ MSE (4-bit) | 0.544 | 0.715 | 0.842 | 0.938 | 0.996 | 260 |
+| DINOv2 | TQ MSE (4-bit) | 0.910 | 0.943 | 0.971 | 0.959 | 0.998 | 388 |
+| DINOv2 | PQ (4-bit) | 0.940 | 0.960 | 0.980 | 0.975 | 0.999 | 384 |
+| DINOv2 | Binary Hash | 0.468 | 0.654 | 0.785 | 0.705 | 0.907 | 96 |
+| RemoteCLIP | TQ MSE (4-bit) | 0.838 | 0.911 | 0.958 | 0.938 | 0.996 | 260 |
 | RemoteCLIP | PQ (4-bit) | 0.940 | 0.961 | 0.980 | 0.970 | 0.999 | 256 |
 | RemoteCLIP | Binary Hash | 0.440 | 0.607 | 0.749 | 0.661 | 0.871 | 64 |
-| GeoRSCLIP | TQ MSE (4-bit) | --- | 0.882 | --- | 0.910 | 0.992 | 388 |
-| GeoRSCLIP | PQ (4-bit) | --- | 0.965 | --- | 0.970 | 0.999 | 384 |
-| GeoRSCLIP | Binary Hash | --- | 0.576 | --- | 0.626 | 0.843 | 96 |
-| SSL4EO | TQ MSE (4-bit) | --- | 0.834 | --- | 0.906 | 0.989 | 388 |
-| SSL4EO | PQ (4-bit) | --- | 0.968 | --- | 0.983 | 1.000 | 384 |
-| SSL4EO | Binary Hash | --- | 0.609 | --- | 0.704 | 0.895 | 96 |
-| MAE-base | TQ MSE (4-bit) | --- | 0.859 | --- | 0.966 | 0.998 | 388 |
-| MAE-base | PQ (4-bit) | --- | 0.953 | --- | 0.979 | 0.999 | 384 |
-| MAE-base | Binary Hash | --- | 0.179 | --- | 0.227 | 0.315 | 96 |
-| Prithvi | TQ MSE (4-bit) | 0.396 | 0.636 | 0.831 | 0.923 | 0.989 | 196 |
+| GeoRSCLIP | TQ MSE (4-bit) | 0.796 | 0.882 | 0.938 | 0.910 | 0.992 | 388 |
+| GeoRSCLIP | PQ (4-bit) | 0.944 | 0.965 | 0.980 | 0.970 | 0.999 | 384 |
+| GeoRSCLIP | Binary Hash | 0.408 | 0.576 | 0.720 | 0.626 | 0.843 | 96 |
+| SSL4EO | TQ MSE (4-bit) | 0.706 | 0.834 | 0.922 | 0.906 | 0.989 | 388 |
+| SSL4EO | PQ (4-bit) | 0.954 | 0.968 | 0.988 | 0.983 | 1.000 | 384 |
+| SSL4EO | Binary Hash | 0.398 | 0.609 | 0.773 | 0.704 | 0.895 | 96 |
+| MAE-base | TQ MSE (4-bit) | 0.756 | 0.859 | 0.946 | 0.966 | 0.998 | 388 |
+| MAE-base | PQ (4-bit) | 0.917 | 0.953 | 0.977 | 0.979 | 0.999 | 384 |
+| MAE-base | Binary Hash | 0.102 | 0.179 | 0.279 | 0.227 | 0.315 | 96 |
+| Prithvi | TQ MSE (4-bit) | 0.589 | 0.779 | 0.908 | 0.923 | 0.989 | 388 |
 | Prithvi | PQ (4-bit) | 0.919 | 0.961 | 0.986 | 0.987 | 1.000 | 384 |
 | Prithvi | Binary Hash | 0.253 | 0.451 | 0.634 | 0.601 | 0.762 | 96 |
 
-Cells marked --- indicate R@1 and R@100 were not measured for the 4 additional models (DINOv2, GeoRSCLIP, SSL4EO, MAE-base); only R@10 was recorded. R@1 and R@100 are available for Prithvi and RemoteCLIP rows. Values for the TQ MSE rows on Prithvi and RemoteCLIP are from the 2-bit budget in the benchmark sweep (not 4-bit); see Table 3 for the full bit-width sweep.
+All cells are populated with the correct 4-bit R@k values (R@1, R@10, R@100) for TQ MSE and PQ. Binary Hash operates at 1 bit by construction. Values for the 4 additional models (DINOv2, GeoRSCLIP, SSL4EO, MAE-base) come from a dedicated run (`results/additional_rk_eurosat.json`); values for Prithvi and RemoteCLIP come from the full benchmark sweep.
 
 ### Table 2: Core results, 6 models, BigEarthNet (269K vectors), 4-bit
 
@@ -148,14 +148,14 @@ The subspace gain scales with anisotropy. For DINOv2 (isotropic), PQ is only 5 p
 
 ### Ranking of design contributions
 
-Combining the four contrasts on BigEarthNet:
+Combining the four contrasts on BigEarthNet, ordered by mean gain across tested models:
 
-| Design choice | Contribution to R@10 | Magnitude |
-|---------------|:----:|:----:|
-| Subspace structure (PQ over TQ MSE) | +0.05 to +0.35 | Large, grows with anisotropy |
-| Beta codebook (TQ MSE over Uniform SQ) | +0.32 to +0.48 | Large, consistent |
-| Empirical codebook (TQ Adaptive over TQ MSE) | +0.01 | Small |
-| Rotation alone at 1 bit (RaBitQ over Binary Hash) | -0.06 to -0.02 | Negative on BigEarthNet |
+| Design choice | Mean gain | Range | Models tested |
+|---------------|:----:|:----:|:----:|
+| Beta codebook (TQ MSE over Uniform SQ) | +0.398 | +0.32 to +0.48 | Prithvi, RemoteCLIP |
+| Subspace structure (PQ over TQ MSE) | +0.162 | +0.05 to +0.35 | All 6 |
+| Empirical codebook (TQ Adaptive over TQ MSE) | +0.011 | +0.01 to +0.01 | Prithvi, RemoteCLIP |
+| Rotation alone at 1 bit (RaBitQ over Binary Hash) | -0.036 | -0.06 to -0.02 | Prithvi, RemoteCLIP |
 
 ![Figure 6: All 9 methods on Prithvi and RemoteCLIP](figures/fig6_all_methods.png)
 *Figure 6: All 9 methods on BigEarthNet for Prithvi and RemoteCLIP. TQ MSE (blue) is the best training-free method on both models.*
@@ -163,7 +163,9 @@ Combining the four contrasts on BigEarthNet:
 ![Figure 7: Codebook ablation](figures/fig7_codebook_ablation.png)
 *Figure 7: Codebook ablation across bit-widths. Beta (blue) gives 2.2x over Uniform (gray). Adaptive (purple) adds only +1% over Beta.*
 
-The mechanistic picture: the largest gain comes from learning joint structure across correlated coordinates (what PQ does). The next largest gain comes from using a codebook matched to the data range (what the Beta codebook does). Training the codebook on real data adds little. Rotation alone at 1 bit is inconsistent.
+The mechanistic picture: the largest gain comes from using a codebook matched to the narrow data range that rotated coordinates occupy (the Beta codebook vs uniform grid contrast). The next largest gain comes from learning joint structure across correlated coordinates within subspaces (what PQ does on top of TQ). Training the codebook on real data adds little. Rotation alone at 1 bit is inconsistent.
+
+A caveat on this ranking. The Beta codebook gain is measured against Uniform SQ, which is a weak baseline because a uniform grid on [-1, 1] wastes most bins on empty space. The subspace structure gain is measured against TQ MSE, which already has the Beta codebook advantage. So the Beta codebook number reflects what happens when you go from no useful codebook to a data-matched codebook, while the subspace structure number reflects what happens when you go from a good scalar quantizer to a trained vector quantizer. They are not directly comparable design decisions but they quantify what each mechanism is worth relative to its natural alternative.
 
 ## 4.3 Dataset Comparison
 
@@ -220,7 +222,7 @@ Mean absolute pairwise correlation between rotated coordinates ($\rho$), average
 | MAE-base | MAE (ImageNet) | 768 | 0.524 $\pm$ 0.005 | 0.0020 | 0.360 |
 | Prithvi | MAE (RS) | 768 | 0.673 $\pm$ 0.057 | 0.0016 | 0.730 |
 
-[^fn1]: Mean absolute pairwise correlation is not a rotation invariant, so we report it over multiple random rotation seeds. Strictly, we measure the correlation structure that TurboQuant's own random rotation exposes. The rotation-invariant participation ratio PR gives the same model ordering: lower $\rho$ corresponds to higher PR (more uniform eigenvalues). We use $\rho$ because it directly measures the quantity that governs quantization error accumulation, but a practitioner could equivalently use PR.
+[^fn1]: Mean absolute pairwise correlation is not a rotation invariant, so we report it over multiple random rotation seeds. Strictly, we measure the correlation structure that TurboQuant's own random rotation exposes. The rotation-invariant participation ratio PR gives the same model ordering (lower $\rho$ corresponds to higher PR), but a weaker predictive relationship: Pearson $r$(PR, TQ R@10) $= 0.703$ on BigEarthNet, versus $r(\rho$, TQ R@10$) = -0.951$. We use $\rho$ because it directly measures the quantity that governs quantization error accumulation: the correlation between coordinates after the specific rotation the quantizer applies. PR measures the eigenvalue spread of the covariance, which is a weaker proxy for what TurboQuant actually sees.
 
 KS D does not cleanly separate models. MAE-base has the lowest KS D (0.360) despite being an MAE model. Coordinate correlation and PR both give the same ordering: contrastive and self-distillation models at the low-$\rho$/high-PR end, MAE models at the high-$\rho$/low-PR end.
 
