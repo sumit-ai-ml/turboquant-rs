@@ -138,8 +138,8 @@ for ax, (model_name, title, color, corr, r10) in zip(axes, panels):
     ax.tick_params(direction='in', which='both')
 
     # Labels
-    ax.set_xlabel('Rotated coordinate $i$')
-    ax.set_ylabel('Rotated coordinate $j$')
+    ax.set_xlabel('rotated coordinate 0')
+    ax.set_ylabel('rotated coordinate 1')
 
     # Title
     ax.set_title(title, fontsize=10, pad=6)
@@ -223,11 +223,11 @@ for ax, (model_name, label, color, corr, r10) in zip(axes.flat, all_models):
 
     # Minimal axis labels (only on edges)
     if ax in axes[-1, :]:
-        ax.set_xlabel('Coord. $i$', fontsize=7)
+        ax.set_xlabel('rotated coord. 0', fontsize=7)
     else:
         ax.set_xticklabels([])
     if ax in axes[:, 0]:
-        ax.set_ylabel('Coord. $j$', fontsize=7)
+        ax.set_ylabel('rotated coord. 1', fontsize=7)
     else:
         ax.set_yticklabels([])
 
