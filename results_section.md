@@ -13,7 +13,7 @@ The FP32 Exact row is 1.000 by definition and not shown. B/vec is the storage co
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
 | PQ | 0.960 | 0.961 | 0.965 | 0.968 | 0.953 | 0.961 | yes | 384 |
-| TQ Adaptive | --- | 0.912 | --- | --- | --- | 0.782 | yes | 388 |
+| TQ Adaptive | 0.942 | 0.912 | 0.880 | 0.842 | 0.863 | 0.782 | yes | 388 |
 | **TQ MSE** | **0.943** | **0.911** | **0.882** | **0.834** | **0.859** | **0.779** | **no** | **388** |
 | SimHash Multi | 0.792 | 0.751 | 0.708 | 0.743 | 0.744 | 0.702 | no | 384 |
 | Uniform SQ | 0.660 | 0.549 | 0.499 | 0.544 | 0.558 | 0.502 | no | 388 |
@@ -27,7 +27,7 @@ The FP32 Exact row is 1.000 by definition and not shown. B/vec is the storage co
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
 | PQ | 0.947 | 0.944 | 0.950 | 0.955 | 0.935 | 0.925 | yes | 384 |
-| TQ Adaptive | --- | 0.887 | --- | --- | --- | 0.584 | yes | 388 |
+| TQ Adaptive | 0.898 | 0.887 | 0.834 | 0.777 | 0.744 | 0.584 | yes | 388 |
 | **TQ MSE** | **0.900** | **0.878** | **0.830** | **0.770** | **0.737** | **0.572** | **no** | **388** |
 | SimHash Multi | 0.688 | 0.648 | 0.601 | 0.651 | 0.573 | 0.481 | no | 384 |
 | Uniform SQ | 0.479 | 0.399 | 0.349 | 0.422 | 0.338 | 0.255 | no | 388 |
@@ -38,7 +38,7 @@ The FP32 Exact row is 1.000 by definition and not shown. B/vec is the storage co
 
 The headline BigEarthNet result: DINOv2 with TQ MSE achieves R@10 = 0.900, Kendall's $\tau$ = 0.884, and Pearson $r$ = 0.989, with no training data (Table 10 below).
 
-The cells marked `---` for TQ Adaptive on DINOv2, GeoRSCLIP, SSL4EO, and MAE-base indicate the empirical Lloyd-Max codebook was not run on those models. TQ Adaptive tracks TQ MSE within 1-2 points on Prithvi and RemoteCLIP (where both were measured), and we expect similar behavior on the other four models.
+TQ Adaptive (empirical Lloyd-Max codebook) was run on all 6 models with 3 seeds and a 30K subsample of training data for codebook fitting. It tracks TQ MSE within 1 point on most models, with the largest gain on MAE-base (+0.7 points on EuroSAT, +0.7 on BigEarthNet) and SSL4EO (+0.8 / +0.7), and essentially zero gain on DINOv2 and Prithvi. The empirical codebook helps slightly more on the moderate-anisotropy models than on the extremes.
 
 ### Observations from the comprehensive matrix
 
@@ -98,10 +98,15 @@ Both use the same rotation. Both use a Lloyd-Max codebook. The difference: TQ MS
 
 | Model | TQ MSE R@10 | TQ Adaptive R@10 | Training gain |
 |-------|:----:|:----:|:----:|
-| Prithvi | 0.572 | 0.584 | +0.012 |
+| DINOv2 | 0.900 | 0.898 | -0.002 |
 | RemoteCLIP | 0.878 | 0.887 | +0.009 |
+| GeoRSCLIP | 0.830 | 0.834 | +0.004 |
+| SSL4EO | 0.770 | 0.777 | +0.007 |
+| MAE-base | 0.737 | 0.744 | +0.007 |
+| Prithvi | 0.572 | 0.584 | +0.012 |
+| Mean | --- | --- | +0.006 |
 
-Training the codebook adds 1 to 2 percentage points. The theoretical Beta codebook already captures most of what an empirical codebook would. The codebook assumption is not the bottleneck.
+Training the codebook adds at most 1 percentage point. The theoretical Beta codebook already captures most of what an empirical codebook would. The codebook assumption is not the bottleneck for any model. The effect is slightly larger on more anisotropic models (Prithvi: +0.012) and essentially zero on the most isotropic model (DINOv2: -0.002), but the magnitude is too small to be practically meaningful.
 
 ### Subspace structure effect (TQ MSE vs PQ)
 
@@ -128,7 +133,7 @@ Combining the four contrasts on BigEarthNet, ordered by mean gain across tested 
 |---------------|:----:|:----:|:----:|
 | Beta codebook (TQ MSE over Uniform SQ) | +0.408 | +0.32 to +0.48 | All 6 |
 | Subspace structure (PQ over TQ MSE) | +0.162 | +0.05 to +0.35 | All 6 |
-| Empirical codebook (TQ Adaptive over TQ MSE) | +0.011 | +0.01 to +0.01 | Prithvi, RemoteCLIP |
+| Empirical codebook (TQ Adaptive over TQ MSE) | +0.006 | -0.002 to +0.012 | All 6 |
 | Rotation alone at 1 bit (RaBitQ over Binary Hash) | -0.002 | -0.10 to +0.21 | All 6 |
 
 ![Figure 6: All 9 methods on Prithvi and RemoteCLIP](figures/fig6_all_methods.png)
