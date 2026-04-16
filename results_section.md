@@ -8,35 +8,67 @@ Two tables (one per dataset) cover the full method $\times$ model matrix. Rows a
 
 The FP32 Exact row is 1.000 by definition and not shown. B/vec is the storage cost at d=768 (RemoteCLIP uses d=512, so its actual bytes are ~33% smaller for the rotation-based methods: 260 vs 388; 128 vs 192 for binary methods).
 
-### Table 1: EuroSAT (16K vectors) R@10 at 4 bits (1 bit for RaBitQ and Binary Hash)
+### Table 1: EuroSAT (16K vectors), R@10 / Kendall's $\tau$ at 4 bits (1 bit for RaBitQ and Binary Hash)
+
+Each cell shows R@10 / $\tau$. R@10 is averaged over 5 seeds. $\tau$ is averaged over 3 seeds with 200 queries per seed (Kendall's $\tau$ is $O(k^2)$ in the top-1000 size, so we use a subsample for cost). TQ Adaptive cells show R@10 only because we did not run ranking analysis on it.
 
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
-| PQ | 0.960 | 0.961 | 0.965 | 0.968 | 0.953 | 0.961 | yes | 384 |
+| PQ | 0.960 / 0.975 | 0.961 / 0.970 | 0.965 / 0.970 | 0.968 / 0.983 | 0.953 / 0.979 | 0.961 / 0.987 | yes | 384 |
 | TQ Adaptive | 0.942 | 0.912 | 0.880 | 0.842 | 0.863 | 0.782 | yes | 388 |
-| **TQ MSE** | **0.943** | **0.911** | **0.882** | **0.834** | **0.859** | **0.779** | **no** | **388** |
-| SimHash Multi | 0.792 | 0.751 | 0.708 | 0.743 | 0.744 | 0.702 | no | 384 |
-| Uniform SQ | 0.660 | 0.549 | 0.499 | 0.544 | 0.558 | 0.502 | no | 388 |
-| RaBitQ | 0.659 | 0.567 | 0.501 | 0.544 | 0.558 | 0.502 | no | 96 |
-| Binary Hash | 0.654 | 0.607 | 0.576 | 0.609 | 0.179 | 0.451 | no | 96 |
-| FlyHash | 0.592 | 0.545 | 0.497 | 0.468 | 0.209 | 0.468 | no | 384 |
-| RandProj Quant | 0.724 | 0.718 | 0.671 | 0.518 | 0.562 | 0.394 | no | 384 |
+| **TQ MSE** | **0.943 / 0.959** | **0.911 / 0.938** | **0.882 / 0.910** | **0.834 / 0.906** | **0.859 / 0.966** | **0.779 / 0.923** | **no** | **388** |
+| SimHash Multi | 0.792 / 0.824 | 0.751 / 0.779 | 0.708 / 0.745 | 0.743 / 0.803 | 0.744 / 0.909 | 0.702 / 0.867 | no | 384 |
+| Uniform SQ | 0.660 / 0.719 | 0.549 / 0.623 | 0.499 / 0.575 | 0.544 / 0.649 | 0.558 / 0.829 | 0.502 / 0.761 | no | 388 |
+| RaBitQ | 0.659 / 0.722 | 0.567 / 0.654 | 0.501 / 0.582 | 0.544 / 0.657 | 0.558 / 0.833 | 0.502 / 0.770 | no | 96 |
+| Binary Hash | 0.654 / 0.705 | 0.607 / 0.661 | 0.576 / 0.626 | 0.609 / 0.704 | 0.179 / 0.227 | 0.451 / 0.601 | no | 96 |
+| FlyHash | 0.592 / 0.653 | 0.545 / 0.605 | 0.497 / 0.568 | 0.468 / 0.599 | 0.209 / 0.274 | 0.468 / 0.725 | no | 384 |
+| RandProj Quant | 0.724 / 0.749 | 0.718 / 0.744 | 0.671 / 0.718 | 0.518 / 0.718 | 0.562 / 0.832 | 0.394 / 0.729 | no | 384 |
 
-### Table 2: BigEarthNet (269K vectors) R@10 at 4 bits (1 bit for RaBitQ and Binary Hash)
+### Table 2: BigEarthNet (269K vectors), R@10 / Kendall's $\tau$ at 4 bits (1 bit for RaBitQ and Binary Hash)
 
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
-| PQ | 0.947 | 0.944 | 0.950 | 0.955 | 0.935 | 0.925 | yes | 384 |
+| PQ | 0.947 / 0.945 | 0.944 / 0.936 | 0.950 / 0.944 | 0.955 / 0.959 | 0.935 / 0.930 | 0.925 / 0.943 | yes | 384 |
 | TQ Adaptive | 0.898 | 0.887 | 0.834 | 0.777 | 0.744 | 0.584 | yes | 388 |
-| **TQ MSE** | **0.900** | **0.878** | **0.830** | **0.770** | **0.737** | **0.572** | **no** | **388** |
-| SimHash Multi | 0.688 | 0.648 | 0.601 | 0.651 | 0.573 | 0.481 | no | 384 |
-| Uniform SQ | 0.479 | 0.399 | 0.349 | 0.422 | 0.338 | 0.255 | no | 388 |
-| RaBitQ | 0.479 | 0.418 | 0.348 | 0.422 | 0.337 | 0.256 | no | 96 |
-| Binary Hash | 0.483 | 0.473 | 0.447 | 0.468 | 0.128 | 0.273 | no | 96 |
-| FlyHash | 0.432 | 0.409 | 0.340 | 0.354 | 0.152 | 0.207 | no | 384 |
-| RandProj Quant | 0.595 | 0.619 | 0.505 | 0.336 | 0.251 | 0.073 | no | 384 |
+| **TQ MSE** | **0.900 / 0.884** | **0.878 / 0.860** | **0.830 / 0.811** | **0.770 / 0.795** | **0.737 / 0.744** | **0.572 / 0.641** | **no** | **388** |
+| SimHash Multi | 0.688 / 0.641 | 0.648 / 0.595 | 0.601 / 0.573 | 0.651 / 0.650 | 0.573 / 0.582 | 0.481 / 0.575 | no | 384 |
+| Uniform SQ | 0.479 / 0.477 | 0.399 / 0.401 | 0.349 / 0.385 | 0.422 / 0.468 | 0.338 / 0.402 | 0.255 / 0.399 | no | 388 |
+| RaBitQ | 0.479 / 0.482 | 0.418 / 0.429 | 0.348 / 0.391 | 0.422 / 0.476 | 0.337 / 0.410 | 0.256 / 0.412 | no | 96 |
+| Binary Hash | 0.483 / 0.481 | 0.473 / 0.461 | 0.447 / 0.457 | 0.468 / 0.503 | 0.128 / 0.253 | 0.273 / 0.381 | no | 96 |
+| FlyHash | 0.432 / 0.440 | 0.409 / 0.419 | 0.340 / 0.384 | 0.354 / 0.433 | 0.152 / 0.275 | 0.207 / 0.382 | no | 384 |
+| RandProj Quant | 0.595 / 0.562 | 0.619 / 0.568 | 0.505 / 0.522 | 0.336 / 0.468 | 0.251 / 0.348 | 0.073 / 0.250 | no | 384 |
 
-The headline BigEarthNet result: DINOv2 with TQ MSE achieves R@10 = 0.900, Kendall's $\tau$ = 0.884, and Pearson $r$ = 0.989, with no training data (Table 10 below).
+### Table 3: Pearson $r$ between FP32 and quantized similarities within top-1000 neighborhood
+
+Higher Pearson $r$ means the quantizer preserves not just neighbor ranking but the relative magnitude of similarity scores. A value above 0.99 means the compressed similarities are a near-perfect linear rescaling of the FP32 similarities. TQ Adaptive omitted (no ranking-analysis run).
+
+*EuroSAT:*
+
+| Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi |
+|--------|:----:|:----:|:----:|:----:|:----:|:----:|
+| PQ | 0.999 | 0.999 | 0.999 | 1.000 | 0.999 | 1.000 |
+| **TQ MSE** | **0.998** | **0.996** | **0.992** | **0.989** | **0.998** | **0.989** |
+| SimHash Multi | 0.968 | 0.947 | 0.929 | 0.952 | 0.979 | 0.964 |
+| Uniform SQ | 0.916 | 0.843 | 0.799 | 0.855 | 0.948 | 0.910 |
+| RaBitQ | 0.915 | 0.865 | 0.798 | 0.855 | 0.948 | 0.910 |
+| Binary Hash | 0.907 | 0.871 | 0.843 | 0.895 | 0.315 | 0.762 |
+| FlyHash | 0.865 | 0.818 | 0.781 | 0.793 | 0.370 | 0.871 |
+| RandProj Quant | 0.931 | 0.927 | 0.910 | 0.895 | 0.950 | 0.875 |
+
+*BigEarthNet:*
+
+| Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi |
+|--------|:----:|:----:|:----:|:----:|:----:|:----:|
+| PQ | 0.998 | 0.997 | 0.998 | 0.999 | 0.996 | 0.997 |
+| **TQ MSE** | **0.989** | **0.984** | **0.968** | **0.952** | **0.919** | **0.830** |
+| SimHash Multi | 0.871 | 0.833 | 0.811 | 0.864 | 0.801 | 0.764 |
+| Uniform SQ | 0.707 | 0.617 | 0.596 | 0.682 | 0.599 | 0.569 |
+| RaBitQ | 0.706 | 0.644 | 0.595 | 0.682 | 0.599 | 0.568 |
+| Binary Hash | 0.706 | 0.686 | 0.680 | 0.717 | 0.408 | 0.550 |
+| FlyHash | 0.654 | 0.629 | 0.579 | 0.618 | 0.425 | 0.519 |
+| RandProj Quant | 0.796 | 0.800 | 0.753 | 0.665 | 0.518 | 0.348 |
+
+The headline BigEarthNet result: DINOv2 with TQ MSE achieves R@10 = 0.900, Kendall's $\tau$ = 0.884 (Table 2), and Pearson $r$ = 0.989 (Table 3), with no training data.
 
 TQ Adaptive (empirical Lloyd-Max codebook) was run on all 6 models with 3 seeds and a 30K subsample of training data for codebook fitting. It tracks TQ MSE within 1 point on most models, with the largest gain on MAE-base (+0.7 points on EuroSAT, +0.7 on BigEarthNet) and SSL4EO (+0.8 / +0.7), and essentially zero gain on DINOv2 and Prithvi. The empirical codebook helps slightly more on the moderate-anisotropy models than on the extremes.
 
@@ -125,7 +157,7 @@ Both use codebooks. Both operate at 4 bits per dimension of budget. The differen
 
 The subspace gain scales with anisotropy. For DINOv2 (isotropic), PQ is only 5 points ahead. For Prithvi (anisotropic), PQ is 35 points ahead. PQ learns per-subspace joint structure that captures coordinate correlations within each subspace; TQ's per-coordinate independence assumption does not.
 
-### Ranking of design contributions
+### Ranking of design contributions (concluding para)
 
 Combining the four contrasts on BigEarthNet, ordered by mean gain across tested models:
 
@@ -150,16 +182,7 @@ A caveat on this ranking. The Beta codebook gain is measured against Uniform SQ,
 
 EuroSAT has 16K vectors across 10 land-use classes. BigEarthNet has 269K vectors across 43 multi-label classes. BigEarthNet is 17x larger and the classes overlap more, so neighbor rankings are harder to preserve under quantization.
 
-### Table 9: R@10 drop when scaling from EuroSAT to BigEarthNet (4-bit)
 
-| Model | EuroSAT TQ | BigEarthNet TQ | TQ drop | EuroSAT PQ | BigEarthNet PQ | PQ drop |
-|-------|:----:|:----:|:----:|:----:|:----:|:----:|
-| DINOv2 | 0.943 | 0.900 | -0.043 | 0.960 | 0.947 | -0.013 |
-| RemoteCLIP | 0.911 | 0.878 | -0.033 | 0.961 | 0.944 | -0.017 |
-| GeoRSCLIP | 0.882 | 0.830 | -0.052 | 0.965 | 0.950 | -0.015 |
-| SSL4EO | 0.834 | 0.770 | -0.064 | 0.968 | 0.955 | -0.013 |
-| MAE-base | 0.859 | 0.737 | -0.122 | 0.953 | 0.935 | -0.018 |
-| Prithvi | 0.779 | 0.572 | -0.207 | 0.961 | 0.925 | -0.036 |
 
 ![Figure 8: Scaling slope chart](figures/fig8_scaling.png)
 *Figure 8: TQ MSE R@10 scaling from EuroSAT (16K) to BigEarthNet (269K). Isotropic models (green, blue) degrade 3-5 points. Anisotropic models (red, purple) degrade 12-21 points.*
@@ -174,15 +197,9 @@ PQ degrades uniformly and slightly across all models, losing 1 to 4 points regar
 
 The isotropy gap widens with scale. On EuroSAT the DINOv2 vs Prithvi gap is 16 points (0.943 vs 0.779). On BigEarthNet it is 33 points (0.900 vs 0.572). Anisotropy hurts more when more near-neighbors need to be disambiguated.
 
-### Implications for archive-scale deployment
+### Implications for archive-scale deployment 
+-- Perhaps reduce to one line limitation instead of a long reflection. Given the performance degradation from EuroSat to BigearthNet, it is unlikely the performance will hold for global scale satellite image archives, and further analysis is required to analyze the scaling effects. 
 
-Global Sentinel-2 archives contain tens of millions of patches. Extrapolating from the 16K to 269K trend:
-
-For isotropic models (DINOv2, RemoteCLIP, GeoRSCLIP), TQ MSE at 4 bits is a viable training-free solution at archive scale. Recall is expected to remain above 0.80 at 10M patches.
-
-For anisotropic models (Prithvi, MAE-base, SSL4EO), training-free TQ MSE is unlikely to scale. Options are to use PQ (which requires training a codebook on a representative sample), to increase the bit budget at the cost of more storage, or to use a different foundation model.
-
-Our data does not measure behavior above 269K. The 10M estimate is an extrapolation.
 
 ## 4.4 Model Comparison
 
@@ -210,7 +227,7 @@ KS D does not cleanly separate models. MAE-base has the lowest KS D (0.360) desp
 ![Figure 1: Isotropy illustration](figures/fig1_isotropy_illustration.png)
 *Figure 1: Pairwise rotated coordinates from BigEarthNet embeddings. Left: DINOv2 produces a round scatter cloud with coordinates that are approximately independent. Right: Prithvi produces an elongated cloud with coordinates that remain correlated even after rotation. Orange dotted lines show 4-bit Beta codebook boundaries.*
 
-### The correlation between isotropy and recall
+### The correlation between isotropy measure and recall
 
 ### Figure 3: Correlation vs recall
 

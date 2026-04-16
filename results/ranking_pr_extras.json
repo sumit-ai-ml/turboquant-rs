@@ -1,0 +1,482 @@
+[
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.8634342787976409,
+    "pearson_mean": 0.9641988829222072
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7667195338474454,
+    "pearson_mean": 0.9152372732580091
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7347098684582207,
+    "pearson_mean": 0.8830757374012171
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7146411983500761,
+    "pearson_mean": 0.8674399116753801
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 42,
+    "kendall_tau_mean": 0.775409478754422,
+    "pearson_mean": 0.9152516711277374
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.8614509693252491,
+    "pearson_mean": 0.9610006363076097
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7569348438371115,
+    "pearson_mean": 0.9075170693966426
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7076830799437586,
+    "pearson_mean": 0.8526354105481451
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7972360623171068,
+    "pearson_mean": 0.9342305619010051
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 123,
+    "kendall_tau_mean": 0.7639748249001592,
+    "pearson_mean": 0.9065651437912794
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.8774779454368528,
+    "pearson_mean": 0.9658707344799319
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.7605752224042643,
+    "pearson_mean": 0.9068476485591149
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.7312737769768313,
+    "pearson_mean": 0.8772172849316507
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.6737269677675181,
+    "pearson_mean": 0.8223705429356517
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 456,
+    "kendall_tau_mean": 0.7691419804662943,
+    "pearson_mean": 0.9067536773134321
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7793293615366668,
+    "pearson_mean": 0.9469226181211107
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.6153084573996164,
+    "pearson_mean": 0.8366499938464886
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.5981770649083046,
+    "pearson_mean": 0.8088077085931933
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7397834098195111,
+    "pearson_mean": 0.9210005476141339
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 42,
+    "kendall_tau_mean": 0.6513222140642557,
+    "pearson_mean": 0.8628520730238262
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7773039465823709,
+    "pearson_mean": 0.9455895291676587
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.6407886323687331,
+    "pearson_mean": 0.8567275441121173
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.6147988222925801,
+    "pearson_mean": 0.824171899274682
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7402663911970672,
+    "pearson_mean": 0.9249687272588054
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 123,
+    "kendall_tau_mean": 0.6627955182217212,
+    "pearson_mean": 0.8672178780052132
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "simhash_multi_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.779505951751309,
+    "pearson_mean": 0.9497735119596445
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "uniform_sq_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.6142426567289503,
+    "pearson_mean": 0.8362095430388201
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "flyhash_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.6028801269273246,
+    "pearson_mean": 0.8202401064875565
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "randproj_quant_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.7526705862691155,
+    "pearson_mean": 0.9338056489163264
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "rabitq",
+    "seed": 456,
+    "kendall_tau_mean": 0.6483325811262646,
+    "pearson_mean": 0.8636783082044207
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.5928672201377566,
+    "pearson_mean": 0.7812901245416538
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.4120176780107477,
+    "pearson_mean": 0.5774232625584685
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.41226650287995015,
+    "pearson_mean": 0.5551506023877485
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.22801805302143874,
+    "pearson_mean": 0.313700453701726
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 42,
+    "kendall_tau_mean": 0.4253926408906463,
+    "pearson_mean": 0.5773823899585028
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.5615171286675984,
+    "pearson_mean": 0.7504358914406989
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.3976030686853103,
+    "pearson_mean": 0.5690023143639038
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.36387341693491576,
+    "pearson_mean": 0.4947188253343478
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.2976751612939656,
+    "pearson_mean": 0.41251383553347204
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 123,
+    "kendall_tau_mean": 0.4107158943665608,
+    "pearson_mean": 0.5685442135780205
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.5709719250141241,
+    "pearson_mean": 0.7609583058404286
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.38835574141975776,
+    "pearson_mean": 0.5606060674061892
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.3712839379105813,
+    "pearson_mean": 0.506400314718693
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.22426401248306607,
+    "pearson_mean": 0.31788111361063665
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 456,
+    "kendall_tau_mean": 0.4007452720165719,
+    "pearson_mean": 0.5588479294992551
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.6000796934628353,
+    "pearson_mean": 0.8365895118101798
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.3969405427530201,
+    "pearson_mean": 0.6133061343332531
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.4285004899750396,
+    "pearson_mean": 0.6409000708605871
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.5646379988023448,
+    "pearson_mean": 0.7978468658686733
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 42,
+    "kendall_tau_mean": 0.4338609151346196,
+    "pearson_mean": 0.6488222552622654
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.5885471526523041,
+    "pearson_mean": 0.8259032367843753
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.4052984896682281,
+    "pearson_mean": 0.6168030615719899
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.41030485066329925,
+    "pearson_mean": 0.6146870001822777
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.5654328121331909,
+    "pearson_mean": 0.7953038120946259
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 123,
+    "kendall_tau_mean": 0.4245915569901246,
+    "pearson_mean": 0.6374116088522368
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "simhash_multi_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.5973630230168365,
+    "pearson_mean": 0.837098248238988
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "uniform_sq_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.40207519112254286,
+    "pearson_mean": 0.6217408676226153
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "flyhash_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.4180347908379998,
+    "pearson_mean": 0.6305082690765778
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "randproj_quant_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.5729467823099174,
+    "pearson_mean": 0.8077878967007521
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "rabitq",
+    "seed": 456,
+    "kendall_tau_mean": 0.4271741655673121,
+    "pearson_mean": 0.6456404646530587
+  }
+]
