@@ -223,7 +223,7 @@ KS D does not cleanly separate models. MAE-base has the lowest KS D (0.360) desp
 ### Figure 1: Isotropy illustration
 
 ![Figure 1: Isotropy illustration](figures/fig1_isotropy_illustration.png)
-*Figure 1: Pairwise rotated coordinates from BigEarthNet embeddings. Left: DINOv2 produces a round scatter cloud with coordinates that are approximately independent. Right: Prithvi produces an elongated cloud with coordinates that remain correlated even after rotation. Orange dotted lines show 4-bit Beta codebook boundaries.*
+*Figure 1: Pairwise rotated coordinates from EuroSAT embeddings (n=4000). Left: DINOv2 ($\rho$=0.13) produces a round scatter cloud where the per-coordinate quantization grid covers the data uniformly. Right: Prithvi ($\rho$=0.63) produces a stretched ellipse where the same grid wastes bins on empty cells. The contrast shown here is at the high end of the spectrum we measure across the 6 models; the difference between adjacent models in the table (e.g., DINOv2 at 0.13 vs SSL4EO at 0.29) is more subtle and should not be read as a binary distinction between isotropic and anisotropic.*
 
 ### The correlation between isotropy measure and recall
 

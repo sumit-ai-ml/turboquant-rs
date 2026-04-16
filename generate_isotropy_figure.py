@@ -94,14 +94,14 @@ print('Fig 1: Two-panel isotropy illustration...')
 fig, axes = plt.subplots(1, 2, figsize=(7.16, 3.2))
 
 panels = [
-    ('dinov2', '(a) DINOv2 (self-distillation)', COLORS['dinov2'], 0.253, 0.900),
-    ('prithvi', '(b) Prithvi (MAE)', COLORS['prithvi'], 0.663, 0.572),
+    ('dinov2', '(a) DINOv2: low coord. correlation', COLORS['dinov2'], 0.132, 0.943),
+    ('prithvi', '(b) Prithvi: high coord. correlation', COLORS['prithvi'], 0.629, 0.779),
 ]
 
 lim = 0.058
 
 for ax, (model_name, title, color, corr, r10) in zip(axes, panels):
-    x, y, d = get_rotated_coords(model_name, 'bigearthnet', seed=42, n=4000)
+    x, y, d = get_rotated_coords(model_name, 'eurosat', seed=42, n=4000)
 
     # White background
     ax.set_facecolor('white')
@@ -156,10 +156,10 @@ for ax, (model_name, title, color, corr, r10) in zip(axes, panels):
 
 # Shared caption
 fig.text(0.5, -0.04,
-         'Pairwise rotated coordinates from BigEarthNet embeddings (n=4000). '
+         'Pairwise rotated coordinates from EuroSAT embeddings (n=4000). '
          'Dotted orange lines: 4-bit Beta codebook boundaries.\n'
-         'Isotropic embeddings (a) produce round clouds where the codebook partitions data evenly. '
-         'Anisotropic embeddings (b) produce elongated clouds\n'
+         'Lower coordinate correlation (a) produces a round cloud where the codebook partitions data evenly. '
+         'Higher correlation (b) produces an elongated cloud\n'
          'where most codebook cells are empty, degrading retrieval quality.',
          ha='center', fontsize=7.5, color='#444444', linespacing=1.4)
 
@@ -179,22 +179,18 @@ print('Fig 2: 6-model isotropy grid...')
 fig, axes = plt.subplots(2, 3, figsize=(7.16, 4.8))
 
 all_models = [
-    ('dinov2', 'DINOv2\n(self-distill.)', COLORS['dinov2'], 0.253, 0.900),
-    ('remoteclip', 'RemoteCLIP\n(contrastive)', COLORS['remoteclip'], 0.215, 0.878),
-    ('georsclip', 'GeoRSCLIP\n(contrastive)', COLORS['georsclip'], 0.247, 0.830),
-    ('ssl4eo', 'SSL4EO\n(MAE, RS)', COLORS['ssl4eo'], 0.345, 0.770),
-    ('mae_base', 'MAE-base\n(MAE)', COLORS['mae_base'], 0.521, 0.737),
-    ('prithvi', 'Prithvi\n(MAE, RS)', COLORS['prithvi'], 0.663, 0.572),
+    ('dinov2', 'DINOv2\n(self-distill.)', COLORS['dinov2'], 0.132, 0.943),
+    ('remoteclip', 'RemoteCLIP\n(contrastive)', COLORS['remoteclip'], 0.205, 0.911),
+    ('georsclip', 'GeoRSCLIP\n(contrastive)', COLORS['georsclip'], 0.190, 0.882),
+    ('ssl4eo', 'SSL4EO\n(MAE, RS)', COLORS['ssl4eo'], 0.293, 0.834),
+    ('mae_base', 'MAE-base\n(MAE)', COLORS['mae_base'], 0.510, 0.859),
+    ('prithvi', 'Prithvi\n(MAE, RS)', COLORS['prithvi'], 0.629, 0.779),
 ]
 
 lim = 0.058
 
 for ax, (model_name, label, color, corr, r10) in zip(axes.flat, all_models):
-    for dataset in ['bigearthnet', 'eurosat']:
-        emb_path = EMBED_DIR / f'{model_name}_{dataset}.npz'
-        if emb_path.exists():
-            x, y, d = get_rotated_coords(model_name, dataset, seed=42, n=3000)
-            break
+    x, y, d = get_rotated_coords(model_name, 'eurosat', seed=42, n=3000)
 
     ax.set_facecolor('white')
     ax.scatter(x, y, c=color, alpha=0.08, s=2, edgecolors='none', rasterized=True)
@@ -253,8 +249,8 @@ for ax, (model_name, label, color, corr, r10) in zip(axes.flat, all_models):
             va='top', ha='left')
 
 fig.text(0.5, -0.01,
-         'Top: low coordinate correlation (isotropic) with high retrieval recall. '
-         'Bottom: high correlation (anisotropic) with degraded recall.',
+         'Coordinate correlation $\\rho$ (top-left of each panel) increases left-to-right and top-to-bottom. '
+         'Retrieval recall (top-right) decreases as correlation rises.',
          ha='center', fontsize=7.5, color='#444444')
 
 plt.tight_layout(rect=[0, 0.02, 1, 1], h_pad=1.0, w_pad=0.8)
