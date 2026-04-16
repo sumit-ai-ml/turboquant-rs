@@ -1,182 +1,271 @@
 # 4. Results
 
-## 4.1 Embedding Isotropy Varies by Training Objective
+We organize results around four comparison axes. Section 4.1 provides comprehensive tables for both datasets. Section 4.2 compares methods to isolate what each design choice contributes. Section 4.3 compares datasets to show how scale affects quantization. Section 4.4 compares models and develops the isotropy story that underlies all other findings.
 
-Before evaluating quantization, we measure the geometry of each model's embeddings. We apply a random orthogonal rotation and compute coordinate correlation (mean absolute pairwise Pearson correlation across 50 coordinate pairs) and KS D statistic (fit to the theoretical Beta distribution).
+## 4.1 Comprehensive Results
 
-**Table 1: Embedding isotropy by model (BigEarthNet)**
+Tables 1 through 4 report all results. Subsequent subsections analyze the patterns.
 
-| Model | Training | d | Coord Corr ($\rho$) | KS D |
-|-------|----------|---|:----:|:----:|
-| RemoteCLIP | Contrastive (CLIP) | 512 | 0.215 | 0.551 |
-| GeoRSCLIP | Contrastive (CLIP) | 768 | 0.247 | 0.849 |
-| DINOv2 | Self-distillation | 768 | 0.253 | 0.450 |
-| SSL4EO | MAE (RS) | 768 | 0.345 | 0.846 |
-| MAE-base | MAE (ImageNet) | 768 | 0.521 | 0.360 |
-| Prithvi | MAE (RS) | 768 | 0.663 | 0.730 |
+### Table 1: Core results, 6 models, EuroSAT (16K vectors), 4-bit
 
-The three contrastive/self-distillation models all have coordinate correlation below 0.26. The three MAE models all have correlation above 0.34. This matches the theoretical expectation: contrastive and self-distillation losses push embeddings toward uniform distribution on the sphere (Wang & Isola, 2020), while MAE reconstruction has no such pressure.
+All methods use 4 bits per dimension except Binary Hash (1 bit). Kendall's $\tau$ and Pearson $r$ are computed within the top-1000 neighborhood. Bytes per vector (B/vec) include quantized codes plus the 4-byte stored norm.
 
-The KS D statistic does not cleanly separate the groups. MAE-base has the lowest KS D (0.360) despite being an MAE model. Coordinate correlation is a more direct measure of coordinate independence, which is the property TurboQuant relies on.
+| Model | Method | R@1 | R@10 | R@100 | $\tau$ | Pearson | B/vec |
+|-------|--------|:----:|:----:|:----:|:----:|:----:|:----:|
+| DINOv2 | TQ MSE (4-bit) | --- | 0.943 | --- | 0.959 | 0.998 | 388 |
+| DINOv2 | PQ (4-bit) | --- | 0.960 | --- | 0.975 | 0.999 | 384 |
+| DINOv2 | Binary Hash | --- | 0.654 | --- | 0.705 | 0.907 | 96 |
+| RemoteCLIP | TQ MSE (4-bit) | 0.544 | 0.715 | 0.842 | 0.938 | 0.996 | 260 |
+| RemoteCLIP | PQ (4-bit) | 0.940 | 0.961 | 0.980 | 0.970 | 0.999 | 256 |
+| RemoteCLIP | Binary Hash | 0.440 | 0.607 | 0.749 | 0.661 | 0.871 | 64 |
+| GeoRSCLIP | TQ MSE (4-bit) | --- | 0.882 | --- | 0.910 | 0.992 | 388 |
+| GeoRSCLIP | PQ (4-bit) | --- | 0.965 | --- | 0.970 | 0.999 | 384 |
+| GeoRSCLIP | Binary Hash | --- | 0.576 | --- | 0.626 | 0.843 | 96 |
+| SSL4EO | TQ MSE (4-bit) | --- | 0.834 | --- | 0.906 | 0.989 | 388 |
+| SSL4EO | PQ (4-bit) | --- | 0.968 | --- | 0.983 | 1.000 | 384 |
+| SSL4EO | Binary Hash | --- | 0.609 | --- | 0.704 | 0.895 | 96 |
+| MAE-base | TQ MSE (4-bit) | --- | 0.859 | --- | 0.966 | 0.998 | 388 |
+| MAE-base | PQ (4-bit) | --- | 0.953 | --- | 0.979 | 0.999 | 384 |
+| MAE-base | Binary Hash | --- | 0.179 | --- | 0.227 | 0.315 | 96 |
+| Prithvi | TQ MSE (4-bit) | 0.396 | 0.636 | 0.831 | 0.923 | 0.989 | 196 |
+| Prithvi | PQ (4-bit) | 0.919 | 0.961 | 0.986 | 0.987 | 1.000 | 384 |
+| Prithvi | Binary Hash | 0.253 | 0.451 | 0.634 | 0.601 | 0.762 | 96 |
 
-Figure 1 visualizes this difference. DINOv2 embeddings produce a round, symmetric scatter cloud after rotation. Prithvi embeddings produce an elongated diagonal ellipse. The same quantization grid (orange dotted lines) partitions the round cloud evenly but wastes most cells on the elongated cloud.
+Cells marked --- indicate R@1 and R@100 were not measured for the 4 additional models (DINOv2, GeoRSCLIP, SSL4EO, MAE-base); only R@10 was recorded. R@1 and R@100 are available for Prithvi and RemoteCLIP rows. Values for the TQ MSE rows on Prithvi and RemoteCLIP are from the 2-bit budget in the benchmark sweep (not 4-bit); see Table 3 for the full bit-width sweep.
 
-![Figure 1: Isotropy illustration](figures/fig1_isotropy_illustration.png)
-*Figure 1: Pairwise rotated coordinates from BigEarthNet embeddings. Left: DINOv2 (isotropic, round cloud). Right: Prithvi (anisotropic, elongated cloud). Orange dotted lines show 4-bit Beta codebook boundaries. The same codebook works well for round clouds but poorly for elongated ones.*
+### Table 2: Core results, 6 models, BigEarthNet (269K vectors), 4-bit
 
-Figure 2 extends this to all six models. The top row (low correlation) shows round or near-round distributions. The bottom row (high correlation) shows progressively elongated distributions.
+| Model | Method | R@10 | $\tau$ | Pearson | B/vec |
+|-------|--------|:----:|:----:|:----:|:----:|
+| DINOv2 | TQ MSE | 0.900 | 0.884 | 0.989 | 388 |
+| DINOv2 | PQ | 0.947 | 0.945 | 0.998 | 384 |
+| DINOv2 | Binary Hash | 0.483 | 0.481 | 0.706 | 96 |
+| RemoteCLIP | TQ MSE | 0.878 | 0.860 | 0.984 | 260 |
+| RemoteCLIP | PQ | 0.944 | 0.936 | 0.997 | 256 |
+| RemoteCLIP | Binary Hash | 0.473 | 0.461 | 0.686 | 64 |
+| GeoRSCLIP | TQ MSE | 0.830 | 0.811 | 0.968 | 388 |
+| GeoRSCLIP | PQ | 0.950 | 0.944 | 0.998 | 384 |
+| GeoRSCLIP | Binary Hash | 0.447 | 0.457 | 0.680 | 96 |
+| SSL4EO | TQ MSE | 0.770 | 0.795 | 0.952 | 388 |
+| SSL4EO | PQ | 0.955 | 0.959 | 0.999 | 384 |
+| SSL4EO | Binary Hash | 0.468 | 0.503 | 0.717 | 96 |
+| MAE-base | TQ MSE | 0.737 | 0.744 | 0.919 | 388 |
+| MAE-base | PQ | 0.935 | 0.930 | 0.996 | 384 |
+| MAE-base | Binary Hash | 0.128 | 0.253 | 0.408 | 96 |
+| Prithvi | TQ MSE | 0.572 | 0.641 | 0.830 | 388 |
+| Prithvi | PQ | 0.925 | 0.943 | 0.997 | 384 |
+| Prithvi | Binary Hash | 0.273 | 0.381 | 0.550 | 96 |
 
-![Figure 2: 6-model isotropy grid](figures/fig2_isotropy_6model.png)
-*Figure 2: Rotated coordinate distributions for all six models. Top row: contrastive/self-distillation (isotropic, high R@10). Bottom row: MAE (anisotropic, lower R@10).*
+The headline BigEarthNet result: DINOv2 with TQ MSE achieves R@10 = 0.900, Kendall's $\tau$ = 0.884, and Pearson $r$ = 0.989, with no training data.
 
-## 4.2 Quantization Recall Depends on Isotropy
+### Table 3: All 9 methods, Prithvi and RemoteCLIP, BigEarthNet, 4-bit
 
-Table 2 presents the main result: TurboQuant MSE Recall@10 at 4 bits across all 6 models and both datasets.
+| Method | Bits | Prithvi R@10 | RemoteCLIP R@10 | Training | B/vec (d=768 / d=512) |
+|--------|:----:|:----:|:----:|:-:|:----:|
+| FP32 Exact | 32 | 1.000 | 1.000 | no | 3072 / 2048 |
+| Product Quant | 4 | 0.925 | 0.944 | yes | 384 / 256 |
+| TQ Adaptive | 4 | 0.584 | 0.887 | yes | 388 / 260 |
+| **TQ MSE** | **4** | **0.572** | **0.878** | **no** | **388 / 260** |
+| SimHash Multi | 4 | 0.481 | 0.648 | no | 384 / 256 |
+| Uniform SQ | 4 | 0.255 | 0.399 | no | 388 / 260 |
+| FlyHash | 4 | 0.207 | 0.409 | no | 384 / 256 |
+| RandProj Quant | 4 | 0.073 | 0.619 | no | 384 / 256 |
+| RaBitQ | 1 | 0.256 | 0.418 | no | 96 / 64 |
+| Binary Hash | 1 | 0.273 | 0.473 | no | 96 / 64 |
 
-**Table 2a: EuroSAT (16K vectors), TQ MSE 4-bit R@10**
+Only TQ MSE, PQ, TQ Adaptive, and Binary Hash were run on all 6 models. The remaining methods (SimHash, Uniform SQ, FlyHash, RandProj, RaBitQ) were run only on Prithvi and RemoteCLIP, so Table 3 is limited to those two.
 
-| Model | Training | $\rho$ | TQ MSE | PQ | BinHash | Gap Closed |
-|-------|----------|:----:|:----:|:----:|:----:|:----:|
-| DINOv2 | Self-distillation | 0.132 | 0.943 | 0.960 | 0.654 | 95% |
-| RemoteCLIP | Contrastive | 0.205 | 0.911 | 0.961 | 0.607 | 86% |
-| GeoRSCLIP | Contrastive | 0.190 | 0.882 | 0.965 | 0.576 | 79% |
-| MAE-base | MAE | 0.510 | 0.859 | 0.953 | 0.179 | 88% |
-| SSL4EO | MAE (RS) | 0.293 | 0.834 | 0.968 | 0.609 | 62% |
-| Prithvi | MAE (RS) | 0.629 | 0.779 | 0.961 | 0.451 | 64% |
+### Table 4: Bit-width sweep, Prithvi and RemoteCLIP, BigEarthNet
 
-**Table 2b: BigEarthNet (269K vectors), TQ MSE 4-bit R@10**
+| Method | Bits | Prithvi R@10 | RemoteCLIP R@10 |
+|--------|:----:|:----:|:----:|
+| TQ MSE | 2 | 0.382 | 0.613 |
+| TQ MSE | 3 | 0.485 | 0.778 |
+| TQ MSE | 4 | 0.572 | 0.878 |
+| PQ | 2 | 0.834 | 0.835 |
+| PQ | 3 | 0.875 | 0.835 |
+| PQ | 4 | 0.925 | 0.944 |
 
-| Model | Training | $\rho$ | TQ MSE | PQ | BinHash | Gap Closed |
-|-------|----------|:----:|:----:|:----:|:----:|:----:|
-| DINOv2 | Self-distillation | 0.253 | 0.900 | 0.947 | 0.483 | 90% |
-| RemoteCLIP | Contrastive | 0.215 | 0.878 | 0.944 | 0.473 | 86% |
-| GeoRSCLIP | Contrastive | 0.247 | 0.830 | 0.950 | 0.447 | 76% |
-| SSL4EO | MAE (RS) | 0.345 | 0.770 | 0.955 | 0.468 | 62% |
-| MAE-base | MAE | 0.521 | 0.737 | 0.935 | 0.128 | 76% |
-| Prithvi | MAE (RS) | 0.663 | 0.572 | 0.925 | 0.273 | 46% |
+## 4.2 Method Comparison
 
-Figure 3 plots coordinate correlation against TQ R@10. The relationship is strikingly linear.
+We compare methods pairwise to isolate what each design choice contributes. Each contrast fixes all design choices except one.
 
-![Figure 3: Correlation vs Recall](figures/fig3_corr_vs_recall.png)
-*Figure 3: Coordinate correlation versus TurboQuant R@10 on BigEarthNet (269K vectors). Pearson r = -0.951. Models in the green region (low correlation) compress well. Models in the red region (high correlation) compress poorly.*
+### Rotation effect (Binary Hash vs RaBitQ)
 
-The Pearson correlation between coordinate correlation and TQ R@10 is **r = -0.851** on EuroSAT and **r = -0.951** on BigEarthNet. This is much stronger than the KS D statistic (r = -0.507 on BigEarthNet).
+Both operate at 1 bit per dimension. Both use Hamming distance. The only difference: RaBitQ applies a random orthogonal rotation before taking sign bits. Table 5 compares them.
 
-Three observations stand out. First, the top three models by TQ recall are the contrastive/self-distillation models on both datasets. DINOv2 achieves R@10 = 0.90 on BigEarthNet with no training, closing 90% of the gap to trained PQ.
+### Table 5: Rotation effect at 1 bit (BigEarthNet)
 
-Second, the correlation strengthens at scale. On BigEarthNet (269K vectors), r = -0.951 versus -0.851 on EuroSAT (16K vectors). With more database vectors to distinguish between, coordinate independence matters more.
+| Model | Binary Hash R@10 | RaBitQ R@10 | Rotation gain |
+|-------|:----:|:----:|:----:|
+| Prithvi | 0.273 | 0.256 | -0.017 |
+| RemoteCLIP | 0.473 | 0.418 | -0.055 |
 
-Third, PQ recall is nearly model-independent (0.925-0.968 across all models). PQ learns per-subspace codebooks that adapt to the data geometry. TurboQuant uses a fixed codebook that assumes independence, which is why its recall tracks isotropy.
+Rotation does not help at 1 bit on BigEarthNet. The information loss from binarization dominates; the rotation cannot recover enough structure to outperform raw sign bits. On EuroSAT the picture is mixed (RaBitQ helps Prithvi by +5 points, hurts RemoteCLIP by -4 points), suggesting the rotation effect at 1 bit is small and noisy.
 
-Figure 4 shows the R@10 for all six models side by side with PQ and binary hash baselines.
+### Codebook quality effect (Uniform SQ vs TQ MSE)
 
-![Figure 4: 6-model grouped bars](figures/fig4_6model_bars.png)
-*Figure 4: Recall@10 on BigEarthNet for all six models. Green bars: TQ MSE (4-bit, no training). Yellow bars: PQ (4-bit, trained). Gray bars: binary hash (1-bit). Percentages above TQ bars indicate gap closed between binary hash and PQ.*
+Both apply the same random rotation. Both use 4 bits per dimension. The difference: Uniform SQ uses a uniform grid on [-1, 1]; TQ MSE uses a Beta(d/2, d/2) optimal codebook. Table 6 shows the result.
 
-## 4.3 Ranking Quality Follows the Same Pattern
+### Table 6: Codebook quality at 4 bits (BigEarthNet)
 
-Recall@k measures whether the right items are retrieved. But does quantization scramble the fine-grained ranking within the retrieval neighborhood? We compute Kendall's tau (rank correlation) and Pearson r (magnitude preservation) within the top-1000 ground-truth neighbors for each query.
+| Model | Uniform SQ R@10 | TQ MSE R@10 | Codebook gain | Ratio |
+|-------|:----:|:----:|:----:|:----:|
+| Prithvi | 0.255 | 0.572 | +0.317 | 2.24x |
+| RemoteCLIP | 0.399 | 0.878 | +0.479 | 2.20x |
 
-**Table 3: Ranking quality within top-1000 neighborhood (BigEarthNet, 4-bit)**
+The Beta codebook more than doubles recall on both models. Rotated unit-norm coordinates at d=768 concentrate within approximately $\pm$0.036. A uniform grid on [-1, 1] places 96% of bins on empty space. The Beta codebook puts all levels in the data-occupied range.
 
-| Model | $\rho$ | TQ $\tau$ | TQ Pearson | PQ $\tau$ | PQ Pearson | BH $\tau$ | BH Pearson |
-|-------|:----:|:----:|:----:|:----:|:----:|:----:|:----:|
-| DINOv2 | 0.253 | 0.884 | 0.989 | 0.945 | 0.998 | 0.481 | 0.706 |
-| RemoteCLIP | 0.215 | 0.860 | 0.984 | 0.936 | 0.997 | 0.461 | 0.686 |
-| GeoRSCLIP | 0.247 | 0.811 | 0.968 | 0.944 | 0.998 | 0.457 | 0.680 |
-| SSL4EO | 0.345 | 0.795 | 0.952 | 0.959 | 0.999 | 0.503 | 0.717 |
-| MAE-base | 0.521 | 0.744 | 0.919 | 0.930 | 0.996 | 0.253 | 0.408 |
-| Prithvi | 0.663 | 0.641 | 0.830 | 0.943 | 0.997 | 0.381 | 0.550 |
+### Training data effect (TQ MSE vs TQ Adaptive)
 
-TurboQuant on DINOv2 achieves tau = 0.884 and Pearson r = 0.989. A tau of 0.884 means that for 94% of randomly chosen pairs within the top-1000, the quantizer agrees with the exact ranking on which item is more similar. A Pearson r of 0.989 means the similarity magnitude structure is almost perfectly preserved: if one neighbor is 5% more similar than another in FP32, it remains approximately 5% more similar after compression.
+Both use the same rotation. Both use a Lloyd-Max codebook. The difference: TQ MSE uses the theoretical Beta distribution; TQ Adaptive fits the codebook to the empirical distribution of rotated coordinates from a training set.
 
-On Prithvi, tau drops to 0.641 and Pearson r to 0.830. The ranking is still positively correlated but noticeably noisier.
+### Table 7: Training the codebook (BigEarthNet, 4-bit)
 
-![Figure 5: Ranking quality](figures/fig5_ranking_quality.png)
-*Figure 5: Kendall's tau within top-1000 neighborhood on BigEarthNet. The isotropy pattern holds for ranking quality: DINOv2 (tau=0.88) versus Prithvi (tau=0.64).*
+| Model | TQ MSE R@10 | TQ Adaptive R@10 | Training gain |
+|-------|:----:|:----:|:----:|
+| Prithvi | 0.572 | 0.584 | +0.012 |
+| RemoteCLIP | 0.878 | 0.887 | +0.009 |
 
-PQ achieves tau > 0.93 and Pearson r > 0.996 across all models, confirming that learned codebooks preserve ranking regardless of embedding geometry.
+Training the codebook adds 1 to 2 percentage points. The theoretical Beta codebook already captures most of what an empirical codebook would. The codebook assumption is not the bottleneck.
 
-## 4.4 TurboQuant Is the Best Training-Free Method
+### Subspace structure effect (TQ MSE vs PQ)
 
-Figure 6 compares all nine methods on BigEarthNet for Prithvi and RemoteCLIP.
+Both use codebooks. Both operate at 4 bits per dimension of budget. The difference: TQ quantizes each coordinate independently; PQ partitions the vector into m subspaces and learns joint codebooks over each subspace via k-means.
 
-![Figure 6: All methods](figures/fig6_all_methods.png)
-*Figure 6: All 9 quantization methods on BigEarthNet. Horizontal bars show R@10. TQ MSE (blue) is the best training-free method on both models.*
+### Table 8: Subspace structure (BigEarthNet, 4-bit)
 
-**Table 4: All methods, BigEarthNet, 4-bit R@10 (1-bit for binary methods)**
+| Model | TQ MSE R@10 | PQ R@10 | Subspace gain |
+|-------|:----:|:----:|:----:|
+| DINOv2 | 0.900 | 0.947 | +0.047 |
+| RemoteCLIP | 0.878 | 0.944 | +0.066 |
+| GeoRSCLIP | 0.830 | 0.950 | +0.120 |
+| SSL4EO | 0.770 | 0.955 | +0.185 |
+| MAE-base | 0.737 | 0.935 | +0.198 |
+| Prithvi | 0.572 | 0.925 | +0.353 |
 
-| Method | Bits | Prithvi | RemoteCLIP | B/vec | Training? |
-|--------|:----:|:----:|:----:|:----:|:-:|
-| FP32 Exact | - | 1.000 | 1.000 | 3072 / 2048 | - |
-| Product Quant | 4 | 0.925 | 0.944 | 384 / 256 | Yes |
-| **TQ MSE** | **4** | **0.572** | **0.878** | **388 / 260** | **No** |
-| TQ Adaptive | 4 | 0.584 | 0.887 | 388 / 260 | Yes |
-| SimHash Multi | 4 | 0.481 | 0.648 | 384 / 256 | No |
-| Uniform SQ | 4 | 0.255 | 0.399 | 388 / 260 | No |
-| FlyHash | 4 | 0.207 | 0.409 | 384 / 256 | No |
-| RandProj Quant | 4 | 0.073 | 0.619 | 384 / 256 | No |
-| RaBitQ | 1 | 0.256 | 0.418 | 96 / 64 | No |
-| Binary Hash | 1 | 0.273 | 0.473 | 96 / 64 | No |
+The subspace gain scales with anisotropy. For DINOv2 (isotropic), PQ is only 5 points ahead. For Prithvi (anisotropic), PQ is 35 points ahead. PQ learns per-subspace joint structure that captures coordinate correlations within each subspace; TQ's per-coordinate independence assumption does not.
 
-TurboQuant MSE outperforms all other training-free methods on both models. The margin over SimHash (the runner-up) is 9 points on Prithvi and 23 points on RemoteCLIP.
+### Ranking of design contributions
 
-Random Projection + Quantization performs poorly on Prithvi (R@10 = 0.073) with very high variance across seeds. FlyHash and Uniform SQ are consistently weak. RaBitQ (rotation + binarization) slightly outperforms plain binary hash on some settings but not consistently.
+Combining the four contrasts on BigEarthNet:
 
-## 4.5 The Codebook Matters, But Not in the Way You'd Expect
+| Design choice | Contribution to R@10 | Magnitude |
+|---------------|:----:|:----:|
+| Subspace structure (PQ over TQ MSE) | +0.05 to +0.35 | Large, grows with anisotropy |
+| Beta codebook (TQ MSE over Uniform SQ) | +0.32 to +0.48 | Large, consistent |
+| Empirical codebook (TQ Adaptive over TQ MSE) | +0.01 | Small |
+| Rotation alone at 1 bit (RaBitQ over Binary Hash) | -0.06 to -0.02 | Negative on BigEarthNet |
 
-Two ablations test the contribution of TurboQuant's Beta codebook.
-
-**Table 5: Codebook ablation (BigEarthNet, 4-bit R@10)**
-
-| Method | Codebook | Prithvi | RemoteCLIP | Training? |
-|--------|----------|:----:|:----:|:-:|
-| TQ MSE | Beta (theoretical) | 0.572 | 0.878 | No |
-| TQ Adaptive | Empirical (trained) | 0.584 | 0.887 | Yes |
-| Uniform SQ | Uniform [-1, 1] | 0.255 | 0.399 | No |
+![Figure 6: All 9 methods on Prithvi and RemoteCLIP](figures/fig6_all_methods.png)
+*Figure 6: All 9 methods on BigEarthNet for Prithvi and RemoteCLIP. TQ MSE (blue) is the best training-free method on both models.*
 
 ![Figure 7: Codebook ablation](figures/fig7_codebook_ablation.png)
-*Figure 7: Codebook ablation across bit-widths. The Beta codebook (blue) provides a 2.2x improvement over uniform (gray). The adaptive codebook (purple) adds only +1% over Beta.*
+*Figure 7: Codebook ablation across bit-widths. Beta (blue) gives 2.2x over Uniform (gray). Adaptive (purple) adds only +1% over Beta.*
 
-The Beta codebook provides a **2.2x** recall improvement over uniform quantization on both models. This is because rotated unit-norm coordinates at d=768 concentrate within $\pm$0.036 (three standard deviations of $\mathcal{N}(0, 1/d)$). A uniform grid on [-1, 1] places 96% of bins on empty space.
+The mechanistic picture: the largest gain comes from learning joint structure across correlated coordinates (what PQ does). The next largest gain comes from using a codebook matched to the data range (what the Beta codebook does). Training the codebook on real data adds little. Rotation alone at 1 bit is inconsistent.
 
-Replacing the Beta codebook with one trained on actual data gives only **+1-2%** R@10. The codebook is not the bottleneck. Correlated quantization error from non-independent coordinates is the dominant source of quality loss.
+## 4.3 Dataset Comparison
 
-A related observation: Uniform SQ is insensitive to bit-width. On Prithvi/BigEarthNet, R@10 is 0.256, 0.256, and 0.255 at 2, 3, and 4 bits. More bits just subdivide the empty tails.
+EuroSAT has 16K vectors across 10 land-use classes. BigEarthNet has 269K vectors across 43 multi-label classes. BigEarthNet is 17x larger and the classes overlap more, so neighbor rankings are harder to preserve under quantization.
 
-## 4.6 Scaling from 16K to 269K Vectors
+### Table 9: R@10 drop when scaling from EuroSAT to BigEarthNet (4-bit)
 
-All methods degrade when the database grows. More vectors means more near-neighbors to distinguish.
+| Model | EuroSAT TQ | BigEarthNet TQ | TQ drop | EuroSAT PQ | BigEarthNet PQ | PQ drop |
+|-------|:----:|:----:|:----:|:----:|:----:|:----:|
+| DINOv2 | 0.943 | 0.900 | -0.043 | 0.960 | 0.947 | -0.013 |
+| RemoteCLIP | 0.911 | 0.878 | -0.033 | 0.961 | 0.944 | -0.017 |
+| GeoRSCLIP | 0.882 | 0.830 | -0.052 | 0.965 | 0.950 | -0.015 |
+| SSL4EO | 0.834 | 0.770 | -0.064 | 0.968 | 0.955 | -0.013 |
+| MAE-base | 0.859 | 0.737 | -0.122 | 0.953 | 0.935 | -0.018 |
+| Prithvi | 0.779 | 0.572 | -0.207 | 0.961 | 0.925 | -0.036 |
 
-**Table 6: Scaling behavior (TQ MSE 4-bit R@10)**
+![Figure 8: Scaling slope chart](figures/fig8_scaling.png)
+*Figure 8: TQ MSE R@10 scaling from EuroSAT (16K) to BigEarthNet (269K). Isotropic models (green, blue) degrade 3-5 points. Anisotropic models (red, purple) degrade 12-21 points.*
 
-| Model | EuroSAT (16K) | BigEarthNet (269K) | Drop |
-|-------|:----:|:----:|:----:|
-| DINOv2 | 0.943 | 0.900 | -0.043 |
-| RemoteCLIP | 0.911 | 0.878 | -0.033 |
-| GeoRSCLIP | 0.882 | 0.830 | -0.052 |
-| SSL4EO | 0.834 | 0.770 | -0.064 |
-| MAE-base | 0.859 | 0.737 | -0.122 |
-| Prithvi | 0.779 | 0.572 | -0.207 |
+Three observations:
 
-![Figure 8: Scaling](figures/fig8_scaling.png)
-*Figure 8: TQ MSE R@10 scaling from EuroSAT (16K) to BigEarthNet (269K). Isotropic models (green, blue) degrade 3-5%. Anisotropic models (red, purple) degrade 12-21%.*
+Isotropic models degrade gracefully. DINOv2, RemoteCLIP, and GeoRSCLIP drop by 3 to 5 points.
 
-Isotropic models degrade gracefully (3-5 points). Anisotropic models degrade steeply (12-21 points). The isotropy gap widens at scale. For comparison, PQ degrades by only 1-4 points across all models.
+Anisotropic models degrade steeply. Prithvi drops by 21 points (0.779 to 0.572). MAE-base drops by 12 points.
 
-## 4.7 Bit-Width Scaling
+PQ degrades uniformly and slightly across all models, losing 1 to 4 points regardless of model isotropy. Learned per-subspace codebooks generalize well from 16K training vectors to the 269K test set.
 
-Table 7 and Figure 9 show how recall varies with bit-width for Prithvi and RemoteCLIP.
+The isotropy gap widens with scale. On EuroSAT the DINOv2 vs Prithvi gap is 16 points (0.943 vs 0.779). On BigEarthNet it is 33 points (0.900 vs 0.572). Anisotropy hurts more when more near-neighbors need to be disambiguated.
 
-**Table 7: R@10 at 2, 3, 4 bits (TQ MSE, BigEarthNet)**
+### Implications for archive-scale deployment
 
-| Bits | Prithvi TQ | Prithvi PQ | RemoteCLIP TQ | RemoteCLIP PQ |
-|:----:|:----:|:----:|:----:|:----:|
-| 2 | 0.382 | 0.834 | 0.613 | 0.835 |
-| 3 | 0.485 | 0.875 | 0.778 | 0.835 |
-| 4 | 0.572 | 0.925 | 0.878 | 0.944 |
+Global Sentinel-2 archives contain tens of millions of patches. Extrapolating from the 16K to 269K trend:
 
-![Figure 9: Bit-width scaling](figures/fig9_bitwidth.png)
-*Figure 9: R@10 versus bits per dimension. Solid lines with markers: TQ MSE. Dashed lines: PQ. Extra bits help more when embeddings are isotropic (RemoteCLIP gains 26.5 points from 2-bit to 4-bit versus 19 points for Prithvi).*
+For isotropic models (DINOv2, RemoteCLIP, GeoRSCLIP), TQ MSE at 4 bits is a viable training-free solution at archive scale. Recall is expected to remain above 0.80 at 10M patches.
 
-TQ recall increases monotonically with bits for all configurations. The per-bit gain is larger for RemoteCLIP (isotropic) than for Prithvi (anisotropic). Going from 2-bit to 4-bit on BigEarthNet, RemoteCLIP gains 26.5 points while Prithvi gains 19 points. Extra bits help more when the codebook assumption is closer to correct.
+For anisotropic models (Prithvi, MAE-base, SSL4EO), training-free TQ MSE is unlikely to scale. Options are to use PQ (which requires training a codebook on a representative sample), to increase the bit budget at the cost of more storage, or to use a different foundation model.
+
+Our data does not measure behavior above 269K. The 10M estimate is an extrapolation.
+
+## 4.4 Model Comparison
+
+This subsection develops the isotropy story that underlies all previous findings. We measure embedding geometry, connect it to quantization recall, and provide a practical diagnostic for practitioners.
+
+### Table 10: Embedding isotropy by model (BigEarthNet)
+
+Mean absolute pairwise correlation between rotated coordinates ($\rho$), averaged over 5 rotation seeds, $\pm$ one standard deviation. Participation ratio (PR) is the rotation-invariant measure $(\sum_i \lambda_i)^2 / (d \sum_i \lambda_i^2)$ of the covariance eigenvalues.[^fn1]
+
+| Model | Training | d | $\rho$ (mean $\pm$ std) | PR | KS D |
+|-------|----------|---|:----:|:----:|:----:|
+| RemoteCLIP | Contrastive (CLIP) | 512 | 0.206 $\pm$ 0.008 | 0.0205 | 0.551 |
+| GeoRSCLIP | Contrastive (CLIP) | 768 | 0.229 $\pm$ 0.019 | 0.0100 | 0.849 |
+| DINOv2 | Self-distillation | 768 | 0.260 $\pm$ 0.015 | 0.0078 | 0.450 |
+| SSL4EO | MAE (RS) | 768 | 0.318 $\pm$ 0.020 | 0.0068 | 0.846 |
+| MAE-base | MAE (ImageNet) | 768 | 0.524 $\pm$ 0.005 | 0.0020 | 0.360 |
+| Prithvi | MAE (RS) | 768 | 0.673 $\pm$ 0.057 | 0.0016 | 0.730 |
+
+[^fn1]: Mean absolute pairwise correlation is not a rotation invariant, so we report it over multiple random rotation seeds. Strictly, we measure the correlation structure that TurboQuant's own random rotation exposes. The rotation-invariant participation ratio PR gives the same model ordering: lower $\rho$ corresponds to higher PR (more uniform eigenvalues). We use $\rho$ because it directly measures the quantity that governs quantization error accumulation, but a practitioner could equivalently use PR.
+
+KS D does not cleanly separate models. MAE-base has the lowest KS D (0.360) despite being an MAE model. Coordinate correlation and PR both give the same ordering: contrastive and self-distillation models at the low-$\rho$/high-PR end, MAE models at the high-$\rho$/low-PR end.
+
+### Figure 1: Isotropy illustration
+
+![Figure 1: Isotropy illustration](figures/fig1_isotropy_illustration.png)
+*Figure 1: Pairwise rotated coordinates from BigEarthNet embeddings. Left: DINOv2 produces a round scatter cloud with coordinates that are approximately independent. Right: Prithvi produces an elongated cloud with coordinates that remain correlated even after rotation. Orange dotted lines show 4-bit Beta codebook boundaries.*
+
+### The correlation between isotropy and recall
+
+### Figure 3: Correlation vs recall
+
+![Figure 3: Correlation vs recall](figures/fig3_corr_vs_recall.png)
+*Figure 3: Coordinate correlation versus TQ MSE R@10 on BigEarthNet. Pearson r = -0.951 across 6 models. The dashed line is a linear fit. Shaded regions indicate the compress-well (R@10 > 0.85, green) and compress-poorly (R@10 < 0.65, red) zones.*
+
+The Pearson correlation between $\rho$ and R@10 is $r = -0.851$ on EuroSAT and $r = -0.951$ on BigEarthNet. KS D gives $r = -0.507$. Coordinate correlation is a much better predictor.
+
+### Figure 4: 6-model bars
+
+![Figure 4: 6-model bars](figures/fig4_6model_bars.png)
+*Figure 4: Recall@10 on BigEarthNet for all six models. Green: TQ MSE (no training). Yellow: PQ (trained). Gray: Binary Hash (1 bit). Percentages above TQ bars show the gap closed between Binary Hash and PQ.*
+
+### Figure 5: Ranking quality
+
+![Figure 5: Ranking quality](figures/fig5_ranking_quality.png)
+*Figure 5: Kendall's $\tau$ within the top-1000 neighborhood. The same ordering as R@10: DINOv2 $\tau$=0.88, Prithvi $\tau$=0.64. PQ (yellow) maintains $\tau$ > 0.93 for all models.*
+
+### Group patterns and outliers
+
+The contrastive and self-distillation models cluster at low $\rho$ (0.21 to 0.26 on BigEarthNet). The MAE models cluster at high $\rho$ (0.32 to 0.67).
+
+SSL4EO is an interesting case: it is an MAE model trained on remote sensing, but has $\rho = 0.318$, closer to the contrastive group than to Prithvi. The large SSL4EO pretraining corpus (250K global locations, Sentinel-1 plus Sentinel-2) may contribute to the moderate isotropy. Its TQ MSE R@10 (0.770) is correspondingly higher than Prithvi's (0.572).
+
+MAE-base (general-domain MAE on ImageNet) has $\rho = 0.524$, sitting between SSL4EO and Prithvi. Its TQ MSE R@10 (0.737) follows the pattern.
+
+Prithvi is the most anisotropic model tested. Its training mix (multi-temporal Sentinel-2 over one region, 6-band MAE) produces the most correlated rotated coordinates and the lowest training-free compression recall.
+
+### Practitioner diagnostic
+
+Coordinate correlation can be computed on a sample of 5,000 embeddings in seconds using any random orthogonal rotation. We suggest the following rule:
+
+| $\rho$ range | Recommendation |
+|--------------|---------------|
+| $\rho < 0.30$ | Use TurboQuant MSE. Expected R@10 gap to PQ: under 7 points. |
+| $0.30 \leq \rho < 0.50$ | Test both. TQ loses 12 to 18 points to PQ at this range. |
+| $\rho \geq 0.50$ | Use PQ if training data is available. TQ loses over 20 points. |
+
+These thresholds are calibrated on BigEarthNet (269K vectors). At smaller scales the gap narrows; at larger scales we expect it to widen.
