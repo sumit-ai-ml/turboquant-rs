@@ -10,12 +10,12 @@ The FP32 Exact row is 1.000 by definition and not shown. B/vec is the storage co
 
 ### Table 1: EuroSAT (16K vectors), R@10 / Kendall's $\tau$ at 4 bits (1 bit for RaBitQ and Binary Hash)
 
-Each cell shows R@10 / $\tau$. R@10 is averaged over 5 seeds. $\tau$ is averaged over 3 seeds with 200 queries per seed (Kendall's $\tau$ is $O(k^2)$ in the top-1000 size, so we use a subsample for cost). TQ Adaptive cells show R@10 only because we did not run ranking analysis on it.
+Each cell shows R@10 / $\tau$. R@10 is averaged over 5 seeds (3 seeds for TQ Adaptive). $\tau$ is averaged over 3 seeds with 200 queries per seed (Kendall's $\tau$ is $O(k^2)$ in the top-1000 size, so we use a subsample for cost).
 
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
 | PQ | 0.960 / 0.975 | 0.961 / 0.970 | 0.965 / 0.970 | 0.968 / 0.983 | 0.953 / 0.979 | 0.961 / 0.987 | yes | 384 |
-| TQ Adaptive | 0.942 | 0.912 | 0.880 | 0.842 | 0.863 | 0.782 | yes | 388 |
+| TQ Adaptive | 0.942 / 0.960 | 0.912 / 0.940 | 0.880 / 0.913 | 0.842 / 0.913 | 0.863 / 0.968 | 0.782 / 0.926 | yes | 388 |
 | **TQ MSE** | **0.943 / 0.959** | **0.911 / 0.938** | **0.882 / 0.910** | **0.834 / 0.906** | **0.859 / 0.966** | **0.779 / 0.923** | **no** | **388** |
 | SimHash Multi | 0.792 / 0.824 | 0.751 / 0.779 | 0.708 / 0.745 | 0.743 / 0.803 | 0.744 / 0.909 | 0.702 / 0.867 | no | 384 |
 | Uniform SQ | 0.660 / 0.719 | 0.549 / 0.623 | 0.499 / 0.575 | 0.544 / 0.649 | 0.558 / 0.829 | 0.502 / 0.761 | no | 388 |
@@ -29,7 +29,7 @@ Each cell shows R@10 / $\tau$. R@10 is averaged over 5 seeds. $\tau$ is averaged
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi | Train | B/vec |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|:-:|:----:|
 | PQ | 0.947 / 0.945 | 0.944 / 0.936 | 0.950 / 0.944 | 0.955 / 0.959 | 0.935 / 0.930 | 0.925 / 0.943 | yes | 384 |
-| TQ Adaptive | 0.898 | 0.887 | 0.834 | 0.777 | 0.744 | 0.584 | yes | 388 |
+| TQ Adaptive | 0.898 / 0.884 | 0.887 / 0.865 | 0.834 / 0.814 | 0.777 / 0.804 | 0.744 / 0.751 | 0.584 / 0.651 | yes | 388 |
 | **TQ MSE** | **0.900 / 0.884** | **0.878 / 0.860** | **0.830 / 0.811** | **0.770 / 0.795** | **0.737 / 0.744** | **0.572 / 0.641** | **no** | **388** |
 | SimHash Multi | 0.688 / 0.641 | 0.648 / 0.595 | 0.601 / 0.573 | 0.651 / 0.650 | 0.573 / 0.582 | 0.481 / 0.575 | no | 384 |
 | Uniform SQ | 0.479 / 0.477 | 0.399 / 0.401 | 0.349 / 0.385 | 0.422 / 0.468 | 0.338 / 0.402 | 0.255 / 0.399 | no | 388 |
@@ -40,13 +40,14 @@ Each cell shows R@10 / $\tau$. R@10 is averaged over 5 seeds. $\tau$ is averaged
 
 ### Table 3: Pearson $r$ between FP32 and quantized similarities within top-1000 neighborhood
 
-Higher Pearson $r$ means the quantizer preserves not just neighbor ranking but the relative magnitude of similarity scores. A value above 0.99 means the compressed similarities are a near-perfect linear rescaling of the FP32 similarities. TQ Adaptive omitted (no ranking-analysis run).
+Higher Pearson $r$ means the quantizer preserves not just neighbor ranking but the relative magnitude of similarity scores. A value above 0.99 means the compressed similarities are a near-perfect linear rescaling of the FP32 similarities.
 
 *EuroSAT:*
 
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|
 | PQ | 0.999 | 0.999 | 0.999 | 1.000 | 0.999 | 1.000 |
+| TQ Adaptive | 0.999 | 0.997 | 0.992 | 0.991 | 0.998 | 0.989 |
 | **TQ MSE** | **0.998** | **0.996** | **0.992** | **0.989** | **0.998** | **0.989** |
 | SimHash Multi | 0.968 | 0.947 | 0.929 | 0.952 | 0.979 | 0.964 |
 | Uniform SQ | 0.916 | 0.843 | 0.799 | 0.855 | 0.948 | 0.910 |
@@ -60,6 +61,7 @@ Higher Pearson $r$ means the quantizer preserves not just neighbor ranking but t
 | Method | DINOv2 | RemoteCLIP | GeoRSCLIP | SSL4EO | MAE-base | Prithvi |
 |--------|:----:|:----:|:----:|:----:|:----:|:----:|
 | PQ | 0.998 | 0.997 | 0.998 | 0.999 | 0.996 | 0.997 |
+| TQ Adaptive | 0.988 | 0.985 | 0.969 | 0.957 | 0.924 | 0.840 |
 | **TQ MSE** | **0.989** | **0.984** | **0.968** | **0.952** | **0.919** | **0.830** |
 | SimHash Multi | 0.871 | 0.833 | 0.811 | 0.864 | 0.801 | 0.764 |
 | Uniform SQ | 0.707 | 0.617 | 0.596 | 0.682 | 0.599 | 0.569 |

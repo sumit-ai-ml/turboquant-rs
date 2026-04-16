@@ -1,0 +1,290 @@
+[
+  {
+    "model": "dinov2",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.9606404398820879,
+    "pearson_mean": 0.9986008297116244
+  },
+  {
+    "model": "dinov2",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.959451208288128,
+    "pearson_mean": 0.9984605367836594
+  },
+  {
+    "model": "dinov2",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9597830723632961,
+    "pearson_mean": 0.9985509241362683
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.9398537969610817,
+    "pearson_mean": 0.996519128335958
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.9412034102537358,
+    "pearson_mean": 0.9966368182164412
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9403343450329706,
+    "pearson_mean": 0.9967859107039574
+  },
+  {
+    "model": "georsclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.912578275278801,
+    "pearson_mean": 0.9920709995600603
+  },
+  {
+    "model": "georsclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.9150755502272716,
+    "pearson_mean": 0.9926371780580916
+  },
+  {
+    "model": "georsclip",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9124306133048767,
+    "pearson_mean": 0.9921377441687053
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.9156732584391023,
+    "pearson_mean": 0.9913059919945436
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.9054247961203613,
+    "pearson_mean": 0.9890887190921578
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9170963128476984,
+    "pearson_mean": 0.9917810220144437
+  },
+  {
+    "model": "mae_base",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.9677000682533747,
+    "pearson_mean": 0.9984233083708477
+  },
+  {
+    "model": "mae_base",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.9673327899037446,
+    "pearson_mean": 0.9982987683728107
+  },
+  {
+    "model": "mae_base",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9681137935587374,
+    "pearson_mean": 0.9982886702415064
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.9293500841219826,
+    "pearson_mean": 0.9906287959806247
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.9251725605515783,
+    "pearson_mean": 0.9896813743482886
+  },
+  {
+    "model": "prithvi",
+    "dataset": "eurosat",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.9221738697983568,
+    "pearson_mean": 0.9878382562324736
+  },
+  {
+    "model": "dinov2",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.8877766113589015,
+    "pearson_mean": 0.9890433593689775
+  },
+  {
+    "model": "dinov2",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.8799166607999084,
+    "pearson_mean": 0.987546849305168
+  },
+  {
+    "model": "dinov2",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.884371584488006,
+    "pearson_mean": 0.988612041124134
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.8679302811090163,
+    "pearson_mean": 0.9857207959949545
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.8617970670529849,
+    "pearson_mean": 0.9839421069025633
+  },
+  {
+    "model": "remoteclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.8656414106313494,
+    "pearson_mean": 0.9852926636278234
+  },
+  {
+    "model": "georsclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.8149631979148617,
+    "pearson_mean": 0.9690940946770479
+  },
+  {
+    "model": "georsclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.8158557331136006,
+    "pearson_mean": 0.9697110305602297
+  },
+  {
+    "model": "georsclip",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.8111082474022392,
+    "pearson_mean": 0.9682096284461817
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.8139472332202334,
+    "pearson_mean": 0.9603507083880367
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7914035928596981,
+    "pearson_mean": 0.951530979299682
+  },
+  {
+    "model": "ssl4eo",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.8072045725918329,
+    "pearson_mean": 0.9590045917610684
+  },
+  {
+    "model": "mae_base",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.7580555489164502,
+    "pearson_mean": 0.9273353516521011
+  },
+  {
+    "model": "mae_base",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.7405411769337847,
+    "pearson_mean": 0.9182100258028472
+  },
+  {
+    "model": "mae_base",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.7545415351400695,
+    "pearson_mean": 0.9252417326882562
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 42,
+    "kendall_tau_mean": 0.6819265512440702,
+    "pearson_mean": 0.8634862278122233
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 123,
+    "kendall_tau_mean": 0.6346789083590412,
+    "pearson_mean": 0.8250085274870312
+  },
+  {
+    "model": "prithvi",
+    "dataset": "bigearthnet",
+    "method": "turboquant_ada_4bit",
+    "seed": 456,
+    "kendall_tau_mean": 0.6368903141644451,
+    "pearson_mean": 0.8307744467264713
+  }
+]
